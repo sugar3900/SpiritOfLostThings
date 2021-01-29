@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2e206dc3dddec4795a34366a50dc84, type: 3}
+  m_Name: PathTileSet
+  m_EditorClassIdentifier: 
+  id: path
+  cornerPrefab: {fileID: 8541124317601467154, guid: f85179047c86d684ebd0a0145c62a808,
+    type: 3}
+  sidePrefab: {fileID: 8541124317601467154, guid: 9a81bd2470548ae4897458a401d47a54,
+    type: 3}
+  diagonalPrefab: {fileID: 8541124317601467154, guid: 9b859f0d13141c24fa1fcc29872d4dc0,
+    type: 3}
+  innerCornerPrefab: {fileID: 8541124317601467154, guid: ab769f886e134424ab74c47166151413,
+    type: 3}
+  solidPrefab: {fileID: 8541124317601467154, guid: 3a221c6c8cf5bbe499f336da30e6a27f,
+    type: 3}
