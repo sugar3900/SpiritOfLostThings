@@ -1,0 +1,88 @@
+# =============== #
+# Unity generated #
+# =============== #
+UnityGenerated/
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]in/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+# MemoryCaptures can get excessive in size.
+# They also could contain extremely sensitive data
+/[Mm]emoryCaptures/
+
+# Asset meta data should only be ignored when the corresponding asset is also ignored
+!/[Aa]ssets/**/*.meta
+
+# Visual Studio cache directory
+.vs/
+.vscode/
+
+# Uncomment this line if you wish to ignore the asset store tools plugin
+# /[Aa]ssets/AssetStoreTools*
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.csproj.meta
+*.unityproj
+*.pidb
+*.suo
+*.sln
+*.sln.meta
+*.user
+*.booproj
+*.blend1
+*.blend2
+*.sln
+*.suo
+*.tmp
+*.pdb
+*.mdb
+*.opendb
+
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+#Icon?
+ehthumbs.db
+Thumbs.db
+
+# ===== #
+# Other #
+# ===== #
+build
+Builds
+Assets/AstarPathfindingProject/
+*.blend1
+*.blend2
+*.blend1.meta
+*.blend2.meta
+/data.log
+/Assets/Scripts/Legacy
+/Assets/Scripts/Legacy.meta
+enet_log.txt
+
+# Unity3D generated file on crash reports
+sysinfo.txt
+
+# Builds
+*.apk
+*.aab
+*.unitypackage
