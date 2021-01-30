@@ -9,7 +9,7 @@ namespace GGJ
 		[SerializeField] public string poemLineContents;
 		[SerializeField] public bool isLight;
 		[SerializeField] public Sprite treeSprite;
-		[SerializeField] public float maxDistanceBeforeParticlesPlay = 5;
+		[SerializeField] public float maxDowseDistance = 5;
 		[SerializeField] public float maxDistanceBeforeTextFades = 5;
 		[SerializeField] public Vector3 position = new Vector3();
 	}

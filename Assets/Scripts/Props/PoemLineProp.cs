@@ -4,12 +4,13 @@ using UnityEngine.UI;
 
 namespace GGJ {
     
-    public class PoemLineController : MonoBehaviour {
+    public class PoemLineProp : DynamicProp {
 		
         [Header("Components")]
         [SerializeField] private ParticleSystem darkParticleSystem;
         [SerializeField] private ParticleSystem lightParticleSystem;
         [SerializeField] private FlyingMemoryController FlyingMemoryPrefab;
+        [SerializeField] private AudioSource audioSource;
         [SerializeField] private Text poemText;
         
         private PoemLineData poemLineData;
@@ -23,24 +24,35 @@ namespace GGJ {
             this.gameLoopController = gameLoopController;
             
             UpdateText(poemLineData.poemLineContents);
+            TurnOffParticleSystems();
         }
         
         public void Update(){
 			
-            UpdateTextFade();
+            if (playerController != null && poemLineData != null)
+            {
+                UpdateTextFade();
+            }
         }
 
         public void OnDowse(){
             
-            if (playerController.GetDistanceFrom(gameObject) < poemLineData.maxDistanceBeforeParticlesPlay)
+            if (playerController.GetDistanceFrom(gameObject) < poemLineData.maxDowseDistance)
             {
-                PlayPoemParticles();
+                PlayDowseParticles();
+                PlayDowseSound();
             }
         }
 
         private void UpdateText(string str){
             
             poemText.text = str;
+        }
+
+        private void TurnOffParticleSystems(){
+            
+            darkParticleSystem.gameObject.SetActive(false);
+            lightParticleSystem.gameObject.SetActive(false);
         }
 
         private void UpdateTextFade(){
@@ -61,12 +73,21 @@ namespace GGJ {
             poemText.color = new Color(poemText.color.r, poemText.color.g, poemText.color.b, alpha);
         }
 
-        private void PlayPoemParticles(){
+        private void PlayDowseParticles(){
 			
             ParticleSystem ps = poemLineData.isLight ? lightParticleSystem : darkParticleSystem;
+            ParticleSystem otherPs = poemLineData.isLight ? darkParticleSystem : lightParticleSystem;
+
+            ps.gameObject.SetActive(true);
+            otherPs.gameObject.SetActive(false);
 
             ps.Clear();
             ps.Play();
+        }
+
+        private void PlayDowseSound(){
+            
+            audioSource.Play();
         }
 
         public void Collect(){

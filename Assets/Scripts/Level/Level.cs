@@ -4,35 +4,10 @@ namespace GGJ
 {
 	public class Level : MonoBehaviour
 	{
-		[SerializeField]
-		private SpriteRenderer backgroundPrefab;
-		[SerializeField]
-		private float backgroundZ = 2f;
-		public bool[,] NavGrid { get; set; }
 		public Tile[,] TileGrid { get; set; }
 		public SpriteRenderer[,] Backgrounds { get; set; }
 		public Prop[] Props { get; set; }
 		public DynamicProp[] DynamicProps { get; set; }
-
-		public void GenerateBackgrounds(int width, int height)
-		{
-			Vector3 bgTileSize = backgroundPrefab.size;
-			int xCount = Mathf.CeilToInt(backgroundPrefab.size.x / width);
-			int yCount = Mathf.CeilToInt(backgroundPrefab.size.y / height);
-			Backgrounds = new SpriteRenderer[xCount, yCount];
-			for (int y = 0; y < yCount; y++)
-			{
-				for (int x = 0; x < xCount; x++)
-				{
-					Vector3 pos = new Vector3(
-						bgTileSize.x * (x + 0.5f) - 0.5f,
-						bgTileSize.y * (y + 0.5f) - 0.5f,
-						backgroundZ);
-					SpriteRenderer bg = Instantiate(backgroundPrefab, pos, Quaternion.identity, transform);
-					Backgrounds[x, y] = bg;
-				}
-			}
-		}
 
 		public Tile GetTileAtCoord(Vector2Int coord)
 		{
@@ -62,12 +37,15 @@ namespace GGJ
 		{
 			foreach (Prop prop in Props)
 			{
-				Vector2Int propCoord = new Vector2Int(
-					(int)prop.transform.position.x,
-					(int)prop.transform.position.y);
-				if (coord == propCoord)
+				if (prop != null)
 				{
-					return prop;
+					Vector2Int propCoord = new Vector2Int(
+						(int)prop.transform.position.x,
+						(int)prop.transform.position.y);
+					if (coord == propCoord)
+					{
+						return prop;
+					}
 				}
 			}
 			return null;
@@ -113,7 +91,6 @@ namespace GGJ
 					}
 				}
 			}
-			NavGrid = null;
 			TileGrid = null;
 			Backgrounds = null;
 			DynamicProps = null;

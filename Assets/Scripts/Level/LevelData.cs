@@ -180,7 +180,7 @@ namespace GGJ
 					dynamicProp.Id = dynamicPropId;
 					return true;
 				}
-				Props.Add(new LevelPropData
+				DynamicProps.Add(new LevelDynamicPropData
 				{
 					Id = dynamicPropId,
 					X = coord.x,

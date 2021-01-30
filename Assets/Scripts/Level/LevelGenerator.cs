@@ -9,7 +9,11 @@ namespace GGJ
 	public class LevelGenerator : MonoBehaviour
 	{
 		[SerializeField]
+		private CharacterProp character;
+		[SerializeField]
 		private GameObject levelPrefab;
+		[SerializeField]
+		private SpriteRenderer backgroundPrefab;
 		[SerializeField]
 		private Tile tilePrefab;
 		[SerializeField]
@@ -25,7 +29,12 @@ namespace GGJ
 		[SerializeField]
 		private float dynamicPropZ = -0.15f;
 		[SerializeField]
+		private float backgroundZ = 2f;
+		[SerializeField]
 		private LevelCreator levelCreator;
+
+		public event Action<DynamicProp> onDynamicPropCreated;
+
 		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
 
 		private void Start()
@@ -89,11 +98,11 @@ namespace GGJ
 
 		private void BuildContent(Level level, LevelData levelData)
 		{
-			level.NavGrid = GetNavGrid(levelData);
+			//level.CreateNavGrid(GetNavGrid(levelData));
 			level.TileGrid = GenerateTiles(levelData, level.transform);
 			level.Props = GenerateProps(levelData, level.transform);
 			level.DynamicProps = GenerateDynamicProps(levelData, level.transform);
-			level.GenerateBackgrounds(levelData.Width, levelData.Height);
+			level.Backgrounds = GenerateBackgrounds(levelData.Width, levelData.Height, level.transform);
 		}
 
 		private bool[,] GetNavGrid(LevelData levelData)
@@ -211,13 +220,39 @@ namespace GGJ
 			if (dynamicPropPrefab != null)
 			{
 				Vector3 offset = new Vector3(0.5f, 0.5f, dynamicPropZ);
-				return Instantiate(dynamicPropPrefab, dynamicPropData.Position + offset, dynamicPropData.Rotation, parent);
+				var dynamicProp = Instantiate(dynamicPropPrefab, dynamicPropData.Position + offset, dynamicPropData.Rotation, parent);
+				if (onDynamicPropCreated != null)
+				{
+					onDynamicPropCreated(dynamicProp);
+				}
+				return dynamicProp;
 			}
 			else
 			{
 				Debug.LogWarning("No prefab found with the id " + dynamicPropData.Id);
 			}
 			return null;
+		}
+
+		public SpriteRenderer[,] GenerateBackgrounds(int width, int height, Transform parent)
+		{
+			Vector3 bgTileSize = backgroundPrefab.size;
+			int xCount = Mathf.CeilToInt(backgroundPrefab.size.x / width);
+			int yCount = Mathf.CeilToInt(backgroundPrefab.size.y / height);
+			SpriteRenderer[,] backgrounds = new SpriteRenderer[xCount, yCount];
+			for (int y = 0; y < yCount; y++)
+			{
+				for (int x = 0; x < xCount; x++)
+				{
+					Vector3 pos = new Vector3(
+						bgTileSize.x * (x + 0.5f) - 0.5f,
+						bgTileSize.y * (y + 0.5f) - 0.5f,
+						backgroundZ);
+					SpriteRenderer bg = Instantiate(backgroundPrefab, pos, Quaternion.identity, parent);
+					backgrounds[x, y] = bg;
+				}
+			}
+			return backgrounds;
 		}
 
 		private void UpdateLevelTileSets(LevelData levelData)
@@ -229,7 +264,7 @@ namespace GGJ
 			{
 				TileSet tileSet = tileSetRegistry[i];
 				validTileSetIds.Add(tileSet.Id);
-				if(tileSet.IsBlocking)
+				if (tileSet.IsBlocking)
 				{
 					blockingTileSets.Add(i + 1);
 				}
@@ -276,7 +311,7 @@ namespace GGJ
 				}
 				else
 				{
-					data.IsBlocking = dynamicProp.IsBlocking;
+					data.IsBlocking = dynamicProp.isBlocking;
 				}
 			}
 			if (toRemove.Count > 0)

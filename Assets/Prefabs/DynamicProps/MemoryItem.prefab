@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 231804244439021338}
   - component: {fileID: 3574366507038303567}
   m_Layer: 0
-  m_Name: NecklaceItem
+  m_Name: MemoryItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4516625161250694020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 615.85315, y: 14.594143, z: -42.878677}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: necklace
+  isBlocking: 0
   spriteRenderer: {fileID: 3574366507038303567}
 --- !u!212 &3574366507038303567
 SpriteRenderer:

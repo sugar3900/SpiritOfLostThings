@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: PropRegistry
   m_EditorClassIdentifier: 
   props:
+  - {fileID: 1014576995689151924, guid: fef0e02273bd0c5448bb1d2567080758, type: 3}
   - {fileID: 1014576995689151924, guid: 8e174299b0ee49b4cb085dc44bae586b, type: 3}
