@@ -5,8 +5,8 @@ namespace GGJ
 {
 	public class PathNode
 	{
-		public PathNode(Vector2Int coord) => Coordinates = coord;
-		public Vector2Int Coordinates { get; }
+		public PathNode(Vector2 coord) => Coordinates = coord;
+		public Vector2 Coordinates { get; }
 		public List<PathEdge> In { get; } = new List<PathEdge>();
 		public List<PathEdge> Out { get; } = new List<PathEdge>();
 

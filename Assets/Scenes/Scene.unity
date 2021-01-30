@@ -742,8 +742,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 831898340}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -868,12 +867,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 519420032}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
@@ -893,7 +892,7 @@ PrefabInstance:
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
@@ -958,12 +957,7 @@ MonoBehaviour:
   isBlocking: 0
   spriteRenderer: {fileID: 0}
   depthZ: -1
---- !u!4 &831898340 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
-    type: 3}
-  m_PrefabInstance: {fileID: 831898337}
-  m_PrefabAsset: {fileID: 0}
+  minSearchInterval: 1
 --- !u!1 &897000095
 GameObject:
   m_ObjectHideFlags: 0
