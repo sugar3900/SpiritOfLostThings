@@ -82,7 +82,7 @@ namespace GGJ
 			level.TileGrid = GenerateTiles(levelData, level.transform);
 			level.Props = GenerateProps(levelData, level.transform);
 			level.Items = GenerateItems(levelData, level.transform);
-			level.SetSize(levelData.Width, levelData.Height);
+			level.GenerateBackgrounds(levelData.Width, levelData.Height);
 		}
 
 		private bool[,] GetNavGrid(LevelData levelData)

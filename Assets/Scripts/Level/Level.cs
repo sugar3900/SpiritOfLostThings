@@ -5,16 +5,31 @@ namespace GGJ
 	public class Level : MonoBehaviour
 	{
 		[SerializeField]
-		private SpriteRenderer background;
+		private SpriteRenderer backgroundPrefab;
 
 		public bool[,] NavGrid { get; set; }
 		public Tile[,] TileGrid { get; set; }
+		public SpriteRenderer[,] Backgrounds { get; set; }
 		public Prop[] Props { get; set; }
 		public MemoryItem[] Items { get; set; }
 
-		public void SetSize(int width, int height)
+		public void GenerateBackgrounds(int width, int height)
 		{
-			background.size = new Vector2(width * 128, height * 128);
+			Vector3 bgTileSize = backgroundPrefab.size;
+			int xCount = Mathf.CeilToInt(backgroundPrefab.size.x / width);
+			int yCount = Mathf.CeilToInt(backgroundPrefab.size.y / height);
+			Backgrounds = new SpriteRenderer[xCount, yCount];
+			for (int y = 0; y < yCount; y++)
+			{
+				for (int x = 0; x < xCount; x++)
+				{
+					Vector3 pos = new Vector3(
+						bgTileSize.x * (x + 0.5f) - 0.5f,
+						bgTileSize.y * (y + 0.5f) - 0.5f);
+					SpriteRenderer bg = Instantiate(backgroundPrefab, pos, Quaternion.identity, transform);
+					Backgrounds[x, y] = bg;
+				}
+			}
 		}
 
 		public Tile GetTileAtCoord(Vector2Int coord)
@@ -85,8 +100,20 @@ namespace GGJ
 					Destroy(item.gameObject);
 				}
 			}
+			for (int y = 0; y < Backgrounds.GetLength(1); y++)
+			{
+				for (int x = 0; x < Backgrounds.GetLength(0); x++)
+				{
+					SpriteRenderer bg = Backgrounds[x, y];
+					if (bg != null)
+					{
+						Destroy(bg.gameObject);
+					}
+				}
+			}
 			NavGrid = null;
 			TileGrid = null;
+			Backgrounds = null;
 			Items = null;
 			Props = null;
 		}
