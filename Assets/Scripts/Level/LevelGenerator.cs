@@ -33,6 +33,8 @@ namespace GGJ
 		[SerializeField]
 		private LevelCreator levelCreator;
 
+		public event Action<DynamicProp> onDynamicPropCreated;
+
 		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
 
 		private void Start()
@@ -219,7 +221,12 @@ namespace GGJ
 			if (dynamicPropPrefab != null)
 			{
 				Vector3 offset = new Vector3(0.5f, 0.5f, dynamicPropZ);
-				return Instantiate(dynamicPropPrefab, dynamicPropData.Position + offset, dynamicPropData.Rotation, parent);
+				var dynamicProp = Instantiate(dynamicPropPrefab, dynamicPropData.Position + offset, dynamicPropData.Rotation, parent);
+				if (onDynamicPropCreated != null)
+				{
+					onDynamicPropCreated(dynamicProp);
+				}
+				return dynamicProp;
 			}
 			else
 			{
