@@ -5,82 +5,82 @@ namespace GGJ
 	public class CharacterProp : DynamicProp
 	{
 		[SerializeField]
-		private float moveSpeed = 1f;
+		private float minPositionLerp = 0.01f;
 		[SerializeField]
-		private float depthZ = -1f;
+		private float maxPositionLerp = 30f;
 		[SerializeField]
-		private float minSearchInterval = 1f;
-		private float timeOfLastSearch;
-		private Vector3 moveTarget = default;
-		public Level Level { get; set; }
-		public PathFinder PathFinder { get; set; } = new PathFinder();
-		private PathNode goalNode;
-		private Path path;
+		private float zDepth = -0.5f;
+		[SerializeField]
+		private float moveSpeed = 8f;
+		[SerializeField]
+		private float rotateSpeed = 1f;
+		[SerializeField]
+		private float radiusForMovementCollision = 0.225f;
+		[SerializeField]
+		private float radiusForEdgeCollision = 0.225f;
+		[SerializeField]
+		private LayerMask movementCollisionLayers;
+		[SerializeField]
+		private PlayerAnimationController animationController;
 
 		private void Update()
 		{
-			if(Time.time > timeOfLastSearch + minSearchInterval)
+			float horizontal = Input.GetAxis("Horizontal");
+			float vertical = Input.GetAxis("Vertical");
+			if (vertical > Mathf.Epsilon)
 			{
-				timeOfLastSearch = Time.time;
-				FindPath();
+				animationController.Up();
 			}
-			MoveAlongPath();
+			else if (vertical < -Mathf.Epsilon)
+			{
+				animationController.Down();
+			}
+			else if (horizontal > Mathf.Epsilon)
+			{
+				animationController.Right();
+			}
+			else if (horizontal < -Mathf.Epsilon)
+			{
+				animationController.Left();
+			}
+			Vector2 input = new Vector2(horizontal, vertical);
+			ApplyMovement(input);
 		}
 
-		private void FindPath()
+		public void ApplyMovement(Vector2 moveDirection)
 		{
-			if (Level != null)
+			float deltaTime = Time.deltaTime;
+
+			moveDirection *= (moveSpeed * deltaTime);
+			if (moveDirection != Vector2.zero)
 			{
-				PathNode end = Level.PathGrid.GetNearestNode(Camera.main.transform.position);
-				if (goalNode != end)
+				if (CanMoveInDirection(moveDirection))
 				{
-					goalNode = end;
-					PathNode start = Level.PathGrid.GetNearestNode(transform.position);
-					path = PathFinder.FindPath(Level.PathGrid, start, end);
-					if (path != null)
-					{
-						MoveTowardPathEnd();
-					}
+					transform.position += (Vector3)moveDirection;
+				}
+				else if (CanMoveInDirection(new Vector2(moveDirection.x, 0f)))
+				{
+					transform.position += new Vector3(moveDirection.x, 0f);
+				}
+				else if (CanMoveInDirection(new Vector2(0f, moveDirection.y)))
+				{
+					transform.position += new Vector3(0f, moveDirection.y);
 				}
 			}
 		}
 
-		private void MoveAlongPath()
+		private bool CanMoveInDirection(Vector2 moveDirection)
 		{
-			if (path != null)
+			Vector2 newPosition = (Vector2)transform.position + moveDirection;
+			Collider2D[] blockingObjects = Physics2D.OverlapCircleAll(newPosition, radiusForMovementCollision, movementCollisionLayers);
+			foreach (Collider2D blockingObject in blockingObjects)
 			{
-				float distance = Vector3.Distance(transform.position, moveTarget);
-				Vector3 dir = (moveTarget - transform.position).normalized;
-				Vector3 move = dir * Time.deltaTime * moveSpeed;
-				transform.Translate(move);
-				if (distance < 0.1f)
+				if (blockingObject != null && !blockingObject.isTrigger)
 				{
-					if (path.MoveNext())
-					{
-						PathNode node = path.Current.End;
-						if (node != null)
-						{
-							MoveTowardPathEnd();
-						}
-					}
-					else
-					{
-						path = null;
-						moveTarget = transform.position;
-					}
+					return false;
 				}
 			}
-		}
-
-		private void MoveTowardPathEnd()
-		{
-			PathNode node = path.Current.End;
-			if (node != null)
-			{
-				Vector2 coord = path.Current.End.Coordinates;
-				moveTarget = new Vector3(coord.x, coord.y, depthZ);
-				Debug.Log(moveTarget);
-			}
+			return true;
 		}
 	}
 }

@@ -688,7 +688,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0512b54645e6e94396f0fb846ec6a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  localCamera: {fileID: 519420031}
   moveSpeed: 8
+  ZoomSpeed: 3
+  ZoomDelta: 1
+  minZoom: 16
+  maxZoom: 40
+  maxLerpSqrDist: 32
+  speedDamp: 0.2
+  target: {fileID: 831898340}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -956,8 +964,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isBlocking: 0
   spriteRenderer: {fileID: 0}
-  depthZ: -1
-  minSearchInterval: 1
+  minPositionLerp: 0.01
+  maxPositionLerp: 30
+  zDepth: -0.5
+  moveSpeed: 8
+  rotateSpeed: 1
+  radiusForMovementCollision: 0.225
+  radiusForEdgeCollision: 0.225
+  movementCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  animationController: {fileID: 1972574537}
+--- !u!4 &831898340 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
+    type: 3}
+  m_PrefabInstance: {fileID: 831898337}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &897000095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,6 +2551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c38ea6e1af5040e0964a98bd43a04f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelGenerator: {fileID: 0}
   initPoemLineDatas: []
 --- !u!1 &1974088287
 GameObject:

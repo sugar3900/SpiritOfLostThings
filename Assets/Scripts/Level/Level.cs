@@ -8,12 +8,6 @@ namespace GGJ
 		public SpriteRenderer[,] Backgrounds { get; set; }
 		public Prop[] Props { get; set; }
 		public DynamicProp[] DynamicProps { get; set; }
-		public PathGrid PathGrid { get; private set; }
-
-		public void CreateNavGrid(bool[,] navGrid)
-		{
-			PathGrid = new PathGrid(navGrid);
-		}
 
 		public Tile GetTileAtCoord(Vector2Int coord)
 		{
@@ -97,7 +91,6 @@ namespace GGJ
 					}
 				}
 			}
-			PathGrid = null;
 			TileGrid = null;
 			Backgrounds = null;
 			DynamicProps = null;

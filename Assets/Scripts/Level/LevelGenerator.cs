@@ -98,12 +98,11 @@ namespace GGJ
 
 		private void BuildContent(Level level, LevelData levelData)
 		{
-			level.CreateNavGrid(GetNavGrid(levelData));
+			//level.CreateNavGrid(GetNavGrid(levelData));
 			level.TileGrid = GenerateTiles(levelData, level.transform);
 			level.Props = GenerateProps(levelData, level.transform);
 			level.DynamicProps = GenerateDynamicProps(levelData, level.transform);
 			level.Backgrounds = GenerateBackgrounds(levelData.Width, levelData.Height, level.transform);
-			character.Level = level;
 		}
 
 		private bool[,] GetNavGrid(LevelData levelData)

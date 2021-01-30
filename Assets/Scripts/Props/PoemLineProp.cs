@@ -29,7 +29,10 @@ namespace GGJ {
         
         public void Update(){
 			
-            UpdateTextFade();
+            if (playerController != null && poemLineData != null)
+            {
+                UpdateTextFade();
+            }
         }
 
         public void OnDowse(){

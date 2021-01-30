@@ -8,7 +8,7 @@ namespace GGJ {
     [RequireComponent(typeof(GameLoopController))]
     [RequireComponent(typeof(PoemLinesController))]
     
-    public class Controllers : MonoBehaviour {
+    public abstract class Controllers : MonoBehaviour {
         
         protected SceneController sceneController;
         protected PlayerController playerController;
