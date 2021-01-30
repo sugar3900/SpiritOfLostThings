@@ -41,6 +41,7 @@ namespace GGJ
 
 		public void Update()
 		{
+			ApplyZoomInput(Input.mouseScrollDelta.x);
 			ProgressZoom();
 			Move();
 		}
