@@ -1,24 +1,52 @@
+﻿using System;
 using UnityEngine;
 
 namespace GGJ
 {
-	public class LevelEditor : MonoBehaviour
+	[Serializable]
+	public class LevelEditor
 	{
 		[SerializeField]
-		private bool isEnabled;
-		public LevelGenerator LevelGenerator { get; set; }
+		private bool canEdit;
 		public Level Level { get; set; }
-
-		public void Update()
+		public LevelGenerator LevelGenerator { get; set; }
+		public LevelData LevelData { get; set; }
+		public void OnUpdate()
 		{
-			if (isEnabled && Input.GetMouseButtonDown(0))
+			if (canEdit && Input.GetMouseButtonDown(0))
+			{
+				Vector2Int coord = GetMouseCoord();
+				GameObject tile = Level.GetTileAtCoord(coord);
+				if (tile != null)
+				{
+					SwitchTileAtMouse(coord.x, coord.y);
+				}
+			}
+		}
+
+		private void SwitchTileAtMouse(int x, int y)
+		{
+			string currentTileId = LevelData.GetTileSetIdAtPos(x, y);
+			int index = LevelData.TileSetIds.IndexOf(currentTileId) + 1;
+			if (index < -1 || index >= LevelData.TileSetIds.Count)
+			{
+				index = 0;
+			}
+			string newId = LevelData.TileSetIds[index];
+			LevelData.SetTileSetIdAtPos(x, y, newId);
+			LevelGenerator.RebuildGrid(Level, LevelData);
+		}
+
+		private Vector2Int GetMouseCoord()
+		{
+			if (Level != null)
 			{
 				Vector2 mousePos = Input.mousePosition;
-				Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+				Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos) + new Vector3(0.5f, 0.5f);
 				Vector2 posInLevel = Level.transform.InverseTransformPoint(worldPos);
-				GameObject prim = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-				prim.transform.position = posInLevel;
+				return new Vector2Int((int)posInLevel.x, (int)posInLevel.y);
 			}
+			return default;
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -19,21 +20,25 @@ namespace GGJ
 		[SerializeField]
 		private MemoryItemRegistry itemRegistry;
 		[SerializeField]
-		private float propZ  = -0.1f;
+		private float propZ = -0.1f;
 		[SerializeField]
-		private float itemZ = 0.15f;
-
+		private float itemZ = -0.15f;
+		[SerializeField]
+		private LevelEditor levelEditor;
 		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
 
 		private void Start()
 		{
-			GenerateLevel();
+			LevelData levelData = LoadLevelData();
+			Level level = levelData != null ? CreateLevelObject(levelData) : null;
+			levelEditor.LevelData = levelData;
+			levelEditor.Level = level;
+			levelEditor.LevelGenerator = this;
 		}
 
-		public Level GenerateLevel()
+		private void Update()
 		{
-			LevelData levelData = LoadLevelData();
-			return levelData != null ? CreateLevelObject(levelData) : null;
+			levelEditor.OnUpdate();
 		}
 
 		private LevelData LoadLevelData()
@@ -54,10 +59,9 @@ namespace GGJ
 			Level level = instance.GetComponent<Level>();
 			try
 			{
-				bool[,] navGrid = GetNavGrid(levelData);
-				GameObject[,] tiles = GenerateTiles(levelData, level.transform);
-				GameObject[] props = GenerateProps(levelData, level.transform);
-				GameObject[] items = GenerateItems(levelData, level.transform);
+				BuildGrid(level, levelData);
+				level.Props = GenerateProps(levelData, level.transform);
+				level.Items = GenerateItems(levelData, level.transform);
 				level.SetSize(levelData.Width, levelData.Height);
 			}
 			catch
@@ -65,6 +69,18 @@ namespace GGJ
 				throw;
 			}
 			return level;
+		}
+
+		public void RebuildGrid(Level level, LevelData levelData)
+		{
+			level.ClearGrid();
+			BuildGrid(level, levelData); ;
+		}
+
+		private void BuildGrid(Level level, LevelData levelData)
+		{
+			level.NavGrid = GetNavGrid(levelData);
+			level.TileGrid = GenerateTiles(levelData, level.transform);
 		}
 
 		private bool[,] GetNavGrid(LevelData levelData)
