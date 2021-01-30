@@ -40,11 +40,15 @@ namespace GGJ
 			float smallestDist = float.MaxValue;
 			foreach (PathNode node in allNodes)
 			{
-				float dist = (node.Coordinates - position).sqrMagnitude;
-				if (dist < smallestDist)
+				if (node != null)
 				{
-					smallestDist = dist;
-					closest = node;
+					float dist = (node.Coordinates - position).sqrMagnitude;
+					if (dist < smallestDist)
+					{
+						smallestDist = dist;
+						closest = node;
+
+					}
 				}
 			}
 			return closest;
