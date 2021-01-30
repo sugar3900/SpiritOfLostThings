@@ -4,9 +4,7 @@ namespace GGJ
 {
 	public class DynamicProp : MonoBehaviour
 	{
-		[SerializeField]
-		private bool isBlocking;
-		public bool IsBlocking => IsBlocking;
+		public bool isBlocking;
 		public string Id => gameObject.name;
 		[SerializeField]
 		private SpriteRenderer spriteRenderer;
