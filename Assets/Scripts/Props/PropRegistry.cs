@@ -5,13 +5,16 @@ namespace GGJ
 	public class PropRegistry : ScriptableObject
 	{
 		[SerializeField]
-		private GameObject[] props;
+		private Prop[] props;
+		public Prop[] Props => props;
+		public int Count => props.Length;
+		public Prop this[int index] => index < Count ? props[index] : null;
 
-		public GameObject GetProp(string id)
+		public Prop GetProp(string id)
 		{
-			foreach (GameObject prop in props)
+			foreach (Prop prop in props)
 			{
-				if (prop.name == id)
+				if (prop.Id == id)
 				{
 					return prop;
 				}

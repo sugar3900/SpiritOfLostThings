@@ -6,6 +6,10 @@ namespace GGJ
 	{
 		[SerializeField]
 		private TileSet[] tileSets;
+		public TileSet[] TileSets => tileSets;
+		public int Count => tileSets.Length;
+
+		public TileSet this[int index] => index < Count ? tileSets[index] : null;
 
 		public TileSet GetTileSet(string id)
 		{

@@ -10,7 +10,7 @@ namespace GGJ
 		[SerializeField]
 		private GameObject levelPrefab;
 		[SerializeField]
-		private GameObject tilePrefab;
+		private Tile tilePrefab;
 		[SerializeField]
 		private string _levelFileName = "Level";
 		[SerializeField]
@@ -24,21 +24,21 @@ namespace GGJ
 		[SerializeField]
 		private float itemZ = -0.15f;
 		[SerializeField]
-		private LevelEditor levelEditor;
+		private LevelCreator levelCreator;
 		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
 
 		private void Start()
 		{
 			LevelData levelData = LoadLevelData();
 			Level level = levelData != null ? CreateLevelObject(levelData) : null;
-			levelEditor.LevelData = levelData;
-			levelEditor.Level = level;
-			levelEditor.LevelGenerator = this;
+			levelCreator.SetData(level, levelData);
+			levelCreator.SetCallbacks(RebuildGrid, SaveLevelData);
+			levelCreator.SetRegistries(tileSetRegistry, propRegistry, itemRegistry);
 		}
 
 		private void Update()
 		{
-			levelEditor.OnUpdate();
+			levelCreator.OnUpdate();
 		}
 
 		private LevelData LoadLevelData()
@@ -53,34 +53,36 @@ namespace GGJ
 			return null;
 		}
 
+		private void SaveLevelData(LevelData levelData)
+		{
+			using (StreamWriter file = File.CreateText(LevelFilePath))
+			{
+				JsonSerializer serializer = new JsonSerializer();
+				serializer.Serialize(file, levelData);
+			}
+		}
+
 		private Level CreateLevelObject(LevelData levelData)
 		{
-			GameObject instance = GameObject.Instantiate(levelPrefab);
+			GameObject instance = Instantiate(levelPrefab);
 			Level level = instance.GetComponent<Level>();
-			try
-			{
-				BuildGrid(level, levelData);
-				level.Props = GenerateProps(levelData, level.transform);
-				level.Items = GenerateItems(levelData, level.transform);
-				level.SetSize(levelData.Width, levelData.Height);
-			}
-			catch
-			{
-				throw;
-			}
+			BuildContent(level, levelData);
 			return level;
 		}
 
 		public void RebuildGrid(Level level, LevelData levelData)
 		{
-			level.ClearGrid();
-			BuildGrid(level, levelData); ;
+			level.Clear();
+			BuildContent(level, levelData);
 		}
 
-		private void BuildGrid(Level level, LevelData levelData)
+		private void BuildContent(Level level, LevelData levelData)
 		{
 			level.NavGrid = GetNavGrid(levelData);
 			level.TileGrid = GenerateTiles(levelData, level.transform);
+			level.Props = GenerateProps(levelData, level.transform);
+			level.Items = GenerateItems(levelData, level.transform);
+			level.SetSize(levelData.Width, levelData.Height);
 		}
 
 		private bool[,] GetNavGrid(LevelData levelData)
@@ -98,11 +100,11 @@ namespace GGJ
 			return navGrid;
 		}
 
-		private GameObject[,] GenerateTiles(LevelData levelData, Transform parent)
+		private Tile[,] GenerateTiles(LevelData levelData, Transform parent)
 		{
 			int width = levelData.Width;
 			int height = levelData.Height;
-			GameObject[,] tileGrid = new GameObject[width, height];
+			Tile[,] tileGrid = new Tile[width, height];
 			foreach (string tileSetId in levelData.TileSetIds)
 			{
 				for (int y = 0; y < height - 1; y++)
@@ -114,7 +116,7 @@ namespace GGJ
 						{
 							tileCase = levelData.GetTileCaseAt(tileSetId, x, y);
 						}
-						if (tileCase != TileCase.Empty)
+						if (tileCase != TileCase.Empty && !string.IsNullOrEmpty(tileSetId))
 						{
 							tileGrid[x, y] = GenerateTile(x, y, tileCase, tileSetId, parent);
 						}
@@ -124,7 +126,7 @@ namespace GGJ
 			return tileGrid;
 		}
 
-		public GameObject GenerateTile(int x, int y, TileCase tileCase, string tileSetId, Transform parent)
+		public Tile GenerateTile(int x, int y, TileCase tileCase, string tileSetId, Transform parent)
 		{
 			TileSet tileSet = tileSetRegistry.GetTileSet(tileSetId);
 			if (tileSet != null)
@@ -133,10 +135,14 @@ namespace GGJ
 				if (sprite != null)
 				{
 					float rotZ = tileCase.GetRotationZ();
-					GameObject instance = GameObject.Instantiate(tilePrefab, new Vector3(x, y), Quaternion.Euler(0f, 0f, rotZ), parent);
-					SpriteRenderer spriteRenderer = instance.GetComponent<SpriteRenderer>();
+					Tile tile = Instantiate(
+						tilePrefab,
+						new Vector3(x, y),
+						Quaternion.Euler(0f, 0f, rotZ),
+						parent);
+					SpriteRenderer spriteRenderer = tile.GetComponent<SpriteRenderer>();
 					spriteRenderer.sprite = sprite;
-					return instance;
+					return tile;
 				}
 				else
 				{
@@ -150,25 +156,25 @@ namespace GGJ
 			return null;
 		}
 
-		private GameObject[] GenerateProps(LevelData levelData, Transform parent)
+		private Prop[] GenerateProps(LevelData levelData, Transform parent)
 		{
-			GameObject[] props = new GameObject[levelData.Props.Count];
+			Prop[] props = new Prop[levelData.Props.Count];
 			for (int i = 0; i < levelData.Props.Count; i++)
 			{
 				LevelPropData levelPropData = levelData.Props[i];
-				GameObject prop = GenerateProp(levelPropData, parent);
+				Prop prop = GenerateProp(levelPropData, parent);
 				props[i] = prop;
 			}
 			return props;
 		}
 
-		public GameObject GenerateProp(LevelPropData propData, Transform parent)
+		public Prop GenerateProp(LevelPropData propData, Transform parent)
 		{
-			GameObject prefab = propRegistry.GetProp(propData.Id);
-			if (prefab != null)
+			Prop propPrefab = propRegistry.GetProp(propData.Id);
+			if (propPrefab != null)
 			{
 				Vector3 offset = new Vector3(0.5f, 0.5f, propZ);
-				return GameObject.Instantiate(prefab, propData.Position + offset, propData.Rotation, parent);
+				return Instantiate(propPrefab, propData.Position + offset, propData.Rotation, parent);
 			}
 			else
 			{
@@ -177,25 +183,25 @@ namespace GGJ
 			return null;
 		}
 
-		private GameObject[] GenerateItems(LevelData levelData, Transform parent)
+		private MemoryItem[] GenerateItems(LevelData levelData, Transform parent)
 		{
-			GameObject[] items = new GameObject[levelData.Items.Count];
+			MemoryItem[] items = new MemoryItem[levelData.Items.Count];
 			for (int i = 0; i < levelData.Items.Count; i++)
 			{
 				LevelItemData levelItemData = levelData.Items[i];
-				GameObject item = GenerateItem(levelItemData, parent);
+				MemoryItem item = GenerateItem(levelItemData, parent);
 				items[i] = item;
 			}
 			return items;
 		}
 
-		public GameObject GenerateItem(LevelItemData itemData, Transform parent)
+		public MemoryItem GenerateItem(LevelItemData itemData, Transform parent)
 		{
-			GameObject prefab = itemRegistry.GetMemoryItem(itemData.Id);
-			if (prefab != null)
+			MemoryItem itemPrefab = itemRegistry.GetMemoryItem(itemData.Id);
+			if (itemPrefab != null)
 			{
 				Vector3 offset = new Vector3(0.5f, 0.5f, itemZ);
-				return GameObject.Instantiate(prefab, itemData.Position + offset, itemData.Rotation, parent);
+				return Instantiate(itemPrefab, itemData.Position + offset, itemData.Rotation, parent);
 			}
 			else
 			{
