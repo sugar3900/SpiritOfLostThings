@@ -6,15 +6,35 @@ namespace GGJ {
 	
 	public class PoemLinesController : Controllers {
 		
+		[SerializeField] private LevelGenerator levelGenerator;
+		
 		[SerializeField] private List<PoemLineData> initPoemLineDatas;
+		
 		
 	    [NonSerialized]	public List<PoemLineData> poemLinesCollected;
 
+	    private List<PoemLineProp> poemLineProps = new List<PoemLineProp>();
+
 		public void InitOrReset(){
 
+			// clear all lists
+			poemLineProps.Clear();
 			poemLinesCollected.Clear();
-
+			
+			// Listen for Prop Creation events
+			levelGenerator.onDynamicPropCreated -= OnDynamicPropCreated;
+			levelGenerator.onDynamicPropCreated += OnDynamicPropCreated;
+			
+			// 
 			InitOrResetAllPoemLines();
+		}
+
+		private void OnDynamicPropCreated(DynamicProp dynamicProp){
+			
+			if (dynamicProp is PoemLineProp prop)
+			{
+				poemLineProps.Add(prop);
+			}
 		}
 
 		public void CollectPoem(PoemLineData poemLineDataCollected){
@@ -24,7 +44,7 @@ namespace GGJ {
 
 		private void InitOrResetAllPoemLines(){
 			
-			List<PoemLineProp> poemLines = GetAllPoemLineControllers();
+			List<PoemLineProp> poemLines = GetAllPoemLineProps();
 
 			for (var i = 0; i < poemLines.Count; i++)
 			{
@@ -34,7 +54,7 @@ namespace GGJ {
 		
 		public void DowseAllPoemLines(){
 			
-			List<PoemLineProp> poemLines = GetAllPoemLineControllers();
+			List<PoemLineProp> poemLines = GetAllPoemLineProps();
 
 			foreach (PoemLineProp poemLine in poemLines) {
 				
@@ -42,7 +62,7 @@ namespace GGJ {
 			}
 		}
 
-		private List<PoemLineProp> GetAllPoemLineControllers(){
+		private List<PoemLineProp> GetAllPoemLineProps(){
 
 			// TODO: actually get all of the poem lines from PropRegistry
 			return new List<PoemLineProp>();
