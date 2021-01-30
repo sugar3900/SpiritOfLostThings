@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PathTileSet
   m_EditorClassIdentifier: 
   id: path
-  cornerPrefab: {fileID: 0}
-  sidePrefab: {fileID: 0}
-  diagonalPrefab: {fileID: 0}
-  innerCornerPrefab: {fileID: 0}
-  solidPrefab: {fileID: 0}
+  cornerPrefab: {fileID: 21300000, guid: 44a53c7d797cd41dfa4dfc99493d4de7, type: 3}
+  sidePrefab: {fileID: 21300000, guid: f8c66224468204bd8a61bd33df90652b, type: 3}
+  diagonalPrefab: {fileID: 21300000, guid: 4e2a217abe58a4a01bc06e626cdce9fc, type: 3}
+  innerCornerPrefab: {fileID: 21300000, guid: 9378c325f82df4d3794e3fe74895bdc7, type: 3}
+  solidPrefab: {fileID: 21300000, guid: 099ffa1d972434c17b726c5ca0375d5a, type: 3}
