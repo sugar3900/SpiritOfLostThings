@@ -365,6 +365,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 9186231229858312652, guid: 2f4137ea02f024761b794a861bc61db0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f4137ea02f024761b794a861bc61db0, type: 3}
 --- !u!224 &345730162 stripped
@@ -1629,7 +1634,7 @@ PrefabInstance:
     - target: {fileID: 9186231229858312652, guid: 551cc8aaf15ca46b388bb6e9ee131f28,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 551cc8aaf15ca46b388bb6e9ee131f28, type: 3}
