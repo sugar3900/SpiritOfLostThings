@@ -10,13 +10,6 @@ namespace GGJ {
         [SerializeField] private StartScreenController startScreenController;
         [SerializeField] private EndScreenController endScreenController;
 
-        public void Start(){
-            
-            // TODO: Switch what's commented when you want the game to start on the start screen
-            //GoToStartScene();
-            GoToGameScene();
-        }
-        
         public void GoToStartScene(){
            
             startScreenController.InitOrReset(() => GoToGameScene());

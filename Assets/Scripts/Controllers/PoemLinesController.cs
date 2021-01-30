@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GGJ {
@@ -7,7 +8,7 @@ namespace GGJ {
 		
 		[SerializeField] private List<PoemLineData> initPoemLineDatas;
 		
-		public List<PoemLineData> poemLinesCollected;
+	    [NonSerialized]	public List<PoemLineData> poemLinesCollected;
 
 		public void InitOrReset(){
 

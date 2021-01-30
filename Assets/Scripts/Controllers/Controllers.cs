@@ -16,13 +16,15 @@ namespace GGJ {
         protected GameLoopController gameLoopController;
         protected PoemLinesController poemLinesController;
     
-        private void Start(){
+        public void Start(){
             
-            sceneController = GetComponent<SceneController>();
             playerController = GetComponent<PlayerController>();
             playerAnimationController = GetComponent<PlayerAnimationController>();
             gameLoopController = GetComponent<GameLoopController>();
             poemLinesController = GetComponent<PoemLinesController>();
+            
+            // Must be last because this officially starts game
+            sceneController = GetComponent<SceneController>();
         }
     }
 }
