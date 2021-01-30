@@ -6,6 +6,7 @@ namespace GGJ {
     [RequireComponent(typeof(PlayerController))]
     [RequireComponent(typeof(PlayerAnimationController))]
     [RequireComponent(typeof(GameLoopController))]
+    [RequireComponent(typeof(PoemLinesController))]
     
     public class Controllers : MonoBehaviour {
         
@@ -13,13 +14,17 @@ namespace GGJ {
         protected PlayerController playerController;
         protected PlayerAnimationController playerAnimationController;
         protected GameLoopController gameLoopController;
+        protected PoemLinesController poemLinesController;
     
-        private void Start(){
+        public void Start(){
             
-            sceneController = GetComponent<SceneController>();
             playerController = GetComponent<PlayerController>();
             playerAnimationController = GetComponent<PlayerAnimationController>();
             gameLoopController = GetComponent<GameLoopController>();
+            poemLinesController = GetComponent<PoemLinesController>();
+            
+            // Must be last because this officially starts game
+            sceneController = GetComponent<SceneController>();
         }
     }
 }

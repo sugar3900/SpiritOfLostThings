@@ -7,15 +7,11 @@ namespace GGJ {
     
     public class GameLoopController : Controllers {
 
-        [SerializeField] private PoemLinesController poemLinesController;
         
-        private List<PoemLineData> poemLinesCollected;
 
         public void InitOrReset(){
             
-            poemLinesCollected.Clear();
             
-            poemLinesController.InitOrReset();
         }
 
         public void Dowse(){
@@ -25,14 +21,14 @@ namespace GGJ {
         
         public void CollectPoemLine(PoemLineData poemLineData){
 
-            poemLinesCollected.Add(poemLineData);
-
-            if (poemLinesCollected.Count >= 5)
+            poemLinesController.CollectPoem(poemLineData);
+            
+            if (poemLinesController.poemLinesCollected.Count >= 5)
             {
                 sceneController.GoToEndGamePoemScene();
             }
             
-            // TODO: send poem item to tree
+            // TODO: get MemoryTreeProp from PropRegistry and call MemoryTreeProp.TurnOnShrooms(poemLinesController.poemLinesCollected.Count);
         }
     }
 }

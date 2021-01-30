@@ -132,9 +132,11 @@ namespace GGJ
 
 		private void ChangeDynamicProp()
 		{
+			Debug.Log("ChangeDynamicProp");
 			Vector2Int coord = GetMouseCoord();
 			DynamicProp dynamicProp = level.GetDynamicPropAtCoord(coord);
 			DynamicProp newDynamicProp = dynamicPropRegistry[toolbar.Selection];
+			Debug.Log(newDynamicProp);
 			if (newDynamicProp != null && (dynamicProp == null || dynamicProp.Id != newDynamicProp.Id))
 			{
 				levelData.SetDynamicPropAtCoord(coord, newDynamicProp.Id);
@@ -174,7 +176,7 @@ namespace GGJ
 			if (level != null)
 			{
 				Vector2 mousePos = Input.mousePosition;
-				Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos) + new Vector3(1f, 1f);
+				Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos) + Vector3.one;
 				Vector2 posInLevel = level.transform.InverseTransformPoint(worldPos);
 				return new Vector2Int((int)posInLevel.x, (int)posInLevel.y);
 			}
