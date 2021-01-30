@@ -16,6 +16,7 @@ namespace GGJ {
             
             gameLoopController.InitOrReset();
             playerController.InitOrReset();
+            playerAnimationController.InitOrReset();
         }
 
         public void GoToEndGamePoemScene(){

@@ -3,7 +3,9 @@ using UnityEngine;
 
 namespace GGJ {
 	
-	public class PoemLinesController : Controllers {
+	//TEMPORARY DEPRECATED
+	
+	public class PoemLinesController : ScriptableObject {
 		
 		private List<PoemLineController> poemLineControllers = new List<PoemLineController>();
 		
@@ -42,7 +44,7 @@ namespace GGJ {
 				
 				newPoemLine.transform.position = poemLineData.position;
 
-				newPoemLine.InitOrReset(poemLineData, playerController, gameLoopController);
+				//newPoemLine.InitOrReset(poemLineData, playerController, gameLoopController);
 
 				poemLineControllers.Add(newPoemLine);
 			}

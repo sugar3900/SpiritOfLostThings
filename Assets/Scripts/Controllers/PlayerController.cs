@@ -4,12 +4,10 @@ using UnityEngine;
 
 namespace GGJ {
     public class PlayerController : Controllers {
-
-        [SerializeField] private PlayerAnimationController playerAnimationController;
-
+        
         public void InitOrReset(){
             
-            playerAnimationController.InitOrReset();
+            // TODO: any cleanup on init or reset
         }
         
         // TODO: call these input methods

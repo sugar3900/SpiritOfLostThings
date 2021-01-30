@@ -8,23 +8,38 @@ namespace GGJ {
         [SerializeField] private Animator animator;
 
         public void InitOrReset(){
-            // TODO: reset for when the game restarts
+
+            Idle();
+        }
+
+        public void Idle(){
+            
+            PlayAnimation("Idle");
         }
 
         public void Left(){
-            // TODO
+            
+            PlayAnimation("WalkRight");
         }
 
         public void Right(){
-            // TODO
+            
+            PlayAnimation("WalkRight");
         }
 
         public void Down(){
-            // TODO
+            
+            PlayAnimation("WalkRight");
         }
 
         public void Up(){
-            // TODO
+            
+            PlayAnimation("WalkRight");
+        }
+
+        private void PlayAnimation(string stateName){
+            
+            animator.CrossFade(stateName, 0.3f);
         }
     }
 }
