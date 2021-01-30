@@ -5,82 +5,65 @@ namespace GGJ
 	public class CharacterProp : DynamicProp
 	{
 		[SerializeField]
-		private float moveSpeed = 1f;
+		private float minPositionLerp = 0.01f;
 		[SerializeField]
-		private float depthZ = -1f;
+		private float maxPositionLerp = 30f;
 		[SerializeField]
-		private float minSearchInterval = 1f;
-		private float timeOfLastSearch;
-		private Vector3 moveTarget = default;
-		public Level Level { get; set; }
-		public PathFinder PathFinder { get; set; } = new PathFinder();
-		private PathNode goalNode;
-		private Path path;
+		private float zDepth = -0.5f;
+		[SerializeField]
+		private float moveSpeed = 8f;
+		[SerializeField]
+		private float rotateSpeed = 1f;
+		[SerializeField]
+		private float radiusForMovementCollision = 0.225f;
+		[SerializeField]
+		private float radiusForEdgeCollision = 0.225f;
+		[SerializeField]
+		private  LayerMask movementCollisionLayers;
 
 		private void Update()
 		{
-			if(Time.time > timeOfLastSearch + minSearchInterval)
-			{
-				timeOfLastSearch = Time.time;
-				FindPath();
-			}
-			MoveAlongPath();
+			Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+			ApplyMovement(input);
 		}
 
-		private void FindPath()
+		public void ApplyMovement(Vector2 moveDirection)
 		{
-			if (Level != null)
-			{
-				PathNode end = Level.PathGrid.GetNearestNode(Camera.main.transform.position);
-				if (goalNode != end)
+			float deltaTime = Time.deltaTime;
+
+				moveDirection *= (moveSpeed * deltaTime);
+				if (moveDirection != Vector2.zero)
 				{
-					goalNode = end;
-					PathNode start = Level.PathGrid.GetNearestNode(transform.position);
-					path = PathFinder.FindPath(Level.PathGrid, start, end);
-					if (path != null)
+					if (CanMoveInDirection(moveDirection))
 					{
-						MoveTowardPathEnd();
+						transform.position += (Vector3)moveDirection;
 					}
+					else if (CanMoveInDirection(new Vector2(moveDirection.x, 0f)))
+					{   //Remove the Y value, move horizontally if unblocked.
+						transform.position += new Vector3(moveDirection.x, 0f);
+					}
+					else if (CanMoveInDirection(new Vector2(0f, moveDirection.y)))
+					{   //Remove the X value, move vertically if unblocekd.
+						transform.position += new Vector3(0f, moveDirection.y);
+					}
+					float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+					Quaternion newRot = Quaternion.AngleAxis(angle, Vector3.forward);
+					transform.rotation = Quaternion.Slerp(transform.rotation, newRot, deltaTime * rotateSpeed);
+			}
+		}
+
+		private bool CanMoveInDirection(Vector2 moveDirection)
+		{
+			Vector2 newPosition = (Vector2)transform.position + moveDirection;
+			Collider2D[] blockingObjects = Physics2D.OverlapCircleAll(newPosition, radiusForMovementCollision, movementCollisionLayers);
+			foreach (Collider2D blockingObject in blockingObjects)
+			{
+				if (blockingObject != null && !blockingObject.isTrigger)
+				{
+					return false;
 				}
 			}
-		}
-
-		private void MoveAlongPath()
-		{
-			if (path != null)
-			{
-				float distance = Vector3.Distance(transform.position, moveTarget);
-				Vector3 dir = (moveTarget - transform.position).normalized;
-				Vector3 move = dir * Time.deltaTime * moveSpeed;
-				transform.Translate(move);
-				if (distance < 0.1f)
-				{
-					if (path.MoveNext())
-					{
-						PathNode node = path.Current.End;
-						if (node != null)
-						{
-							MoveTowardPathEnd();
-						}
-					}
-					else
-					{
-						path = null;
-						moveTarget = transform.position;
-					}
-				}
-			}
-		}
-
-		private void MoveTowardPathEnd()
-		{
-			PathNode node = path.Current.End;
-			if (node != null)
-			{
-				Vector2 coord = path.Current.End.Coordinates;
-				moveTarget = new Vector3(coord.x, coord.y, depthZ);
-				Debug.Log(moveTarget);
-			}
+			return true;
 		}
 	}
 }
