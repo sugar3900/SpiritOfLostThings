@@ -5,22 +5,18 @@ namespace GGJ
 	public class LevelEditor : MonoBehaviour
 	{
 		[SerializeField]
-		private LevelGenerator levelGenerator;
-		public Level level;
-
-		public void SetLevel(Level level)
-		{
-			this.level = level;
-		}
+		private bool isEnabled;
+		public LevelGenerator LevelGenerator { get; set; }
+		public Level Level { get; set; }
 
 		public void Update()
 		{
-			if (Input.GetMouseButtonDown(0))
+			if (isEnabled && Input.GetMouseButtonDown(0))
 			{
 				Vector2 mousePos = Input.mousePosition;
 				Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-				Vector2 posInLevel = level.transform.InverseTransformPoint(worldPos);
-				var prim = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+				Vector2 posInLevel = Level.transform.InverseTransformPoint(worldPos);
+				GameObject prim = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 				prim.transform.position = posInLevel;
 			}
 		}

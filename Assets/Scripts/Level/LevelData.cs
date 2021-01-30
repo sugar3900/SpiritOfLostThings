@@ -7,6 +7,7 @@ namespace GGJ
 	public class LevelData
 	{
 		public List<LevelPropData> Props { get; set; }
+		public List<LevelItemData> Items { get; set; }
 		public List<string> TileSetIds { get; set; }
 		public List<int> BlockedTiles { get; set; }
 		[JsonIgnore]

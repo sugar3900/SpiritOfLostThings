@@ -7,16 +7,14 @@ namespace GGJ
 		[SerializeField]
 		private SpriteRenderer background;
 
-		public bool[,] NavGrid { get; private set; }
-		public GameObject[,] TileGrid { get; private set; }
-		public GameObject[] Props { get; private set; }
+		public bool[,] NavGrid { get; set; }
+		public GameObject[,] TileGrid { get; set; }
+		public GameObject[] Props { get; set; }
+		public GameObject[] Items { get; set; }
 
-		public void Initialize(bool[,] navGrid, GameObject[,] tileGrid, GameObject[] props, int width, int height)
+		public void SetSize(int width, int height)
 		{
-			NavGrid = navGrid;
-			TileGrid = tileGrid;
-			Props = props;
-			background.size = new Vector2(width, height);
+			background.transform.localScale = new Vector2(width, height);
 		}
 	}
 }

@@ -16,6 +16,12 @@ namespace GGJ
 		private TileSetRegistry tileSetRegistry;
 		[SerializeField]
 		private PropRegistry propRegistry;
+		[SerializeField]
+		private MemoryItemRegistry itemRegistry;
+		[SerializeField]
+		private float propZ  = -0.1f;
+		[SerializeField]
+		private float itemZ = 0.15f;
 
 		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
 
@@ -51,8 +57,8 @@ namespace GGJ
 				bool[,] navGrid = GetNavGrid(levelData);
 				GameObject[,] tiles = GenerateTiles(levelData, level.transform);
 				GameObject[] props = GenerateProps(levelData, level.transform);
-
-				level.Initialize(navGrid, tiles, props, levelData.Width, levelData.Height);
+				GameObject[] items = GenerateItems(levelData, level.transform);
+				level.SetSize(levelData.Width, levelData.Height);
 			}
 			catch
 			{
@@ -145,11 +151,39 @@ namespace GGJ
 			GameObject prefab = propRegistry.GetProp(propData.Id);
 			if (prefab != null)
 			{
-				return GameObject.Instantiate(prefab, propData.Position, propData.Rotation, parent);
+				Vector3 offset = new Vector3(0.5f, 0.5f, propZ);
+				return GameObject.Instantiate(prefab, propData.Position + offset, propData.Rotation, parent);
 			}
 			else
 			{
 				Debug.LogWarning("No prefab found with the id " + propData.Id);
+			}
+			return null;
+		}
+
+		private GameObject[] GenerateItems(LevelData levelData, Transform parent)
+		{
+			GameObject[] items = new GameObject[levelData.Items.Count];
+			for (int i = 0; i < levelData.Items.Count; i++)
+			{
+				LevelItemData levelItemData = levelData.Items[i];
+				GameObject item = GenerateItem(levelItemData, parent);
+				items[i] = item;
+			}
+			return items;
+		}
+
+		public GameObject GenerateItem(LevelItemData itemData, Transform parent)
+		{
+			GameObject prefab = itemRegistry.GetMemoryItem(itemData.Id);
+			if (prefab != null)
+			{
+				Vector3 offset = new Vector3(0.5f, 0.5f, itemZ);
+				return GameObject.Instantiate(prefab, itemData.Position + offset, itemData.Rotation, parent);
+			}
+			else
+			{
+				Debug.LogWarning("No prefab found with the id " + itemData.Id);
 			}
 			return null;
 		}
