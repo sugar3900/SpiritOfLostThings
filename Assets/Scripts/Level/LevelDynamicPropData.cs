@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GGJ
 {
-	public class LevelItemData
+	public class LevelDynamicPropData
 	{
 		public string Id { get; set; }
 		public int X { get; set; }

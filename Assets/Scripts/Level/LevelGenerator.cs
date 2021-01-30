@@ -18,11 +18,11 @@ namespace GGJ
 		[SerializeField]
 		private PropRegistry propRegistry;
 		[SerializeField]
-		private MemoryItemRegistry itemRegistry;
+		private DynamicPropRegistry dynamicPropRegistry;
 		[SerializeField]
 		private float propZ = -0.1f;
 		[SerializeField]
-		private float itemZ = -0.15f;
+		private float dynamicPropZ = -0.15f;
 		[SerializeField]
 		private LevelCreator levelCreator;
 		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
@@ -33,7 +33,7 @@ namespace GGJ
 			Level level = levelData != null ? CreateLevelObject(levelData) : null;
 			levelCreator.SetData(level, levelData);
 			levelCreator.SetCallbacks(RebuildGrid, SaveLevelData);
-			levelCreator.SetRegistries(tileSetRegistry, propRegistry, itemRegistry);
+			levelCreator.SetRegistries(tileSetRegistry, propRegistry, dynamicPropRegistry);
 		}
 
 		private void Update()
@@ -81,7 +81,7 @@ namespace GGJ
 			level.NavGrid = GetNavGrid(levelData);
 			level.TileGrid = GenerateTiles(levelData, level.transform);
 			level.Props = GenerateProps(levelData, level.transform);
-			level.Items = GenerateItems(levelData, level.transform);
+			level.DynamicProps = GenerateDynamicProps(levelData, level.transform);
 			level.GenerateBackgrounds(levelData.Width, levelData.Height);
 		}
 
@@ -183,29 +183,28 @@ namespace GGJ
 			return null;
 		}
 
-		private MemoryItem[] GenerateItems(LevelData levelData, Transform parent)
+		private DynamicProp[] GenerateDynamicProps(LevelData levelData, Transform parent)
 		{
-			MemoryItem[] items = new MemoryItem[levelData.Items.Count];
-			for (int i = 0; i < levelData.Items.Count; i++)
+			DynamicProp[] dynamicProps = new DynamicProp[levelData.DynamicProps.Count];
+			for (int i = 0; i < levelData.DynamicProps.Count; i++)
 			{
-				LevelItemData levelItemData = levelData.Items[i];
-				MemoryItem item = GenerateItem(levelItemData, parent);
-				items[i] = item;
+				LevelDynamicPropData levelDynamicPropData = levelData.DynamicProps[i];
+				dynamicProps[i] = GenerateDynamicProp(levelDynamicPropData, parent);
 			}
-			return items;
+			return dynamicProps;
 		}
 
-		public MemoryItem GenerateItem(LevelItemData itemData, Transform parent)
+		public DynamicProp GenerateDynamicProp(LevelDynamicPropData dynamicPropData, Transform parent)
 		{
-			MemoryItem itemPrefab = itemRegistry.GetMemoryItem(itemData.Id);
-			if (itemPrefab != null)
+			DynamicProp dynamicPropPrefab = dynamicPropRegistry.GetDynamicProp(dynamicPropData.Id);
+			if (dynamicPropPrefab != null)
 			{
-				Vector3 offset = new Vector3(0.5f, 0.5f, itemZ);
-				return Instantiate(itemPrefab, itemData.Position + offset, itemData.Rotation, parent);
+				Vector3 offset = new Vector3(0.5f, 0.5f, dynamicPropZ);
+				return Instantiate(dynamicPropPrefab, dynamicPropData.Position + offset, dynamicPropData.Rotation, parent);
 			}
 			else
 			{
-				Debug.LogWarning("No prefab found with the id " + itemData.Id);
+				Debug.LogWarning("No prefab found with the id " + dynamicPropData.Id);
 			}
 			return null;
 		}

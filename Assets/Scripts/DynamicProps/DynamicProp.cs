@@ -2,7 +2,7 @@
 
 namespace GGJ
 {
-	public class MemoryItem : MonoBehaviour
+	public class DynamicProp : MonoBehaviour
 	{
 		[SerializeField]
 		private string id;

@@ -4,6 +4,6 @@
 	{
 		Tiles,
 		Props,
-		Items
+		DynamicProp
 	}
 }

@@ -11,7 +11,7 @@ namespace GGJ
 		public Tile[,] TileGrid { get; set; }
 		public SpriteRenderer[,] Backgrounds { get; set; }
 		public Prop[] Props { get; set; }
-		public MemoryItem[] Items { get; set; }
+		public DynamicProp[] DynamicProps { get; set; }
 
 		public void GenerateBackgrounds(int width, int height)
 		{
@@ -41,16 +41,16 @@ namespace GGJ
 			return null;
 		}
 
-		public MemoryItem GetMemoryItemAtCoord(Vector2Int coord)
+		public DynamicProp GetDynamicPropAtCoord(Vector2Int coord)
 		{
-			foreach (MemoryItem item in Items)
+			foreach (DynamicProp dynamicProp in DynamicProps)
 			{
-				Vector2Int itemCoord = new Vector2Int(
-					(int)item.transform.position.x,
-					(int)item.transform.position.y);
-				if (coord == itemCoord)
+				Vector2Int dynamicPropCoord = new Vector2Int(
+					(int)dynamicProp.transform.position.x,
+					(int)dynamicProp.transform.position.y);
+				if (coord == dynamicPropCoord)
 				{
-					return item;
+					return dynamicProp;
 				}
 			}
 			return null;
@@ -92,12 +92,12 @@ namespace GGJ
 					Destroy(prop.gameObject);
 				}
 			}
-			for (int i = Items.Length - 1; i >= 0; i--)
+			for (int i = DynamicProps.Length - 1; i >= 0; i--)
 			{
-				MemoryItem item = Items[i];
-				if (item != null)
+				DynamicProp dynamicProp = DynamicProps[i];
+				if (dynamicProp != null)
 				{
-					Destroy(item.gameObject);
+					Destroy(dynamicProp.gameObject);
 				}
 			}
 			for (int y = 0; y < Backgrounds.GetLength(1); y++)
@@ -114,7 +114,7 @@ namespace GGJ
 			NavGrid = null;
 			TileGrid = null;
 			Backgrounds = null;
-			Items = null;
+			DynamicProps = null;
 			Props = null;
 		}
 	}

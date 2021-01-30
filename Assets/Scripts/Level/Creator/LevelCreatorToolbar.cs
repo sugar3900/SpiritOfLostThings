@@ -21,7 +21,7 @@ namespace GGJ
 		private Dropdown dropdown;
 		private PropRegistry propRegistry;
 		private TileSetRegistry tileSetRegistry;
-		private MemoryItemRegistry memoryItemRegistry;
+		private DynamicPropRegistry dynamicPropRegistry;
 		public bool IsShown
 		{
 			get => toolbarRoot.activeSelf;
@@ -34,11 +34,11 @@ namespace GGJ
 		public void SetRegistries(
 			TileSetRegistry tileSetRegistry,
 			PropRegistry propRegistry,
-			MemoryItemRegistry memoryItemRegistry)
+			DynamicPropRegistry dynamicPropRegistry)
 		{
 			this.tileSetRegistry = tileSetRegistry;
 			this.propRegistry = propRegistry;
-			this.memoryItemRegistry = memoryItemRegistry;
+			this.dynamicPropRegistry = dynamicPropRegistry;
 			InitializeDropdown();
 			Redraw();
 		}
@@ -92,8 +92,8 @@ namespace GGJ
 					return PopulateTileSets();
 				case LevelCreatorMode.Props:
 					return PopulateProps();
-				case LevelCreatorMode.Items:
-					return PopulateItems();
+				case LevelCreatorMode.DynamicProp:
+					return PopulateDynamicProps();
 				default:
 					return null;
 			}
@@ -123,16 +123,16 @@ namespace GGJ
 			return propOptions;
 		}
 
-		private List<LevelCreatorOption> PopulateItems()
+		private List<LevelCreatorOption> PopulateDynamicProps()
 		{
-			var itemOptions = new List<LevelCreatorOption>();
-			for (int i = 0; i < memoryItemRegistry.Count; i++)
+			List<LevelCreatorOption> dynamicPropOptions = new List<LevelCreatorOption>();
+			for (int i = 0; i < dynamicPropRegistry.Count; i++)
 			{
-				MemoryItem item = memoryItemRegistry.MemoryItems[i];
-				Sprite sprite = item.Sprite;
-				itemOptions.Add(CreateOption(item.Id, sprite, i));
+				DynamicProp dynamicProp = dynamicPropRegistry.DynamicProps[i];
+				Sprite sprite = dynamicProp.Sprite;
+				dynamicPropOptions.Add(CreateOption(dynamicProp.Id, sprite, i));
 			}
-			return itemOptions;
+			return dynamicPropOptions;
 		}
 
 		private LevelCreatorOption CreateOption(string id, Sprite sprite, int index)

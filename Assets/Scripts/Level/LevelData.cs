@@ -7,7 +7,7 @@ namespace GGJ
 	public class LevelData
 	{
 		public List<LevelPropData> Props { get; set; }
-		public List<LevelItemData> Items { get; set; }
+		public List<LevelDynamicPropData> DynamicProps { get; set; }
 		public List<string> TileSetIds { get; set; }
 		public List<int> BlockedTiles { get; set; }
 		[JsonIgnore]
@@ -119,15 +119,15 @@ namespace GGJ
 			return false;
 		}
 
-		private LevelItemData GetItemAtCoord(Vector2Int coord)
+		private LevelDynamicPropData GetDynamicPropAtCoord(Vector2Int coord)
 		{
 			if (GetCoordIsInBounds(coord))
 			{
-				foreach (LevelItemData item in Items)
+				foreach (LevelDynamicPropData dynamicProp in DynamicProps)
 				{
-					if (item.Coord == coord)
+					if (dynamicProp.Coord == coord)
 					{
-						return item;
+						return dynamicProp;
 					}
 				}
 			}
@@ -170,19 +170,19 @@ namespace GGJ
 			return false;
 		}
 
-		public bool SetItemAtCoord(Vector2Int coord, string itemId)
+		public bool SetDynamicPropAtCoord(Vector2Int coord, string dynamicPropId)
 		{
 			if (GetCoordIsInBounds(coord))
 			{
-				LevelItemData item = GetItemAtCoord(coord);
-				if (item != null)
+				LevelDynamicPropData dynamicProp = GetDynamicPropAtCoord(coord);
+				if (dynamicProp != null)
 				{
-					item.Id = itemId;
+					dynamicProp.Id = dynamicPropId;
 					return true;
 				}
 				Props.Add(new LevelPropData
 				{
-					Id = itemId,
+					Id = dynamicPropId,
 					X = coord.x,
 					Y = coord.y
 				});
@@ -215,14 +215,14 @@ namespace GGJ
 			return false;
 		}
 
-		public bool ClearItemAtCoord(Vector2Int coord)
+		public bool ClearDynamicPropAtCoord(Vector2Int coord)
 		{
 			if (GetCoordIsInBounds(coord))
 			{
-				LevelItemData item = GetItemAtCoord(coord);
-				if (item != null)
+				LevelDynamicPropData dynamicProp = GetDynamicPropAtCoord(coord);
+				if (dynamicProp != null)
 				{
-					Items.Remove(item);
+					DynamicProps.Remove(dynamicProp);
 					return true;
 				}
 			}

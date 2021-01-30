@@ -14,7 +14,7 @@ namespace GGJ
 		private LevelData levelData;
 		private PropRegistry propRegistry;
 		private TileSetRegistry tileSetRegistry;
-		private MemoryItemRegistry memoryItemRegistry;
+		private DynamicPropRegistry dynamicPropRegistry;
 		private Action<Level, LevelData> rebuildCallback;
 		private Action<LevelData> saveCallback;
 
@@ -35,12 +35,12 @@ namespace GGJ
 		public void SetRegistries(
 			TileSetRegistry tileSetRegistry,
 			PropRegistry propRegistry,
-			MemoryItemRegistry memoryItemRegistry)
+			DynamicPropRegistry dynamicPropRegistry)
 		{
 			this.tileSetRegistry = tileSetRegistry;
 			this.propRegistry = propRegistry;
-			this.memoryItemRegistry = memoryItemRegistry;
-			toolbar.SetRegistries(tileSetRegistry, propRegistry, memoryItemRegistry);
+			this.dynamicPropRegistry = dynamicPropRegistry;
+			toolbar.SetRegistries(tileSetRegistry, propRegistry, dynamicPropRegistry);
 		}
 
 		public void OnUpdate()
@@ -79,8 +79,8 @@ namespace GGJ
 					case LevelCreatorMode.Props:
 						ChangeProp();
 						break;
-					case LevelCreatorMode.Items:
-						ChangeItem();
+					case LevelCreatorMode.DynamicProp:
+						ChangeDynamicProp();
 						break;
 				}
 			}
@@ -94,8 +94,8 @@ namespace GGJ
 					case LevelCreatorMode.Props:
 						ClearProp();
 						break;
-					case LevelCreatorMode.Items:
-						ClearItem();
+					case LevelCreatorMode.DynamicProp:
+						ClearDynamicProp();
 						break;
 				}
 			}
@@ -130,14 +130,14 @@ namespace GGJ
 			}
 		}
 
-		private void ChangeItem()
+		private void ChangeDynamicProp()
 		{
 			Vector2Int coord = GetMouseCoord();
-			MemoryItem item = level.GetMemoryItemAtCoord(coord);
-			MemoryItem newItem = memoryItemRegistry[toolbar.Selection];
-			if (newItem != null && (item == null || item.Id != newItem.Id))
+			DynamicProp dynamicProp = level.GetDynamicPropAtCoord(coord);
+			DynamicProp newDynamicProp = dynamicPropRegistry[toolbar.Selection];
+			if (newDynamicProp != null && (dynamicProp == null || dynamicProp.Id != newDynamicProp.Id))
 			{
-				levelData.SetItemAtCoord(coord, newItem.Id);
+				levelData.SetDynamicPropAtCoord(coord, newDynamicProp.Id);
 				RebuildAndSave();
 			}
 		}
@@ -160,10 +160,10 @@ namespace GGJ
 			}
 		}
 
-		private void ClearItem()
+		private void ClearDynamicProp()
 		{
 			Vector2Int coord = GetMouseCoord();
-			if (levelData.ClearItemAtCoord(coord))
+			if (levelData.ClearDynamicPropAtCoord(coord))
 			{
 				RebuildAndSave();
 			}

@@ -2010,9 +2010,10 @@ MonoBehaviour:
   _levelFileName: Level
   tileSetRegistry: {fileID: 11400000, guid: 579c245098f08aa44b04a13a7382e5e5, type: 2}
   propRegistry: {fileID: 11400000, guid: f49f87d6f44f1344187fa67378e085a6, type: 2}
-  itemRegistry: {fileID: 11400000, guid: 303b1f822ae57d946bc0b7601607b627, type: 2}
+  dynamicPropRegistry: {fileID: 11400000, guid: 303b1f822ae57d946bc0b7601607b627,
+    type: 2}
   propZ: -0.1
-  itemZ: -0.15
+  dynamicPropZ: -0.15
   levelCreator:
     toolbar:
       toolbarRoot: {fileID: 1974088287}

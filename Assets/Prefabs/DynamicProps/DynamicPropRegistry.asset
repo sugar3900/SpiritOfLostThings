@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7719ae07c4294b039544e4f1a62d116, type: 3}
-  m_Name: MemoryItemRegistry
+  m_Name: DynamicPropRegistry
   m_EditorClassIdentifier: 
-  memoryItems:
+  dynamicProps:
   - {fileID: 231804244439021338, guid: 20187a23f3403d042b20c7026f8bcbc0, type: 3}
