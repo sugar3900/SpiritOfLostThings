@@ -9,11 +9,14 @@ namespace GGJ
 		[SerializeField]
 		private GameObject levelPrefab;
 		[SerializeField]
+		private GameObject tilePrefab;
+		[SerializeField]
 		private string _levelFileName = "Level";
 		[SerializeField]
 		private TileSetRegistry tileSetRegistry;
 		[SerializeField]
 		private PropRegistry propRegistry;
+
 		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
 
 		private void Start()
@@ -48,7 +51,8 @@ namespace GGJ
 				bool[,] navGrid = GetNavGrid(levelData);
 				GameObject[,] tiles = GenerateTiles(levelData, level.transform);
 				GameObject[] props = GenerateProps(levelData, level.transform);
-				level.Initialize(navGrid, tiles, props);
+
+				level.Initialize(navGrid, tiles, props, levelData.Width, levelData.Height);
 			}
 			catch
 			{
@@ -103,11 +107,14 @@ namespace GGJ
 			TileSet tileSet = tileSetRegistry.GetTileSet(tileSetId);
 			if (tileSet != null)
 			{
-				GameObject prefab = tileSet.GetPrefab(tileCase);
-				if (prefab != null)
+				Sprite sprite = tileSet.GetSprite(tileCase);
+				if (sprite != null)
 				{
 					float rotZ = tileCase.GetRotationZ();
-					return GameObject.Instantiate(prefab, new Vector3(x, y), Quaternion.Euler(0f, 0f, rotZ), parent);
+					GameObject instance = GameObject.Instantiate(tilePrefab, new Vector3(x, y), Quaternion.Euler(0f, 0f, rotZ), parent);
+					SpriteRenderer spriteRenderer = instance.GetComponent<SpriteRenderer>();
+					spriteRenderer.sprite = sprite;
+					return instance;
 				}
 				else
 				{

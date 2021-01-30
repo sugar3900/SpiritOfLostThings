@@ -9,17 +9,17 @@ namespace GGJ
 		public string Id => id;
 
 		[SerializeField]
-		private GameObject cornerPrefab;
+		private Sprite cornerPrefab;
 		[SerializeField]
-		private GameObject sidePrefab;
+		private Sprite sidePrefab;
 		[SerializeField]
-		private GameObject diagonalPrefab;
+		private Sprite diagonalPrefab;
 		[SerializeField]
-		private GameObject innerCornerPrefab;
+		private Sprite innerCornerPrefab;
 		[SerializeField]
-		private GameObject solidPrefab;
+		private Sprite solidPrefab;
 
-		public GameObject GetPrefab(TileCase tileCase)
+		public Sprite GetSprite(TileCase tileCase)
 		{
 
 			switch (tileCase)
