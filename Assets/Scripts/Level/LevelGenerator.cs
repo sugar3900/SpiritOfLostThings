@@ -107,7 +107,7 @@ namespace GGJ
 				if (prefab != null)
 				{
 					float rotZ = tileCase.GetRotationZ();
-					return GameObject.Instantiate(prefab, new Vector3(x, 0f, y), Quaternion.Euler(0f, 0f, rotZ), parent);
+					return GameObject.Instantiate(prefab, new Vector3(x, y), Quaternion.Euler(0f, 0f, rotZ), parent);
 				}
 				else
 				{
