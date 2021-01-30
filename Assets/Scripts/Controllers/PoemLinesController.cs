@@ -3,51 +3,48 @@ using UnityEngine;
 
 namespace GGJ {
 	
-	//TEMPORARY DEPRECATED
-	
-	public class PoemLinesController : ScriptableObject {
+	public class PoemLinesController : Controllers {
 		
-		private List<PoemLineController> poemLineControllers = new List<PoemLineController>();
+		[SerializeField] private List<PoemLineData> initPoemLineDatas;
 		
-		[SerializeField] private PoemLineController poemLineControllerPrefab;
-		[SerializeField] private List<PoemLineData> poemLineDatas;
+		public List<PoemLineData> poemLinesCollected;
 
 		public void InitOrReset(){
-			
-			DestroyAllPoemLines();
-			CreatePoemLines();
+
+			poemLinesCollected.Clear();
+
+			InitOrResetAllPoemLines();
 		}
 
-		public void DowseAllPoemLines(){
+		public void CollectPoem(PoemLineData poemLineDataCollected){
 			
-			foreach (PoemLineController poemLineController in poemLineControllers) {
-				
-				poemLineController.OnDowse();
+			poemLinesCollected.Add(poemLineDataCollected);
+		}
+
+		private void InitOrResetAllPoemLines(){
+			
+			List<PoemLineController> poemLines = GetAllPoemLineControllers();
+
+			for (var i = 0; i < poemLines.Count; i++)
+			{
+				poemLines[i].InitOrReset( initPoemLineDatas[i], playerController, gameLoopController);
 			}
 		}
 		
-		private void DestroyAllPoemLines(){
+		public void DowseAllPoemLines(){
 			
-			foreach (PoemLineController poemLineController in poemLineControllers) {
-				
-				Destroy(poemLineController.gameObject);
-			}
+			List<PoemLineController> poemLines = GetAllPoemLineControllers();
 
-			poemLineControllers.Clear();
+			foreach (PoemLineController poemLine in poemLines) {
+				
+				poemLine.OnDowse();
+			}
 		}
 
-		private void CreatePoemLines(){
+		private List<PoemLineController> GetAllPoemLineControllers(){
 
-			foreach (PoemLineData poemLineData in poemLineDatas) {
-				
-				var newPoemLine = Instantiate(poemLineControllerPrefab);
-				
-				newPoemLine.transform.position = poemLineData.position;
-
-				//newPoemLine.InitOrReset(poemLineData, playerController, gameLoopController);
-
-				poemLineControllers.Add(newPoemLine);
-			}
+			// TODO: actually get all of the poem lines from PropRegistry
+			return new List<PoemLineController>();
 		}
 	}
 }
