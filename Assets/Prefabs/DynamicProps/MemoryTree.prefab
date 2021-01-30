@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocking: 0
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 9064848643936754590}
 --- !u!114 &2996964054518091579
 MonoBehaviour:
   m_ObjectHideFlags: 0

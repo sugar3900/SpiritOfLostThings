@@ -16,7 +16,7 @@ namespace GGJ
 				{
 					if (!sourceGrid[x, y])
 					{
-						Vector2Int coord = new Vector2Int(x, y);
+						Vector2 coord = new Vector2(x, y);
 						allNodes[x, y] = new PathNode(coord);
 					}
 				}
@@ -54,22 +54,26 @@ namespace GGJ
 		{
 			foreach (PathNode node in allNodes)
 			{
-				ConnectNode(node, new Vector2Int(0, 1));
-				ConnectNode(node, new Vector2Int(1, 0));
-				ConnectNode(node, new Vector2Int(0, -1));
-				ConnectNode(node, new Vector2Int(-1, 0));
+				if (node != null)
+				{
+					ConnectNode(node, new Vector2(0, 1));
+					ConnectNode(node, new Vector2(1, 0));
+					ConnectNode(node, new Vector2(0, -1));
+					ConnectNode(node, new Vector2(-1, 0));
+				}
 			}
 		}
 
-		private void ConnectNode(PathNode node, Vector2Int offset)
+		private void ConnectNode(PathNode node, Vector2 offset)
 		{
-			Vector2Int neighborPos = node.Coordinates + offset;
-			if(neighborPos.x >= 0
+
+			Vector2 neighborPos = node.Coordinates + offset;
+			if (neighborPos.x >= 0
 				&& neighborPos.x < allNodes.GetLength(0)
 				&& neighborPos.y >= 0
 				&& neighborPos.y < allNodes.GetLength(1))
 			{
-				node.Connect(allNodes[neighborPos.x, neighborPos.y]);
+				node.Connect(allNodes[(int)neighborPos.x, (int)neighborPos.y]);
 			}
 		}
 	}

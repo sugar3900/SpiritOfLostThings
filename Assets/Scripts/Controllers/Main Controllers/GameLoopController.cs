@@ -7,8 +7,6 @@ namespace GGJ {
     
     public class GameLoopController : Controllers {
 
-        
-
         public void InitOrReset(){
             
             
