@@ -27,6 +27,8 @@ namespace GGJ {
             {
                 sceneController.GoToEndGamePoemScene();
             }
+            
+            // TODO: get MemoryTreeProp from PropRegistry and call MemoryTreeProp.TurnOnShrooms(poemLinesController.poemLinesCollected.Count);
         }
     }
 }

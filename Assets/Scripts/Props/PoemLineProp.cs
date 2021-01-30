@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace GGJ {
     
-    public class PoemLineController : MonoBehaviour {
+    public class PoemLineProp : MonoBehaviour {
 		
         [Header("Components")]
         [SerializeField] private ParticleSystem darkParticleSystem;

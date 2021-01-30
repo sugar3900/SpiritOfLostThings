@@ -24,7 +24,7 @@ namespace GGJ {
 
 		private void InitOrResetAllPoemLines(){
 			
-			List<PoemLineController> poemLines = GetAllPoemLineControllers();
+			List<PoemLineProp> poemLines = GetAllPoemLineControllers();
 
 			for (var i = 0; i < poemLines.Count; i++)
 			{
@@ -34,18 +34,18 @@ namespace GGJ {
 		
 		public void DowseAllPoemLines(){
 			
-			List<PoemLineController> poemLines = GetAllPoemLineControllers();
+			List<PoemLineProp> poemLines = GetAllPoemLineControllers();
 
-			foreach (PoemLineController poemLine in poemLines) {
+			foreach (PoemLineProp poemLine in poemLines) {
 				
 				poemLine.OnDowse();
 			}
 		}
 
-		private List<PoemLineController> GetAllPoemLineControllers(){
+		private List<PoemLineProp> GetAllPoemLineControllers(){
 
 			// TODO: actually get all of the poem lines from PropRegistry
-			return new List<PoemLineController>();
+			return new List<PoemLineProp>();
 		}
 	}
 }
