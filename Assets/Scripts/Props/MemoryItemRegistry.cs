@@ -9,11 +9,11 @@ namespace GGJ
 
 		public GameObject GetMemoryItem(string id)
 		{
-			foreach (GameObject item in memoryItems)
+			foreach (GameObject prop in memoryItems)
 			{
-				if (item.name == id)
+				if (prop.name == id)
 				{
-					return item;
+					return prop;
 				}
 			}
 			return null;
