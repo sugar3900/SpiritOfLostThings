@@ -19,11 +19,31 @@ namespace GGJ
 		[SerializeField]
 		private float radiusForEdgeCollision = 0.225f;
 		[SerializeField]
-		private  LayerMask movementCollisionLayers;
+		private LayerMask movementCollisionLayers;
+		[SerializeField]
+		private PlayerAnimationController animationController;
 
 		private void Update()
 		{
-			Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+			float horizontal = Input.GetAxis("Horizontal");
+			float vertical = Input.GetAxis("Vertical");
+			if (vertical > Mathf.Epsilon)
+			{
+				animationController.Up();
+			}
+			else if (vertical < -Mathf.Epsilon)
+			{
+				animationController.Down();
+			}
+			else if (horizontal > Mathf.Epsilon)
+			{
+				animationController.Right();
+			}
+			else if (horizontal < -Mathf.Epsilon)
+			{
+				animationController.Left();
+			}
+			Vector2 input = new Vector2(horizontal, vertical);
 			ApplyMovement(input);
 		}
 
@@ -31,24 +51,21 @@ namespace GGJ
 		{
 			float deltaTime = Time.deltaTime;
 
-				moveDirection *= (moveSpeed * deltaTime);
-				if (moveDirection != Vector2.zero)
+			moveDirection *= (moveSpeed * deltaTime);
+			if (moveDirection != Vector2.zero)
+			{
+				if (CanMoveInDirection(moveDirection))
 				{
-					if (CanMoveInDirection(moveDirection))
-					{
-						transform.position += (Vector3)moveDirection;
-					}
-					else if (CanMoveInDirection(new Vector2(moveDirection.x, 0f)))
-					{   //Remove the Y value, move horizontally if unblocked.
-						transform.position += new Vector3(moveDirection.x, 0f);
-					}
-					else if (CanMoveInDirection(new Vector2(0f, moveDirection.y)))
-					{   //Remove the X value, move vertically if unblocekd.
-						transform.position += new Vector3(0f, moveDirection.y);
-					}
-					float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-					Quaternion newRot = Quaternion.AngleAxis(angle, Vector3.forward);
-					transform.rotation = Quaternion.Slerp(transform.rotation, newRot, deltaTime * rotateSpeed);
+					transform.position += (Vector3)moveDirection;
+				}
+				else if (CanMoveInDirection(new Vector2(moveDirection.x, 0f)))
+				{
+					transform.position += new Vector3(moveDirection.x, 0f);
+				}
+				else if (CanMoveInDirection(new Vector2(0f, moveDirection.y)))
+				{
+					transform.position += new Vector3(0f, moveDirection.y);
+				}
 			}
 		}
 

@@ -974,6 +974,7 @@ MonoBehaviour:
   movementCollisionLayers:
     serializedVersion: 2
     m_Bits: 0
+  animationController: {fileID: 1972574537}
 --- !u!4 &831898340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
