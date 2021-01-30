@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace GGJ
 {
@@ -69,34 +70,37 @@ namespace GGJ
 
 		private void HandleInputs()
 		{
-			if (Input.GetMouseButtonDown(0))
+			if (!EventSystem.current.IsPointerOverGameObject())
 			{
-				switch (toolbar.Mode)
+				if (Input.GetMouseButtonDown(0))
 				{
-					case LevelCreatorMode.Tiles:
-						ChangeTile();
-						break;
-					case LevelCreatorMode.Props:
-						ChangeProp();
-						break;
-					case LevelCreatorMode.DynamicProp:
-						ChangeDynamicProp();
-						break;
+					switch (toolbar.Mode)
+					{
+						case LevelCreatorMode.Tiles:
+							ChangeTile();
+							break;
+						case LevelCreatorMode.Props:
+							ChangeProp();
+							break;
+						case LevelCreatorMode.DynamicProp:
+							ChangeDynamicProp();
+							break;
+					}
 				}
-			}
-			else if (Input.GetMouseButtonDown(1))
-			{
-				switch (toolbar.Mode)
+				else if (Input.GetMouseButtonDown(1))
 				{
-					case LevelCreatorMode.Tiles:
-						ClearTile();
-						break;
-					case LevelCreatorMode.Props:
-						ClearProp();
-						break;
-					case LevelCreatorMode.DynamicProp:
-						ClearDynamicProp();
-						break;
+					switch (toolbar.Mode)
+					{
+						case LevelCreatorMode.Tiles:
+							ClearTile();
+							break;
+						case LevelCreatorMode.Props:
+							ClearProp();
+							break;
+						case LevelCreatorMode.DynamicProp:
+							ClearDynamicProp();
+							break;
+					}
 				}
 			}
 		}
