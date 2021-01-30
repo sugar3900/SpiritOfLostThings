@@ -4,11 +4,12 @@ namespace GGJ
 {
 	public class Prop : MonoBehaviour
 	{
+		public string Id => gameObject.name;
 		[SerializeField]
-		private string id;
-		public string Id => id;
+		public bool isBlocking ;
+		public bool IsBlocking => isBlocking;
 		[SerializeField]
 		private SpriteRenderer spriteRenderer;
-		public Sprite Sprite => spriteRenderer.sprite;
+		public Sprite Sprite => (spriteRenderer != null) ? spriteRenderer.sprite : null;
 	}
 }

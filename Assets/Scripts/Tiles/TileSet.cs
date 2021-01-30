@@ -4,9 +4,10 @@ namespace GGJ
 {
 	public class TileSet : ScriptableObject
 	{
+		public string Id => name;
 		[SerializeField]
-		private string id;
-		public string Id => id;
+		private bool isBlocking;
+		public bool IsBlocking => isBlocking;
 
 		[SerializeField]
 		private Sprite cornerPrefab;

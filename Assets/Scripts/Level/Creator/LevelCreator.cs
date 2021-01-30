@@ -174,7 +174,7 @@ namespace GGJ
 			if (level != null)
 			{
 				Vector2 mousePos = Input.mousePosition;
-				Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos) + new Vector3(0.5f, 0.5f);
+				Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos) + new Vector3(1f, 1f);
 				Vector2 posInLevel = level.transform.InverseTransformPoint(worldPos);
 				return new Vector2Int((int)posInLevel.x, (int)posInLevel.y);
 			}

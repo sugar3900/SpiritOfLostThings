@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -55,10 +56,20 @@ namespace GGJ
 
 		private void SaveLevelData(LevelData levelData)
 		{
-			using (StreamWriter file = File.CreateText(LevelFilePath))
+			try
 			{
-				JsonSerializer serializer = new JsonSerializer();
-				serializer.Serialize(file, levelData);
+				UpdateLevelTileSets(levelData);
+				UpdateLevelPropData(levelData);
+				UpdateLevelDynamicPropData(levelData);
+				using (StreamWriter file = File.CreateText(LevelFilePath))
+				{
+					JsonSerializer serializer = new JsonSerializer();
+					serializer.Serialize(file, levelData);
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.LogError(ex);
 			}
 		}
 
@@ -207,6 +218,74 @@ namespace GGJ
 				Debug.LogWarning("No prefab found with the id " + dynamicPropData.Id);
 			}
 			return null;
+		}
+
+		private void UpdateLevelTileSets(LevelData levelData)
+		{
+			// Initialize with the "empty" tileset at index 0:
+			List<string> validTileSetIds = new List<string>() { "" };
+			List<int> blockingTileSets = new List<int>();
+			for (int i = 0; i < tileSetRegistry.Count; i++)
+			{
+				TileSet tileSet = tileSetRegistry[i];
+				validTileSetIds.Add(tileSet.Id);
+				if(tileSet.IsBlocking)
+				{
+					blockingTileSets.Add(i + 1);
+				}
+			}
+			levelData.TileSetIds = validTileSetIds;
+			levelData.BlockedTiles = blockingTileSets;
+		}
+
+		private void UpdateLevelPropData(LevelData levelData)
+		{
+			List<LevelPropData> toRemove = new List<LevelPropData>();
+			for (int i = 0; i < levelData.Props.Count; i++)
+			{
+				LevelPropData data = levelData.Props[i];
+				Prop prop = propRegistry.GetProp(data.Id);
+				if (prop == null)
+				{
+					toRemove.Add(data);
+				}
+				else
+				{
+					data.IsBlocking = prop.isBlocking;
+				}
+			}
+			if (toRemove.Count > 0)
+			{
+				foreach (LevelPropData levelPropData in toRemove)
+				{
+					levelData.Props.Remove(levelPropData);
+				}
+			}
+		}
+
+		private void UpdateLevelDynamicPropData(LevelData levelData)
+		{
+			List<LevelDynamicPropData> toRemove = new List<LevelDynamicPropData>();
+			for (int i = 0; i < levelData.DynamicProps.Count; i++)
+			{
+				LevelDynamicPropData data = levelData.DynamicProps[i];
+				DynamicProp dynamicProp = dynamicPropRegistry.GetDynamicProp(data.Id);
+				if (dynamicProp == null)
+				{
+					toRemove.Add(data);
+				}
+				else
+				{
+					data.IsBlocking = dynamicProp.IsBlocking;
+				}
+			}
+			if (toRemove.Count > 0)
+			{
+				foreach (LevelDynamicPropData levelPropData in toRemove)
+				{
+					levelData.DynamicProps.Remove(levelPropData);
+				}
+			}
 		}
 	}
 }

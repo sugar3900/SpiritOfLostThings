@@ -9,6 +9,7 @@ namespace GGJ
 		public int X { get; set; }
 		public int Y { get; set; }
 		public float RotZ { get; set; }
+		public bool IsBlocking { get; set; }
 		[JsonIgnore]
 		public Vector3 Position => new Vector3(X, Y);
 		[JsonIgnore]

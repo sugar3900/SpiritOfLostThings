@@ -6,7 +6,8 @@ namespace GGJ
 	{
 		[SerializeField]
 		private SpriteRenderer backgroundPrefab;
-
+		[SerializeField]
+		private float backgroundZ = 2f;
 		public bool[,] NavGrid { get; set; }
 		public Tile[,] TileGrid { get; set; }
 		public SpriteRenderer[,] Backgrounds { get; set; }
@@ -25,7 +26,8 @@ namespace GGJ
 				{
 					Vector3 pos = new Vector3(
 						bgTileSize.x * (x + 0.5f) - 0.5f,
-						bgTileSize.y * (y + 0.5f) - 0.5f);
+						bgTileSize.y * (y + 0.5f) - 0.5f,
+						backgroundZ);
 					SpriteRenderer bg = Instantiate(backgroundPrefab, pos, Quaternion.identity, transform);
 					Backgrounds[x, y] = bg;
 				}
