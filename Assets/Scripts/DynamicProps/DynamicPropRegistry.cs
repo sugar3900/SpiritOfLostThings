@@ -12,11 +12,11 @@ namespace GGJ
 
 		public DynamicProp GetDynamicProp(string id)
 		{
-			foreach (DynamicProp prop in dynamicProps)
+			foreach (DynamicProp dynamicProp in dynamicProps)
 			{
-				if (prop.Id == id)
+				if (dynamicProp != null && dynamicProp.Id == id)
 				{
-					return prop;
+					return dynamicProp;
 				}
 			}
 			return null;
