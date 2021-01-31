@@ -35,8 +35,8 @@ namespace GGJ
 		[SerializeField]
 		private int obstacleLayer = 8;
 
-		public event Action<Level> onLevelGenerated;
-		public event Action<DynamicProp> onDynamicPropCreated;
+		public event Action<Level> OnLevelGenerated;
+		public event Action<DynamicProp> OnDynamicPropCreated;
 
 		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
 
@@ -90,7 +90,7 @@ namespace GGJ
 			GameObject instance = Instantiate(levelPrefab);
 			Level level = instance.GetComponent<Level>();
 			BuildContent(level, levelData);
-			onLevelGenerated?.Invoke(level);
+			OnLevelGenerated?.Invoke(level);
 			return level;
 		}
 
@@ -216,7 +216,7 @@ namespace GGJ
 			{
 				Vector3 position = new Vector3(dynamicPropData.X + 0.5f, dynamicPropData.Y + 0.5f, dynamicPropZ);
 				DynamicProp dynamicProp = Instantiate(dynamicPropPrefab, position, Quaternion.identity, parent);
-				onDynamicPropCreated?.Invoke(dynamicProp);
+				OnDynamicPropCreated?.Invoke(dynamicProp);
 				return dynamicProp;
 			}
 			else

@@ -11,17 +11,17 @@ namespace GGJ {
 
         public void OnEnable(){
             
-            levelGenerator.onLevelGenerated += SetUpGameFirstTime;
+            levelGenerator.OnLevelGenerated += SetUpGameFirstTime;
         }
         
         public void OnDisable(){
             
-            levelGenerator.onLevelGenerated -= SetUpGameFirstTime;
+            levelGenerator.OnLevelGenerated -= SetUpGameFirstTime;
         }
 
         private void SetUpGameFirstTime(Level level){
             
-            levelGenerator.onLevelGenerated -= SetUpGameFirstTime;
+            levelGenerator.OnLevelGenerated -= SetUpGameFirstTime;
 
             LevelPropInterfacer.ParseLevelData(level);
             

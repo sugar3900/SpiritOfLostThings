@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GGJ
 {
@@ -11,7 +12,7 @@ namespace GGJ
 		[SerializeField]
 		private LayerMask movementCollisionLayers;
 		[SerializeField]
-		private CharacterAnimationController animationController;
+		private Animator animator;
 
 		private void Update()
 		{
@@ -19,23 +20,23 @@ namespace GGJ
 			float vertical = Input.GetAxis("Vertical");
 			if (vertical > Mathf.Epsilon)
 			{
-				animationController.Up();
+				Up();
 			}
 			else if (vertical < -Mathf.Epsilon)
 			{
-				animationController.Down();
+				Down();
 			}
 			else if (horizontal > Mathf.Epsilon)
 			{
-				animationController.Right();
+				Right();
 			}
 			else if (horizontal < -Mathf.Epsilon)
 			{
-				animationController.Left();
+				Left();
 			}
 			else
 			{
-				animationController.Idle();
+				Idle();
 			}
 			Vector2 input = new Vector2(horizontal, vertical);
 			ApplyMovement(input);
@@ -77,9 +78,56 @@ namespace GGJ
 			return true;
 		}
 
-		public float GetDistanceFrom(GameObject gameObject){
-            
+		public float GetDistanceFrom(GameObject gameObject)
+		{
+
 			return Vector3.Distance(transform.position, gameObject.transform.position);
+		}
+
+		private CharacterState currentState;
+
+		public void Idle() => SetState(CharacterState.Idle);
+
+		public void Left() => SetState(CharacterState.Left);
+
+		public void Right() => SetState(CharacterState.Right);
+
+		public void Down() => SetState(CharacterState.Down);
+
+		public void Up() => SetState(CharacterState.Up);
+
+		private void SetState(CharacterState state)
+		{
+
+			if (state == currentState)
+			{
+				return;
+			}
+
+			currentState = state;
+
+			PlayAnimation(GetAnimNameForState(state));
+		}
+
+		private void PlayAnimation(string stateName) => animator.CrossFade(stateName, 0.2f);
+
+		private string GetAnimNameForState(CharacterState state)
+		{
+			switch (state)
+			{
+				case CharacterState.Idle:
+					return "Idle";
+				case CharacterState.Left:
+					return "WalkRight";
+				case CharacterState.Right:
+					return "WalkRight";
+				case CharacterState.Up:
+					return "WalkRight";
+				case CharacterState.Down:
+					return "WalkRight";
+				default:
+					throw new ArgumentOutOfRangeException(nameof(state), state, null);
+			}
 		}
 	}
 }

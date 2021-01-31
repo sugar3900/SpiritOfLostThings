@@ -43,7 +43,7 @@ namespace GGJ
 		private void Start()
 		{
 			targetZoom = (minZoom + maxZoom) / 2;
-			levelGenerator.onDynamicPropCreated += DetectCharacterGeneration;
+			levelGenerator.OnDynamicPropCreated += DetectCharacterGeneration;
 		}
 
 		private void DetectCharacterGeneration(DynamicProp dynamicProp)
