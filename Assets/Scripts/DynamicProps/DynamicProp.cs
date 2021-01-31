@@ -8,5 +8,9 @@ namespace GGJ
 		[SerializeField]
 		private SpriteRenderer spriteRenderer;
 		public Sprite Sprite => (spriteRenderer != null) ? spriteRenderer.sprite : null;
+
+		public virtual void Initialize(Level level)
+		{
+		}
 	}
 }

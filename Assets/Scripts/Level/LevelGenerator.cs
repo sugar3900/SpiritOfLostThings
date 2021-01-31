@@ -71,6 +71,7 @@ namespace GGJ
 		{
 			try
 			{
+				levelData.Resize(64, 64);
 				UpdateLevelTileSets(levelData);
 				UpdateLevelPropData(levelData);
 				UpdateLevelDynamicPropData(levelData);
@@ -110,6 +111,10 @@ namespace GGJ
 			if (generationCount == 0)
 			{
 				level.DynamicProps = GenerateDynamicProps(levelData, level.transform);
+				foreach (var dynamicProp in level.DynamicProps)
+				{
+					dynamicProp.Initialize(level);
+				}
 			}
 		}
 
