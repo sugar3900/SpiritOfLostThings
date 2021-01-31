@@ -7,20 +7,18 @@ namespace GGJ
 		[SerializeField]
 		private Camera localCamera;
 		[SerializeField]
-		private float moveSpeed = 1f;
+		private float zoomSpeed = 3f;
 		[SerializeField]
-		private float ZoomSpeed = 3f;
+		private float zoomDelta = 3f;
 		[SerializeField]
-		private float ZoomDelta = 1f;
+		private float minZoom = 10f;
 		[SerializeField]
-		private float minZoom = 16f;
-		[SerializeField]
-		private float maxZoom = 40f;
+		private float maxZoom = 20f;
 		[SerializeField]
 		private float maxLerpSqrDist = 32f;
 		[SerializeField]
 		private float speedDamp = 0.2f;
-		protected float endZoom { get; set; }
+		private float endZoom;
 		[SerializeField]
 		private Transform target;
 
@@ -39,10 +37,17 @@ namespace GGJ
 			}
 		}
 
+		private void Start()
+		{
+			endZoom = maxZoom;
+		}
+
 		public void Update()
 		{
-			ApplyZoomInput(Input.mouseScrollDelta.x);
-			ProgressZoom();
+			if (localCamera.orthographicSize != endZoom)
+			{
+				ProgressZoom();
+			}
 			Move();
 		}
 
@@ -69,7 +74,6 @@ namespace GGJ
 		public void SetZoom(float value)
 		{
 			localCamera.orthographicSize = value;
-			endZoom = value;
 		}
 
 		private void LerpToTarget()
@@ -89,26 +93,9 @@ namespace GGJ
 				localCamera.transform.position.z);
 		}
 
-
-		public void ApplyZoomInput(float adjustInput)
-		{
-			if (adjustInput != GetZoom())
-			{
-				if (adjustInput > 0f)
-				{
-					endZoom -= ZoomDelta;
-				}
-				else if (adjustInput < 0f)
-				{
-					endZoom += ZoomDelta;
-				}
-				endZoom = Mathf.Clamp(endZoom, minZoom, maxZoom);
-			}
-		}
-
 		private void ProgressZoom()
 		{
-			SetZoom(Mathf.Lerp(GetZoom(), endZoom, Time.deltaTime * ZoomDelta));
+			SetZoom(Mathf.Lerp(GetZoom(), endZoom, Time.deltaTime * zoomDelta));
 		}
 	}
 }

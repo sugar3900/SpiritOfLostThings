@@ -5,15 +5,7 @@ namespace GGJ
 	public class CharacterProp : DynamicProp
 	{
 		[SerializeField]
-		private float minPositionLerp = 0.01f;
-		[SerializeField]
-		private float maxPositionLerp = 30f;
-		[SerializeField]
-		private float zDepth = -0.5f;
-		[SerializeField]
 		private float moveSpeed = 8f;
-		[SerializeField]
-		private float rotateSpeed = 1f;
 		[SerializeField]
 		private float radiusForMovementCollision = 0.225f;
 		[SerializeField]
@@ -42,6 +34,10 @@ namespace GGJ
 			else if (horizontal < -Mathf.Epsilon)
 			{
 				animationController.Left();
+			}
+			else
+			{
+				animationController.Idle();
 			}
 			Vector2 input = new Vector2(horizontal, vertical);
 			ApplyMovement(input);

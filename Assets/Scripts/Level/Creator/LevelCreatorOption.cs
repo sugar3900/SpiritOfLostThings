@@ -18,7 +18,7 @@ namespace GGJ
 		public void Initialize(string id, Sprite sprite, Action selectCallback)
 		{
 			image.sprite = sprite;
-			label.text = id;
+			label.text = id.Replace("TileSet", string.Empty);
 			button.onClick.AddListener(() => selectCallback());
 		}
 

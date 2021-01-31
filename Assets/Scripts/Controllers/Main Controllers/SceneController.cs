@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -10,9 +11,14 @@ namespace GGJ {
         [SerializeField] private StartScreenController startScreenController;
         [SerializeField] private EndScreenController endScreenController;
 
+        public void OnEnable(){
+            
+            GoToStartScene();
+        }
+
         public void GoToStartScene(){
            
-            startScreenController.InitOrReset(() => GoToGameScene());
+            startScreenController.InitOrReset(GoToGameScene);
             endScreenController.MakeInvisible();
         }
 
