@@ -15,7 +15,6 @@ namespace GGJ
 		public int Height { get; set; }
 		public int[] Layout { get; set; }
 
-
 		public void Resize(int width, int height)
 		{
 			int length = width * height;

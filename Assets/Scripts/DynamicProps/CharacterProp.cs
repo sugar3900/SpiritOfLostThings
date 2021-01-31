@@ -13,6 +13,23 @@ namespace GGJ
 		private LayerMask movementCollisionLayers;
 		[SerializeField]
 		private Animator animator;
+		[SerializeField]
+		private float animationFadeSpeed;
+		private CharacterState currentState;
+		private float maxX;
+		private float maxY;
+
+		private Vector3 Position
+		{
+			get => transform.position;
+			set => transform.position = new Vector3(Mathf.Clamp(value.x, 0f, maxX), Mathf.Clamp(value.y, 0f, maxY));
+		}
+
+		public override void Initialize(Level level)
+		{
+			maxX = level.Width;
+			maxY = level.Height;
+		}
 
 		private void Update()
 		{
@@ -51,22 +68,22 @@ namespace GGJ
 			{
 				if (CanMoveInDirection(moveDirection))
 				{
-					transform.position += (Vector3)moveDirection;
+					Position += (Vector3)moveDirection;
 				}
 				else if (CanMoveInDirection(new Vector2(moveDirection.x, 0f)))
 				{
-					transform.position += new Vector3(moveDirection.x, 0f);
+					Position += new Vector3(moveDirection.x, 0f);
 				}
 				else if (CanMoveInDirection(new Vector2(0f, moveDirection.y)))
 				{
-					transform.position += new Vector3(0f, moveDirection.y);
+					Position += new Vector3(0f, moveDirection.y);
 				}
 			}
 		}
 
 		private bool CanMoveInDirection(Vector2 moveDirection)
 		{
-			Vector2 newPosition = (Vector2)transform.position + moveDirection;
+			Vector2 newPosition = (Vector2)Position + moveDirection;
 			Collider2D[] blockingObjects = Physics2D.OverlapCircleAll(newPosition, moveColRadius, movementCollisionLayers);
 			foreach (Collider2D blockingObject in blockingObjects)
 			{
@@ -79,37 +96,22 @@ namespace GGJ
 		}
 
 		public float GetDistanceFrom(GameObject gameObject)
-		{
-
-			return Vector3.Distance(transform.position, gameObject.transform.position);
-		}
-
-		private CharacterState currentState;
+			=> Vector3.Distance(Position, gameObject.transform.position);
 
 		public void Idle() => SetState(CharacterState.Idle);
-
 		public void Left() => SetState(CharacterState.Left);
-
 		public void Right() => SetState(CharacterState.Right);
-
 		public void Down() => SetState(CharacterState.Down);
-
 		public void Up() => SetState(CharacterState.Up);
-
+		private void PlayAnimation(string stateName) => animator.CrossFade(stateName, animationFadeSpeed);
 		private void SetState(CharacterState state)
 		{
-
-			if (state == currentState)
+			if (state != currentState)
 			{
-				return;
+				currentState = state;
+				PlayAnimation(GetAnimNameForState(state));
 			}
-
-			currentState = state;
-
-			PlayAnimation(GetAnimNameForState(state));
 		}
-
-		private void PlayAnimation(string stateName) => animator.CrossFade(stateName, 0.2f);
 
 		private string GetAnimNameForState(CharacterState state)
 		{

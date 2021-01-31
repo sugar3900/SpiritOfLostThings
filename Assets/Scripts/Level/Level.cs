@@ -8,15 +8,8 @@ namespace GGJ
 		public SpriteRenderer[,] Backgrounds { get; set; }
 		public Prop[] Props { get; set; }
 		public DynamicProp[] DynamicProps { get; set; }
-
-		public Tile GetTileAtCoord(Vector2Int coord)
-		{
-			if (coord.x >= 0 && coord.x < TileGrid.GetLength(0) && coord.y >= 0 && coord.y < TileGrid.GetLength(1))
-			{
-				return TileGrid[coord.x, coord.y];
-			}
-			return null;
-		}
+		public int Width => TileGrid.GetLength(0);
+		public int Height => TileGrid.GetLength(1);
 
 		public DynamicProp GetDynamicPropAtCoord(Vector2Int coord)
 		{
