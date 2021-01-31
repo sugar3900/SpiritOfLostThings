@@ -12,8 +12,10 @@ namespace GGJ {
         [SerializeField] private FlyingMemoryController FlyingMemoryPrefab;
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private Text poemText;
+
+        public event Action<PoemLineData> collected;
         
-        private PoemLineData poemLineData;
+        public PoemLineData poemLineData;
         private PlayerController playerController;
         private GameLoopController gameLoopController;
 
@@ -38,11 +40,8 @@ namespace GGJ {
 
         public void OnDowse(){
             
-            if (playerController.GetDistanceFrom(gameObject) < poemLineData.maxDowseDistance)
-            {
-                PlayDowseParticles();
-                PlayDowseSound();
-            }
+            PlayDowseParticles();
+            PlayDowseSound();
         }
 
         private void UpdateText(string str){
@@ -92,8 +91,8 @@ namespace GGJ {
         }
 
         public void Collect(){
-			
-            gameLoopController.CollectPoemLine(poemLineData);
+
+            collected?.Invoke(poemLineData);
 
             Instantiate(FlyingMemoryPrefab);
         }
