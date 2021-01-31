@@ -8,6 +8,9 @@ namespace GGJ
 		[SerializeField]
 		private bool isPersistent;
 		public bool IsPersistent => isPersistent;
+		[SerializeField]
+		private bool isBlocking;
+		public bool IsBlocking => isBlocking;
 		public int X => Mathf.FloorToInt(transform.position.x);
 		public int Y => Mathf.FloorToInt(transform.position.y);
 		public string Id => gameObject.name;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RockwallTileSet
   m_EditorClassIdentifier: 
   isBlocking: 1
+  sortOrder: 1
   cornerPrefab: {fileID: 21300000, guid: b2ec85e8b03cc48dda0f5696fc7e1144, type: 3}
   sidePrefab: {fileID: 21300000, guid: 22024393607e14b8186610c300652d2e, type: 3}
   diagonalPrefab: {fileID: 21300000, guid: b9049e88ec2014eeb8ee747188272843, type: 3}
