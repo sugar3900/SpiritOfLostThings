@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChairB
   m_EditorClassIdentifier: 
   poemLineContents: A dusty chair longs for someone who hasn't sat there in a very
-    long time.
+    long time
   isLight: 0
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5
