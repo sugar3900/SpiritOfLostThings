@@ -1,22 +1,37 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace GGJ {
     
     public class SceneController : Controllers {
         
+        [SerializeField] private LevelGenerator levelGenerator;
         [SerializeField] private StartScreenController startScreenController;
         [SerializeField] private EndScreenController endScreenController;
 
         public void OnEnable(){
             
-            GoToStartScene();
+            levelGenerator.onLevelGenerated += SetUpGameFirstTime;
+        }
+        
+        public void OnDisable(){
+            
+            levelGenerator.onLevelGenerated -= SetUpGameFirstTime;
         }
 
-        public void GoToStartScene(){
+        private void SetUpGameFirstTime(Level level){
+            
+            levelGenerator.onLevelGenerated -= SetUpGameFirstTime;
+
+            LevelPropInterfacer.ParseLevelData(level);
+            
+            // Reset core Controllers
+            GameLoopController.InitOrReset();
+            
+            OverlayStartScreen();
+        }
+
+        private void OverlayStartScreen(){
            
             startScreenController.InitOrReset(GoToGameScene);
             endScreenController.MakeInvisible();
@@ -28,24 +43,21 @@ namespace GGJ {
             endScreenController.MakeInvisible();
             
             // Reset core Controllers
-            gameLoopController.InitOrReset();
-            poemLinesController.InitOrReset();
-            playerController.InitOrReset();
-            playerAnimationController.InitOrReset();
+            GameLoopController.InitOrReset();
         }
 
-        public void GoToEndGamePoemScene(){
+        public void OverlayEndScene(){
             
             startScreenController.MakeInvisible();
-            endScreenController.ResetAndInit(poemLinesController.poemLinesCollected);
+            endScreenController.ResetAndInit(GameLoopController.poemLinesCollected);
 
-            StartCoroutine(WaitThenGoToGameScene());
+            StartCoroutine(WaitThenGoToStartScreen());
         }
 
-        private IEnumerator WaitThenGoToGameScene(){
+        private IEnumerator WaitThenGoToStartScreen(){
             
-            yield return new WaitForSeconds(5);
-            GoToStartScene();
+            yield return new WaitForSeconds(8);
+            OverlayStartScreen();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace GGJ
 		[SerializeField]
 		private LayerMask movementCollisionLayers;
 		[SerializeField]
-		private PlayerAnimationController animationController;
+		private CharacterAnimationController animationController;
 
 		private void Update()
 		{
@@ -77,6 +77,11 @@ namespace GGJ
 				}
 			}
 			return true;
+		}
+
+		public float GetDistanceFrom(GameObject gameObject){
+            
+			return Vector3.Distance(transform.position, gameObject.transform.position);
 		}
 	}
 }
