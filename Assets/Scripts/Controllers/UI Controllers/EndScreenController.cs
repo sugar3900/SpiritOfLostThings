@@ -34,7 +34,7 @@ public class EndScreenController : MonoBehaviour {
     private IEnumerator WaitThenClose(){
            
         // TODO: change this to close on click later?
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(25);
         CloseAndRunCallback();
     }
 
