@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,18 +8,26 @@ namespace GGJ {
     public class StartScreenController : MonoBehaviour {
         
         [SerializeField] private GameObject entireScreen;
-
-        private Action playButtonCallback;
+        [SerializeField] private Animator animator;
         
-        public void InitOrReset(Action playButtonCallback){
+        public void InitOrReset(){
 
+            animator.CrossFade("Idle", 0);
             entireScreen.SetActive(true);
-            this.playButtonCallback = playButtonCallback;
         }
 
         public void OnPlayButtonPress(){
+
+            animator.CrossFade("OnStartButtonClicked", 0);
+
+            StartCoroutine(WaitThenTurnOff());
+        }
+
+        private IEnumerator WaitThenTurnOff(){
             
-            playButtonCallback?.Invoke();
+            yield return new WaitForSeconds(10);
+            
+            MakeInvisible();
         }
 
         public void MakeInvisible(){

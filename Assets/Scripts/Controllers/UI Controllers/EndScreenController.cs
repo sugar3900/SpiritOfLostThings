@@ -59,11 +59,12 @@ public class EndScreenController : MonoBehaviour {
 
     private string GetPoemContents(List<PoemLineData> poemLinesCollected){
        
-        string poemContents = firstLineOfPoem;
+        string poemContents = firstLineOfPoem + "\n";
 
         foreach (PoemLineData poemLineData in poemLinesCollected)
         {
             string poemLine = poemLineData.poemLineContents;
+            poemLine = poemLine.Replace("\n", " ");
             poemContents += poemLine;
 
             poemContents += "\n";

@@ -8,7 +8,7 @@ namespace GGJ {
 
         [NonSerialized]	public List<PoemLineData> poemLinesCollected = new List<PoemLineData>();
         
-        [SerializeField] private int poemLinesBeforeGameEnd = 1; //normally 5
+        [SerializeField] private int poemLinesBeforeGameEnd = 2; //normally 5
 
         public void InitOrReset(){
             

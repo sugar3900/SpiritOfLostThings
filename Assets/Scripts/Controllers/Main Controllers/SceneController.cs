@@ -8,7 +8,9 @@ namespace GGJ {
         [SerializeField] private LevelGenerator levelGenerator;
         [SerializeField] private StartScreenController startScreenController;
         [SerializeField] private EndScreenController endScreenController;
-
+        [SerializeField] private bool turnOffStartScreen = false;
+        [SerializeField] private bool turnOffEndScreen = false;
+        
         public void OnEnable(){
             
             levelGenerator.OnLevelGenerated += ParseLevelData;
@@ -30,28 +32,29 @@ namespace GGJ {
         private void SetUpGameFirstTime(Level level){
             
             levelGenerator.OnLevelGenerated -= SetUpGameFirstTime;
-            OverlayStartScreen();
+
+            OverlayStartScreenAndInitOrResetGame();
         }
 
-        private void OverlayStartScreen(){
-           
-            startScreenController.InitOrReset(GoToGameScene);
-            endScreenController.MakeInvisible();
-        }
+        private void OverlayStartScreenAndInitOrResetGame(){
 
-        public void GoToGameScene(){
+            if (!turnOffStartScreen)
+            {
+                startScreenController.InitOrReset();
+            }
             
-            startScreenController.MakeInvisible();
             endScreenController.MakeInvisible();
-            
-            // Reset core Controllers
             GameLoopController.InitOrReset();
         }
 
         public void OverlayEndScene(){
             
             startScreenController.MakeInvisible();
-            endScreenController.ResetAndInit(GameLoopController.poemLinesCollected, OverlayStartScreen);
+
+            if (!turnOffEndScreen)
+            {
+                endScreenController.ResetAndInit(GameLoopController.poemLinesCollected, OverlayStartScreenAndInitOrResetGame);
+            }
         }
     }
 }

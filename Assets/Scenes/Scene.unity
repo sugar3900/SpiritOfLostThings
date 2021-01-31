@@ -193,6 +193,12 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!95 &252579462 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2746586267681529379, guid: 2f4137ea02f024761b794a861bc61db0,
+    type: 3}
+  m_PrefabInstance: {fileID: 345730161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &345730161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,6 +206,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1358980102}
     m_Modifications:
+    - target: {fileID: 7315356905342856119, guid: 2f4137ea02f024761b794a861bc61db0,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 252579462}
     - target: {fileID: 9186231229858312651, guid: 2f4137ea02f024761b794a861bc61db0,
         type: 3}
       propertyPath: m_Pivot.x
@@ -777,7 +788,8 @@ MonoBehaviour:
       scrollRect: {fileID: 1705474339}
       contentArea: {fileID: 30461494}
       dropdown: {fileID: 467862257}
-    canEdit: 1
+    canEdit: 0
+    indicatorZ: -3
     indicatorPrefab: {fileID: 5225554940775215949, guid: cd533c39fe703df439a90393a06d5532,
       type: 3}
   obstacleLayer: 8
@@ -806,7 +818,6 @@ GameObject:
   - component: {fileID: 1972574540}
   - component: {fileID: 1972574539}
   - component: {fileID: 1972574538}
-  - component: {fileID: 1972574537}
   - component: {fileID: 1972574542}
   m_Layer: 0
   m_Name: Controllers
@@ -815,18 +826,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1972574537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972574536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10f85cc42089e496686d6016b6a692b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1972574538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,6 +841,8 @@ MonoBehaviour:
   levelGenerator: {fileID: 1936640499}
   startScreenController: {fileID: 345730163}
   endScreenController: {fileID: 1188049846}
+  turnOffStartScreen: 1
+  turnOffEndScreen: 0
 --- !u!114 &1972574539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,6 +855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01868f2936b764ddebd8296d31dfd146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poemLinesBeforeGameEnd: 2
 --- !u!4 &1972574540
 Transform:
   m_ObjectHideFlags: 0
