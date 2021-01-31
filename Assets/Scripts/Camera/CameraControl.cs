@@ -39,13 +39,15 @@ namespace GGJ
 
 		private void Start()
 		{
-			endZoom = minZoom;
+			endZoom = maxZoom;
 		}
 
 		public void Update()
 		{
-			ApplyZoomInput(Input.mouseScrollDelta.y * zoomSpeed);
-			ProgressZoom();
+			if (localCamera.orthographicSize != endZoom)
+			{
+				ProgressZoom();
+			}
 			Move();
 		}
 
@@ -72,7 +74,6 @@ namespace GGJ
 		public void SetZoom(float value)
 		{
 			localCamera.orthographicSize = value;
-			endZoom = value;
 		}
 
 		private void LerpToTarget()
@@ -90,13 +91,6 @@ namespace GGJ
 				Target.position.x,
 				Target.position.y,
 				localCamera.transform.position.z);
-		}
-
-
-		public void ApplyZoomInput(float adjustInput)
-		{
-			endZoom -= GetZoom() - adjustInput;
-			endZoom = Mathf.Clamp(endZoom, minZoom, maxZoom);
 		}
 
 		private void ProgressZoom()

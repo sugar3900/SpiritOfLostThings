@@ -32,6 +32,8 @@ namespace GGJ
 		private float backgroundZ = 2f;
 		[SerializeField]
 		private LevelCreator levelCreator;
+		[SerializeField]
+		private int obstacleLayer = 8;
 
 		public event Action<DynamicProp> onDynamicPropCreated;
 
@@ -162,6 +164,13 @@ namespace GGJ
 						parent);
 					SpriteRenderer spriteRenderer = tile.GetComponent<SpriteRenderer>();
 					spriteRenderer.sprite = sprite;
+					if (tileSet.IsBlocking)
+					{
+						BoxCollider2D col = tile.gameObject.AddComponent<BoxCollider2D>();
+						col.offset = new Vector2(-0.5f, -0.5f);
+						col.size = Vector2.one;
+						tile.gameObject.layer = obstacleLayer;
+					}
 					return tile;
 				}
 				else

@@ -689,10 +689,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localCamera: {fileID: 519420031}
-  zoomSpeed: 8
+  zoomSpeed: 50
   zoomDelta: 1
-  minZoom: 2
-  maxZoom: 5
+  minZoom: 3
+  maxZoom: 4
   maxLerpSqrDist: 32
   speedDamp: 0.2
   target: {fileID: 831898340}
@@ -978,7 +978,7 @@ MonoBehaviour:
   radiusForEdgeCollision: 0.225
   movementCollisionLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   animationController: {fileID: 1972574537}
 --- !u!4 &831898340 stripped
 Transform:
@@ -2481,6 +2481,7 @@ MonoBehaviour:
       contentArea: {fileID: 30461494}
       dropdown: {fileID: 467862257}
     canEdit: 1
+  obstacleLayer: 8
 --- !u!4 &1936640500
 Transform:
   m_ObjectHideFlags: 0
