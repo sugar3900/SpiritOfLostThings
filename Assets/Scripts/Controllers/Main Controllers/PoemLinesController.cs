@@ -24,16 +24,15 @@ namespace GGJ {
 			// Listen for Prop Creation events
 			levelGenerator.onDynamicPropCreated -= OnDynamicPropCreated;
 			levelGenerator.onDynamicPropCreated += OnDynamicPropCreated;
-			
-			// 
-			InitOrResetAllPoemLines();
 		}
 
 		private void OnDynamicPropCreated(DynamicProp dynamicProp){
 			
-			if (dynamicProp is PoemLineProp prop)
+			if (dynamicProp is PoemLineProp poemLineProp)
 			{
-				poemLineProps.Add(prop);
+				poemLineProps.Add(poemLineProp);
+
+				poemLineProp.collected += gameLoopController.CollectPoemLine;
 			}
 		}
 
@@ -56,10 +55,21 @@ namespace GGJ {
 			
 			List<PoemLineProp> poemLines = GetAllPoemLineProps();
 
-			foreach (PoemLineProp poemLine in poemLines) {
-				
-				poemLine.OnDowse();
+			foreach (PoemLineProp poemLine in poemLines)
+			{
+
+				float maxDistanceForDowsing = poemLine.poemLineData.maxDowseDistance;
+
+				if (GetPoemLineDistanceFromPlayer(poemLine) < maxDistanceForDowsing)
+				{
+					poemLine.OnDowse();
+				}
 			}
+		}
+
+		private float GetPoemLineDistanceFromPlayer(PoemLineProp poemLine){
+
+			return playerController.GetDistanceFrom(poemLine.gameObject);
 		}
 
 		private List<PoemLineProp> GetAllPoemLineProps(){

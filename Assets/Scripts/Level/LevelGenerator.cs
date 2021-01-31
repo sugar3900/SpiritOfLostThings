@@ -35,6 +35,7 @@ namespace GGJ
 		[SerializeField]
 		private int obstacleLayer = 8;
 
+		public event Action<Level> onLevelGenerated;
 		public event Action<DynamicProp> onDynamicPropCreated;
 
 		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
@@ -89,6 +90,10 @@ namespace GGJ
 			GameObject instance = Instantiate(levelPrefab);
 			Level level = instance.GetComponent<Level>();
 			BuildContent(level, levelData);
+			if(onLevelGenerated != null)
+			{
+				onLevelGenerated(level);
+			}
 			return level;
 		}
 
