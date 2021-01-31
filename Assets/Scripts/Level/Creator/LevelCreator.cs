@@ -224,17 +224,26 @@ namespace GGJ
 		{
 			for (int i = indicators.Count - 1; i >= 0; i--)
 			{
-				UnityObject.Destroy(indicators[i]);
+				if (indicators[i] != null)
+				{
+					UnityObject.Destroy(indicators[i]);
+				}
 			}
 		}
 
 		private void CreatePropIndicator(IProp prop)
 		{
-			if (prop != null)
+			try
 			{
-				Vector3 pos = new Vector3(prop.X + 0.5f, prop.Y + 0.5f, indicatorZ);
-				GameObject indicator = UnityObject.Instantiate(indicatorPrefab, pos, Quaternion.identity, level.transform);
-				indicators.Add(indicator);
+				if (prop != null && !(prop is CharacterProp))
+				{
+					Vector3 pos = new Vector3(prop.X + 0.5f, prop.Y + 0.5f, indicatorZ);
+					GameObject indicator = UnityObject.Instantiate(indicatorPrefab, pos, Quaternion.identity, level.transform);
+					indicators.Add(indicator);
+				}
+			}
+			catch
+			{
 			}
 		}
 	}

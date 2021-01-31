@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GGJ {
     
     public class GameLoopController : Controllers {
 
         [NonSerialized]	public List<PoemLineData> poemLinesCollected = new List<PoemLineData>();
+        
+        [SerializeField] private int poemLinesBeforeGameEnd = 1; //normally 5
 
         public void InitOrReset(){
             
@@ -31,7 +34,7 @@ namespace GGJ {
             
             LevelPropInterfacer.MemoryTree.TurnOnMushrooms(poemLinesCollected.Count);
             
-            if (poemLinesCollected.Count >= 5)
+            if (poemLinesCollected.Count >= poemLinesBeforeGameEnd)
             {
                 SceneController.OverlayEndScene();
             }

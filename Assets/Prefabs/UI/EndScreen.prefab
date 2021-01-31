@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3485372f1d71348c99fdb9db510ed404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstLineOfPoem: What was it that you found?
   entireScreen: {fileID: 9186231229858312652}
   poemLineText: {fileID: 9186231230808896107}
   treeSpriteVariants:
