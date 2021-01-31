@@ -75,8 +75,6 @@ public class EndScreenController : MonoBehaviour {
 
     private int MapPoemLightnessToTreeSpriteIndex(int poemLightness, int maxPoemLightness){
         
-        int minPoemLightness = 0;
-        int minTreeSpriteVariant = 0;
         int maxTreeSpriteVariant = treeSpriteVariants.Length - 1;
         
         int treeVariantIndex = poemLightness / maxPoemLightness * (maxTreeSpriteVariant);

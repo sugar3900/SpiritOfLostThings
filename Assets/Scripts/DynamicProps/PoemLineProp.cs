@@ -16,8 +16,14 @@ namespace GGJ {
         [SerializeField] private TextMesh poemText;
 
         private Action<PoemLineData> OnCollectedCallback;
-        
-        public void InitOrReset(Action<PoemLineData> onCollectedCallback){
+
+		private void Start()
+		{
+			MeshRenderer renderer = poemText.GetComponent<MeshRenderer>();
+            renderer.sortingLayerName = "PoemLines";
+        }
+
+		public void InitOrReset(Action<PoemLineData> onCollectedCallback){
 
             OnCollectedCallback = onCollectedCallback;
 
