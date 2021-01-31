@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: NettlesA
   m_EditorClassIdentifier: 
-  poemLineContents: "Prickly towers threaten: \nstray and see, they dare!"
+  poemLineContents: "Prickly towers threaten: \nstray and see, \nthey dare!"
   isLight: 0
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5
