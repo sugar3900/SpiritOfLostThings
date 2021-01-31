@@ -105,12 +105,12 @@ TextMesh:
     more...'
   m_OffsetZ: 0
   m_CharacterSize: 13.28
-  m_LineSpacing: 1
+  m_LineSpacing: 0.75
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 96
-  m_FontStyle: 2
+  m_FontSize: 84
+  m_FontStyle: 1
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 62cf18cff81ed4e7a814d659a3d71d16, type: 3}
   m_Color:
