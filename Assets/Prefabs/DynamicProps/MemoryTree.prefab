@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBlocking: 0
   spriteRenderer: {fileID: 72417531281518382}
 --- !u!212 &72417531281518382
 SpriteRenderer:
@@ -140,7 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBlocking: 0
   spriteRenderer: {fileID: 713785530447773177}
 --- !u!212 &713785530447773177
 SpriteRenderer:
@@ -236,7 +234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBlocking: 0
   spriteRenderer: {fileID: 6220387476902991780}
 --- !u!212 &6220387476902991780
 SpriteRenderer:
@@ -332,7 +329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb94daefe3bf42bf802b24211874634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBlocking: 0
   spriteRenderer: {fileID: 9064848643936754590}
   mushrooms:
   - {fileID: 5267898421380390695}
@@ -365,7 +361,7 @@ Transform:
   m_GameObject: {fileID: 5097830421313783221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.56413, z: -0.012583}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 459776517089398385}
   - {fileID: 2578724896580101818}
@@ -420,7 +416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBlocking: 0
   spriteRenderer: {fileID: 7384545002330734542}
 --- !u!212 &7384545002330734542
 SpriteRenderer:
@@ -516,7 +511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBlocking: 0
   spriteRenderer: {fileID: 9064848643936754590}
 --- !u!212 &9064848643936754590
 SpriteRenderer:
@@ -612,7 +606,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBlocking: 0
   spriteRenderer: {fileID: 7110870774382944244}
 --- !u!212 &7110870774382944244
 SpriteRenderer:
