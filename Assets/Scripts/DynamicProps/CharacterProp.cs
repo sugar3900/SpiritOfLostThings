@@ -31,30 +31,65 @@ namespace GGJ
 			maxY = level.Height;
 		}
 
+		public enum Direction {
+			Left,
+			Right,
+			Up,
+			Down,
+			None
+		}
+
 		private void Update()
 		{
 			float horizontal = Input.GetAxis("Horizontal");
 			float vertical = Input.GetAxis("Vertical");
-			if (vertical > Mathf.Epsilon)
+			
+			// Input -> bool
+			bool pressingUp = vertical > Mathf.Epsilon;
+			bool pressingDown = vertical < -Mathf.Epsilon;
+			bool notPressingUpOrDown = !pressingUp && !pressingDown;
+			bool pressingLeft = horizontal < -Mathf.Epsilon;
+			bool pressingRight = horizontal > Mathf.Epsilon;
+			bool notPressingLeftOrRight = !pressingLeft && !pressingRight;
+
+			// bool -> Direction
+			Direction verticalDirection = pressingUp ? Direction.Up : Direction.Down;
+			verticalDirection = notPressingUpOrDown ? Direction.None : verticalDirection;
+			Direction horizontalDirection = pressingLeft ? Direction.Left : Direction.Right;
+			horizontalDirection = notPressingLeftOrRight ? Direction.None : horizontalDirection;
+
+			// Direction -> SetState()
+			switch (verticalDirection)
 			{
-				Up();
+				case Direction.Up when horizontalDirection == Direction.Left:
+					SetState(CharacterState.UpLeft);
+					break;
+				case Direction.Up when horizontalDirection == Direction.Right:
+					SetState(CharacterState.UpRight);
+					break;
+				case Direction.Up:
+					SetState(CharacterState.Up);
+					break;
+				case Direction.Down when horizontalDirection == Direction.Left:
+					SetState(CharacterState.DownLeft);
+					break;
+				case Direction.Down when horizontalDirection == Direction.Right:
+					SetState(CharacterState.DownRight);
+					break;
+				case Direction.Down:
+					SetState(CharacterState.Down);
+					break;
+				case Direction.None when horizontalDirection == Direction.Left:
+					SetState(CharacterState.Left);
+					break;
+				case Direction.None when horizontalDirection == Direction.Right:
+					SetState(CharacterState.Right);
+					break;
+				case Direction.None:
+					SetState(CharacterState.Idle);
+					break;
 			}
-			else if (vertical < -Mathf.Epsilon)
-			{
-				Down();
-			}
-			else if (horizontal > Mathf.Epsilon)
-			{
-				Right();
-			}
-			else if (horizontal < -Mathf.Epsilon)
-			{
-				Left();
-			}
-			else
-			{
-				Idle();
-			}
+			
 			Vector2 input = new Vector2(horizontal, vertical);
 			ApplyMovement(input);
 		}
@@ -97,12 +132,6 @@ namespace GGJ
 
 		public float GetDistanceFrom(GameObject gameObject)
 			=> Vector3.Distance(Position, gameObject.transform.position);
-
-		public void Idle() => SetState(CharacterState.Idle);
-		public void Left() => SetState(CharacterState.Left);
-		public void Right() => SetState(CharacterState.Right);
-		public void Down() => SetState(CharacterState.Down);
-		public void Up() => SetState(CharacterState.Up);
 		private void PlayAnimation(string stateName) => animator.CrossFade(stateName, animationFadeSpeed);
 		private void SetState(CharacterState state)
 		{
@@ -117,16 +146,15 @@ namespace GGJ
 		{
 			switch (state)
 			{
-				case CharacterState.Idle:
-					return "Idle";
-				case CharacterState.Left:
-					return "WalkRight";
-				case CharacterState.Right:
-					return "WalkRight";
-				case CharacterState.Up:
-					return "WalkRight";
-				case CharacterState.Down:
-					return "WalkRight";
+				case CharacterState.Idle: return "Idle";
+				case CharacterState.Left: return "WalkLeft";
+				case CharacterState.Right: return "WalkRight";
+				case CharacterState.Up: return "WalkUp";
+				case CharacterState.Down: return "WalkDown";
+				case CharacterState.UpLeft: return "WalkUpLeft";
+				case CharacterState.UpRight: return "WalkUpRight";
+				case CharacterState.DownLeft: return "WalkDownLeft";
+				case CharacterState.DownRight: return "WalkDownRight";
 				default:
 					throw new ArgumentOutOfRangeException(nameof(state), state, null);
 			}
