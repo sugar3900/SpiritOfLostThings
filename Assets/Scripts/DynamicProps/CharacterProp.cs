@@ -43,6 +43,10 @@ namespace GGJ
 			{
 				animationController.Left();
 			}
+			else
+			{
+				animationController.Idle();
+			}
 			Vector2 input = new Vector2(horizontal, vertical);
 			ApplyMovement(input);
 		}

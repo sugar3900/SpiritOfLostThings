@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WaterTileSet
   m_EditorClassIdentifier: 
   isBlocking: 1
-  cornerPrefab: {fileID: 21300000, guid: 44a53c7d797cd41dfa4dfc99493d4de7, type: 3}
-  sidePrefab: {fileID: 21300000, guid: f8c66224468204bd8a61bd33df90652b, type: 3}
-  diagonalPrefab: {fileID: 21300000, guid: 4e2a217abe58a4a01bc06e626cdce9fc, type: 3}
-  innerCornerPrefab: {fileID: 21300000, guid: 9378c325f82df4d3794e3fe74895bdc7, type: 3}
-  solidPrefab: {fileID: 21300000, guid: 099ffa1d972434c17b726c5ca0375d5a, type: 3}
+  cornerPrefab: {fileID: 21300000, guid: 8a7fae3a09e91477a8b6e3c10fb70970, type: 3}
+  sidePrefab: {fileID: 21300000, guid: 658f28d50d63f4f30bd34f8558cb7ee0, type: 3}
+  diagonalPrefab: {fileID: 21300000, guid: c542655c8b5a74f638e7e321514b3ac4, type: 3}
+  innerCornerPrefab: {fileID: 21300000, guid: f18463349d129442bb0b5ff64aa16e00, type: 3}
+  solidPrefab: {fileID: 21300000, guid: 932cbc96c82b24e32800d27741bb2bb1, type: 3}
