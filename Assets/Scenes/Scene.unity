@@ -843,6 +843,8 @@ MonoBehaviour:
   levelGenerator: {fileID: 1936640499}
   startScreenController: {fileID: 345730163}
   endScreenController: {fileID: 1188049846}
+  turnOffStartScreen: 0
+  turnOffEndScreen: 0
 --- !u!114 &1972574539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,7 +857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01868f2936b764ddebd8296d31dfd146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poemLinesBeforeGameEnd: 1
+  poemLinesBeforeGameEnd: 5
 --- !u!4 &1972574540
 Transform:
   m_ObjectHideFlags: 0

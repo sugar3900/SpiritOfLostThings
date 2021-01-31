@@ -272,7 +272,7 @@ Transform:
   m_GameObject: {fileID: 7793451596356329953}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.07632971, y: 0.07632971, z: 0.07632971}
+  m_LocalScale: {x: 0.07632971, y: 0.07632971, z: -10.59}
   m_Children:
   - {fileID: 3181841768635333265}
   m_Father: {fileID: 0}
@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPersistent: 0
+  isBlocking: 0
   spriteRenderer: {fileID: 0}
   poemLineData: {fileID: 11400000, guid: d1f8c37dd40c14ed89647b612dbfab12, type: 2}
   darkParticleSystem: {fileID: 7849090822252910949}
