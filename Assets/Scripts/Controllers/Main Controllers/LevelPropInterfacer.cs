@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace GGJ
 {
@@ -16,7 +15,6 @@ namespace GGJ
 			PoemLines.Clear();
 			MemoryTree = null;
 			Character = null;
-			Debug.Log("Rebuild");
 
 			foreach (DynamicProp dynamicProp in dynamicProps)
 			{
