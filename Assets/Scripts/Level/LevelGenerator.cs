@@ -37,6 +37,7 @@ namespace GGJ
 
 		public event Action<Level> OnLevelGenerated;
 		public event Action<DynamicProp> OnDynamicPropCreated;
+		private int generationCount;
 
 		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
 
@@ -91,6 +92,7 @@ namespace GGJ
 			Level level = instance.GetComponent<Level>();
 			BuildContent(level, levelData);
 			OnLevelGenerated?.Invoke(level);
+			generationCount++;
 			return level;
 		}
 
@@ -104,8 +106,11 @@ namespace GGJ
 		{
 			level.TileGrid = GenerateTiles(levelData, level.transform);
 			level.Props = GenerateProps(levelData, level.transform);
-			level.DynamicProps = GenerateDynamicProps(levelData, level.transform);
 			level.Backgrounds = GenerateBackgrounds(levelData.Width, levelData.Height, level.transform);
+			if (generationCount == 0)
+			{
+				level.DynamicProps = GenerateDynamicProps(levelData, level.transform);
+			}
 		}
 
 		private Tile[,] GenerateTiles(LevelData levelData, Transform parent)

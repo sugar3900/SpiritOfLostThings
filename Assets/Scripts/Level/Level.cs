@@ -51,7 +51,7 @@ namespace GGJ
 			return null;
 		}
 
-		public void Clear()
+		public void ClearTiles()
 		{
 			for (int y = 0; y < TileGrid.GetLength(1); y++)
 			{
@@ -64,6 +64,11 @@ namespace GGJ
 					}
 				}
 			}
+			TileGrid = null;
+		}
+
+		private void ClearProps()
+		{
 			for (int i = Props.Length - 1; i >= 0; i--)
 			{
 				Prop prop = Props[i];
@@ -72,6 +77,11 @@ namespace GGJ
 					Destroy(prop.gameObject);
 				}
 			}
+			Props = null;
+		}
+
+		private void ClearDynamicProps()
+		{
 			for (int i = DynamicProps.Length - 1; i >= 0; i--)
 			{
 				DynamicProp dynamicProp = DynamicProps[i];
@@ -80,6 +90,11 @@ namespace GGJ
 					Destroy(dynamicProp.gameObject);
 				}
 			}
+			DynamicProps = null;
+		}
+
+		private void ClearBackground()
+		{
 			for (int y = 0; y < Backgrounds.GetLength(1); y++)
 			{
 				for (int x = 0; x < Backgrounds.GetLength(0); x++)
@@ -91,10 +106,14 @@ namespace GGJ
 					}
 				}
 			}
-			TileGrid = null;
 			Backgrounds = null;
-			DynamicProps = null;
-			Props = null;
+		}
+
+		public void Clear()
+		{
+			ClearTiles();
+			ClearBackground();
+			ClearProps();
 		}
 	}
 }
