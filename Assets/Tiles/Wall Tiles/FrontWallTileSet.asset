@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da2e206dc3dddec4795a34366a50dc84, type: 3}
-  m_Name: WallTileSet
+  m_Name: FrontWallTileSet
   m_EditorClassIdentifier: 
   isBlocking: 0
   cornerPrefab: {fileID: 21300000, guid: ad5319abe1268499dbe0ad9d839b4d77, type: 3}
   sidePrefab: {fileID: 21300000, guid: 2b33fd76c71834f5196cced0a78f8ee1, type: 3}
   diagonalPrefab: {fileID: 21300000, guid: 97888950cc8dc423f9bcc87d39f5f6a5, type: 3}
   innerCornerPrefab: {fileID: 21300000, guid: 2e264a627d351488cad6fc7dd70c6690, type: 3}
-  solidPrefab: {fileID: 21300000, guid: c6a85f8a7fafd4c099df07a98a691b76, type: 3}
+  solidPrefab: {fileID: 21300000, guid: 0ba2bd3915dcd4065b4a033fc6fd43d1, type: 3}
