@@ -29,6 +29,7 @@ namespace GGJ {
         
         public void Update(){
 			
+            // Make sure this PoemLineProp was initialized before starting to 
             if (playerController != null && poemLineData != null)
             {
                 UpdateTextFade();

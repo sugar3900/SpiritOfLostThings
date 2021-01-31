@@ -2551,7 +2551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c38ea6e1af5040e0964a98bd43a04f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelGenerator: {fileID: 0}
+  levelGenerator: {fileID: 1936640499}
   initPoemLineDatas: []
 --- !u!1 &1974088287
 GameObject:
