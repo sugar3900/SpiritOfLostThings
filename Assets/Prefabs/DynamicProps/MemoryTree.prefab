@@ -332,6 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb94daefe3bf42bf802b24211874634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBlocking: 0
+  spriteRenderer: {fileID: 9064848643936754590}
   mushrooms:
   - {fileID: 5267898421380390695}
   - {fileID: 179224091661598343}
@@ -555,7 +557,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f7c18dbe36c08405f8b43de0b8e2064d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5ccb7fcc571b4f248ccd9fe3d2d6227, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
