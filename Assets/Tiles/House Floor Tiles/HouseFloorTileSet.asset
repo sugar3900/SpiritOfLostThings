@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da2e206dc3dddec4795a34366a50dc84, type: 3}
-  m_Name: HouseFrontWallTileSet
+  m_Name: HouseFloorTileSet
   m_EditorClassIdentifier: 
   isBlocking: 0
   cornerPrefab: {fileID: 21300000, guid: 815eed1a34843418886b78e86ecd3c80, type: 3}
