@@ -51,15 +51,7 @@ namespace GGJ {
         public void OverlayEndScene(){
             
             startScreenController.MakeInvisible();
-            endScreenController.ResetAndInit(GameLoopController.poemLinesCollected);
-
-            StartCoroutine(WaitThenGoToStartScreen());
-        }
-
-        private IEnumerator WaitThenGoToStartScreen(){
-            
-            yield return new WaitForSeconds(8);
-            OverlayStartScreen();
+            endScreenController.ResetAndInit(GameLoopController.poemLinesCollected, OverlayStartScreen);
         }
     }
 }
