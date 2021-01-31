@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dynamicProps:
   - {fileID: 231804244439021338, guid: 20187a23f3403d042b20c7026f8bcbc0, type: 3}
-  - {fileID: 6262956157603524961, guid: 11de6c332f2af4f5a94feb0f1172bb6a, type: 3}
+  - {fileID: 6764154799324421512, guid: b3eadc4c9f89e4592a121f1d54307f35, type: 3}
+  - {fileID: 6764154799324421512, guid: 331665d3aee7b4ace88f4260225adeaa, type: 3}
   - {fileID: 2996964054518091579, guid: e37013c3465d04e1d9a731e9c210c175, type: 3}
   - {fileID: 231804244439021338, guid: 9e7ecfcc2e79a41cb8777453f18a00cc, type: 3}
   - {fileID: 231804244439021338, guid: fb0fdfd7e26284bd48dc6486edcefe6a, type: 3}
