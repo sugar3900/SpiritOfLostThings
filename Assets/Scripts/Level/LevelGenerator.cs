@@ -208,7 +208,11 @@ namespace GGJ
 				{
 					if (prop.IsBlocking)
 					{
-						AddBoxCollider(prop.gameObject);
+						Prop[] childProps = prop.GetComponentsInChildren<Prop>();
+						foreach (var child in childProps)
+						{
+							AddBoxCollider(child.gameObject);
+						}
 					}
 					return prop;
 				}
@@ -248,7 +252,11 @@ namespace GGJ
 					OnDynamicPropCreated?.Invoke(dynamicProp);
 					if (dynamicProp.IsBlocking)
 					{
-						AddBoxCollider(dynamicProp.gameObject);
+						DynamicProp[] childProps = dynamicProp.GetComponentsInChildren<DynamicProp>();
+						foreach (var child in childProps)
+						{
+							AddBoxCollider(child.gameObject);
+						}
 					}
 					return dynamicProp;
 				}
