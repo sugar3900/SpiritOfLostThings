@@ -11,7 +11,7 @@ PrefabInstance:
         type: 3}
       propertyPath: poemLineData
       value: 
-      objectReference: {fileID: 11400000, guid: d1f8c37dd40c14ed89647b612dbfab12,
+      objectReference: {fileID: 11400000, guid: 36c46b906ad864b6191052bcf05582e8,
         type: 2}
     - target: {fileID: 6914205723123181154, guid: 290967a4fbee441bd93b23603e394d48,
         type: 3}
@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 7793451596356329953, guid: 290967a4fbee441bd93b23603e394d48,
         type: 3}
       propertyPath: m_Name
-      value: ChairA
+      value: ChairB
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 290967a4fbee441bd93b23603e394d48, type: 3}
