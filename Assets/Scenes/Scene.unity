@@ -778,6 +778,7 @@ MonoBehaviour:
       contentArea: {fileID: 30461494}
       dropdown: {fileID: 467862257}
     canEdit: 1
+    indicatorZ: -3
     indicatorPrefab: {fileID: 5225554940775215949, guid: cd533c39fe703df439a90393a06d5532,
       type: 3}
   obstacleLayer: 8
@@ -854,6 +855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01868f2936b764ddebd8296d31dfd146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poemLinesBeforeGameEnd: 1
 --- !u!4 &1972574540
 Transform:
   m_ObjectHideFlags: 0
