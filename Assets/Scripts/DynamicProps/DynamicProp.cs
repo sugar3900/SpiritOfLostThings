@@ -16,6 +16,13 @@ namespace GGJ
 		public Sprite Sprite => (spriteRenderer != null) ? spriteRenderer.sprite : null;
 
 		public static List<DynamicProp> Where { get; internal set; }
+		private void Start()
+		{
+			if (spriteRenderer != null)
+			{
+				spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+			}
+		}
 
 		public virtual void Initialize(Level level)
 		{

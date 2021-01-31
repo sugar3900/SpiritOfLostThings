@@ -25,6 +25,8 @@ namespace GGJ
 			set => transform.position = new Vector3(Mathf.Clamp(value.x, 0f, maxX), Mathf.Clamp(value.y, 0f, maxY));
 		}
 
+		private void Start() => Idle();
+
 		public override void Initialize(Level level)
 		{
 			maxX = level.Width;

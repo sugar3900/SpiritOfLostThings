@@ -174,7 +174,11 @@ namespace GGJ
 			if (GetCoordIsInBounds(coord))
 			{
 				LevelPropData prop = GetPropAtCoord(coord);
-				Props.Remove(prop);
+				if (prop != null)
+				{
+					Props.Remove(prop);
+					return true;
+				}
 			}
 			return false;
 		}
