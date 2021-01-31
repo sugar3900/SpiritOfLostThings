@@ -6,17 +6,18 @@ namespace GGJ {
     
     public class PoemLineProp : DynamicProp {
 		
+        [Header("Settings")]
+        [SerializeField] private PoemLineData poemLineData;
+        
         [Header("Components")]
         [SerializeField] private ParticleSystem darkParticleSystem;
         [SerializeField] private ParticleSystem lightParticleSystem;
         [SerializeField] private FlyingMemoryController FlyingMemoryPrefab;
         [SerializeField] private AudioSource audioSource;
-        [SerializeField] private Text poemText;
+        [SerializeField] private TextMesh poemText;
 
         private Action<PoemLineData> OnCollectedCallback;
         
-        public PoemLineData poemLineData;
-
         public void InitOrReset(Action<PoemLineData> onCollectedCallback){
 
             OnCollectedCallback = onCollectedCallback;
