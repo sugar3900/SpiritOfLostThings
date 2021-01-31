@@ -2,42 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GGJ {
-    
-    public class GameLoopController : Controllers {
+namespace GGJ
+{
+	public class GameLoopController : Controllers
+	{
 
-        [NonSerialized]	public List<PoemLineData> poemLinesCollected = new List<PoemLineData>();
-        
-        [SerializeField] private int poemLinesBeforeGameEnd = 2; //normally 5
+		[NonSerialized] public List<PoemLineData> poemLinesCollected = new List<PoemLineData>();
 
-        public void InitOrReset(){
-            
-            poemLinesCollected.Clear();
+		[SerializeField] private int poemLinesBeforeGameEnd = 2; //normally 5
 
-            LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.InitOrReset(CollectPoemLine));
-        }
+		public void InitOrReset()
+		{
 
-        // TODO: call dowse from input somewhere
-        public void Dowse(){
+			poemLinesCollected.Clear();
 
-            LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.DowseIfClose(LevelPropInterfacer.Character));
-        }
+			LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.InitOrReset(CollectPoemLine));
+		}
 
-        public void Update(){
-            
-           LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.UpdateTextFade(LevelPropInterfacer.Character));
-        }
+		// TODO: call dowse from input somewhere
+		public void Dowse()
+		{
 
-        private void CollectPoemLine(PoemLineData poemLineData){
+			LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.DowseIfClose(LevelPropInterfacer.Character));
+		}
 
-            poemLinesCollected.Add(poemLineData);
-            
-            LevelPropInterfacer.MemoryTree.TurnOnMushrooms(poemLinesCollected.Count);
-            
-            if (poemLinesCollected.Count >= poemLinesBeforeGameEnd)
-            {
-                SceneController.OverlayEndScene();
-            }
-        }
-    }
+		public void Update()
+		{
+
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				Application.Quit();
+			}
+			LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.UpdateTextFade(LevelPropInterfacer.Character));
+		}
+
+		private void CollectPoemLine(PoemLineData poemLineData)
+		{
+
+			poemLinesCollected.Add(poemLineData);
+
+			LevelPropInterfacer.MemoryTree.TurnOnMushrooms(poemLinesCollected.Count);
+
+			if (poemLinesCollected.Count >= poemLinesBeforeGameEnd)
+			{
+				SceneController.OverlayEndScene();
+			}
+		}
+	}
 }

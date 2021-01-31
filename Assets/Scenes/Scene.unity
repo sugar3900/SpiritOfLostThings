@@ -391,7 +391,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072173772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5167723, y: -2.0382295, z: 12.14167}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1358980102}
@@ -1057,6 +1057,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7249863933551351820, guid: d62356fdb775145c58f3b1d7903a4eeb,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.52488106
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249863933551351820, guid: d62356fdb775145c58f3b1d7903a4eeb,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.6037736
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249863933551351820, guid: d62356fdb775145c58f3b1d7903a4eeb,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.4756141
+      objectReference: {fileID: 0}
     - target: {fileID: 7249863933551351821, guid: d62356fdb775145c58f3b1d7903a4eeb,
         type: 3}
       propertyPath: levelGenerator

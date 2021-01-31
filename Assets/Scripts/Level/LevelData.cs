@@ -1,19 +1,43 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 
 namespace GGJ
 {
-	public class LevelData
+	public class LevelData : ISerializable
 	{
 		public List<LevelPropData> Props { get; set; }
 		public List<LevelDynamicPropData> DynamicProps { get; set; }
 		public List<string> TileSetIds { get; set; }
 		public List<int> BlockedTiles { get; set; }
-		[JsonIgnore]
 		public int Width => Layout.Length / Height;
 		public int Height { get; set; }
 		public int[] Layout { get; set; }
+
+		public LevelData()
+		{
+		}
+
+		public LevelData(SerializationInfo info, StreamingContext context)
+		{
+			Props = (List<LevelPropData>)info.GetValue("Props", typeof(List<LevelPropData>));
+			DynamicProps = (List<LevelDynamicPropData>)info.GetValue("DynamicProps", typeof(List<LevelDynamicPropData>));
+			TileSetIds = (List<string>)info.GetValue("TileSetIds", typeof(List<string>));
+			BlockedTiles = (List<int>)info.GetValue("BlockedTiles", typeof(List<int>));
+			Height = (int)info.GetValue("Height", typeof(int));
+			Layout = (int[])info.GetValue("Layout", typeof(int[]));
+		}
+
+		public void GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			info.AddValue("Props", Props);
+			info.AddValue("DynamicProps", DynamicProps);
+			info.AddValue("TileSetIds", TileSetIds);
+			info.AddValue("BlockedTiles", BlockedTiles);
+			info.AddValue("Height", Height);
+			info.AddValue("Layout", Layout);
+		}
 
 		public void Resize(int width, int height)
 		{
