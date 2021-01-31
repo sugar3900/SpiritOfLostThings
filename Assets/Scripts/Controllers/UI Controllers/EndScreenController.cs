@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using GGJ;
 using UnityEngine;
@@ -6,21 +7,40 @@ using UnityEngine.UI;
 
 public class EndScreenController : MonoBehaviour {
 
+    [TextArea] [SerializeField] private string firstLineOfPoem = "";
     [SerializeField] private GameObject entireScreen;
     [SerializeField] private Text poemLineText;
     [SerializeField] private Sprite[] treeSpriteVariants;
     [SerializeField] private Image treeImage;
+
+    private Action closeCallback;
     
-    public void ResetAndInit(List<PoemLineData> poemLinesCollected){
+    public void ResetAndInit(List<PoemLineData> poemLinesCollected, Action closeCallback){
+
+        this.closeCallback = closeCallback;
         
         entireScreen.SetActive(true);
         FillInPoem(poemLinesCollected);
         CustomizeTree(poemLinesCollected);
+
+        StartCoroutine(WaitThenClose());
     }
 
     public void MakeInvisible(){
         
         entireScreen.SetActive(false);
+    }
+    
+    private IEnumerator WaitThenClose(){
+           
+        // TODO: change this to close on click later?
+        yield return new WaitForSeconds(15);
+        CloseAndRunCallback();
+    }
+
+    private void CloseAndRunCallback(){
+        
+        closeCallback?.Invoke();
     }
 
     private void FillInPoem(List<PoemLineData> poemLinesCollected){
@@ -39,11 +59,12 @@ public class EndScreenController : MonoBehaviour {
 
     private string GetPoemContents(List<PoemLineData> poemLinesCollected){
        
-        string poemContents = "";
+        string poemContents = firstLineOfPoem;
 
         foreach (PoemLineData poemLineData in poemLinesCollected)
         {
-            poemContents += poemLineData.poemLineContents;
+            string poemLine = poemLineData.poemLineContents;
+            poemContents += poemLine;
 
             poemContents += "\n";
         }
