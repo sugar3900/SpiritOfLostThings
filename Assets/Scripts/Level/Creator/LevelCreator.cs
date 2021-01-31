@@ -200,29 +200,23 @@ namespace GGJ
 
 		private void IndicateProps(LevelCreatorMode mode)
 		{
-			try
+			ClearIndicators();
+			switch (mode)
 			{
-				ClearIndicators();
-				switch (mode)
-				{
-					case LevelCreatorMode.Tiles:
-						break;
-					case LevelCreatorMode.Props:
-						foreach (IProp prop in level.Props)
-						{
-							CreatePropIndicator(prop);
-						}
-						break;
-					case LevelCreatorMode.DynamicProp:
-						foreach (IProp prop in level.DynamicProps)
-						{
-							CreatePropIndicator(prop);
-						}
-						break;
-				}
-			}
-			catch
-			{
+				case LevelCreatorMode.Tiles:
+					break;
+				case LevelCreatorMode.Props:
+					foreach (IProp prop in level.Props)
+					{
+						CreatePropIndicator(prop);
+					}
+					break;
+				case LevelCreatorMode.DynamicProp:
+					foreach (IProp prop in level.DynamicProps)
+					{
+						CreatePropIndicator(prop);
+					}
+					break;
 			}
 		}
 
@@ -230,17 +224,26 @@ namespace GGJ
 		{
 			for (int i = indicators.Count - 1; i >= 0; i--)
 			{
-				UnityObject.Destroy(indicators[i]);
+				if (indicators[i] != null)
+				{
+					UnityObject.Destroy(indicators[i]);
+				}
 			}
 		}
 
 		private void CreatePropIndicator(IProp prop)
 		{
-			if (prop != null && !(prop is CharacterProp))
+			try
 			{
-				Vector3 pos = new Vector3(prop.X + 0.5f, prop.Y + 0.5f, indicatorZ);
-				GameObject indicator = UnityObject.Instantiate(indicatorPrefab, pos, Quaternion.identity, level.transform);
-				indicators.Add(indicator);
+				if (prop != null && !(prop is CharacterProp))
+				{
+					Vector3 pos = new Vector3(prop.X + 0.5f, prop.Y + 0.5f, indicatorZ);
+					GameObject indicator = UnityObject.Instantiate(indicatorPrefab, pos, Quaternion.identity, level.transform);
+					indicators.Add(indicator);
+				}
+			}
+			catch
+			{
 			}
 		}
 	}
