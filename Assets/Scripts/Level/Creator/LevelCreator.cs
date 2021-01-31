@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityObject = UnityEngine.Object;
 
 namespace GGJ
 {
@@ -11,6 +13,11 @@ namespace GGJ
 		private LevelCreatorToolbar toolbar;
 		[SerializeField]
 		private bool canEdit;
+		[SerializeField]
+		private float indicatorZ = -3f;
+		[SerializeField]
+		private GameObject indicatorPrefab;
+		private List<GameObject> indicators = new List<GameObject>();
 		private Level level;
 		private LevelData levelData;
 		private PropRegistry propRegistry;
@@ -42,6 +49,12 @@ namespace GGJ
 			this.propRegistry = propRegistry;
 			this.dynamicPropRegistry = dynamicPropRegistry;
 			toolbar.SetRegistries(tileSetRegistry, propRegistry, dynamicPropRegistry);
+			toolbar.OnModeChanged += IndicateProps;
+		}
+
+		public void CleanUp()
+		{
+			toolbar.OnModeChanged -= IndicateProps;
 		}
 
 		public void OnUpdate()
@@ -50,7 +63,6 @@ namespace GGJ
 			{
 				toolbar.IsShown = true;
 				HandleInputs();
-				toolbar.OnUpdate();
 			}
 			else
 			{
@@ -66,6 +78,7 @@ namespace GGJ
 		{
 			Rebuild();
 			Save();
+			IndicateProps(toolbar.Mode);
 		}
 
 		private void HandleInputs()
@@ -183,6 +196,46 @@ namespace GGJ
 				return new Vector2Int((int)posInLevel.x, (int)posInLevel.y);
 			}
 			return default;
+		}
+
+		private void IndicateProps(LevelCreatorMode mode)
+		{
+			ClearIndicators();
+			switch (mode)
+			{
+				case LevelCreatorMode.Tiles:
+					break;
+				case LevelCreatorMode.Props:
+					foreach (IProp prop in level.Props)
+					{
+						CreatePropIndicator(prop);
+					}
+					break;
+				case LevelCreatorMode.DynamicProp:
+					foreach (IProp prop in level.DynamicProps)
+					{
+						CreatePropIndicator(prop);
+					}
+					break;
+			}
+		}
+
+		private void ClearIndicators()
+		{
+			for (int i = indicators.Count - 1; i >= 0; i--)
+			{
+				UnityObject.Destroy(indicators[i]);
+			}
+		}
+
+		private void CreatePropIndicator(IProp prop)
+		{
+			if (prop != null)
+			{
+				Vector3 pos = new Vector3(prop.X + 0.5f, prop.Y + 0.5f, indicatorZ);
+				GameObject indicator = UnityObject.Instantiate(indicatorPrefab, pos, Quaternion.identity, level.transform);
+				indicators.Add(indicator);
+			}
 		}
 	}
 }

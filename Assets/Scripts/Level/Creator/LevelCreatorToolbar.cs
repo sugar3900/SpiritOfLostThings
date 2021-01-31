@@ -30,6 +30,7 @@ namespace GGJ
 		public LevelCreatorMode Mode { get; private set; }
 		public int Selection { get; set; }
 		private List<LevelCreatorOption> options = new List<LevelCreatorOption>();
+		public event Action<LevelCreatorMode> OnModeChanged;
 
 		public void SetRegistries(
 			TileSetRegistry tileSetRegistry,
@@ -58,12 +59,8 @@ namespace GGJ
 		private void SetMode(int modeIndex)
 		{
 			Mode = (LevelCreatorMode)modeIndex;
+			OnModeChanged?.Invoke(Mode);
 			Redraw();
-		}
-
-		public void OnUpdate()
-		{
-
 		}
 
 		private void Redraw()

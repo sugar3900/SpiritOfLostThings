@@ -755,7 +755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a647110a7552c45906e0eafc6ab03b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
   levelPrefab: {fileID: 2822548108908471110, guid: 5aa55fff6b5d734439456d79dcacb57d,
     type: 3}
   backgroundPrefab: {fileID: 641896994923267459, guid: 2b6753cb0abba0749852c81a411a7bf5,
@@ -779,6 +778,8 @@ MonoBehaviour:
       contentArea: {fileID: 30461494}
       dropdown: {fileID: 467862257}
     canEdit: 1
+    indicatorPrefab: {fileID: 5225554940775215949, guid: cd533c39fe703df439a90393a06d5532,
+      type: 3}
   obstacleLayer: 8
 --- !u!4 &1936640500
 Transform:
@@ -826,8 +827,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f85cc42089e496686d6016b6a692b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  currentState: 0
 --- !u!114 &1972574538
 MonoBehaviour:
   m_ObjectHideFlags: 0

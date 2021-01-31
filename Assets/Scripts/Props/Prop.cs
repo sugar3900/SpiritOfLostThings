@@ -2,10 +2,12 @@
 
 namespace GGJ
 {
-	public class Prop : MonoBehaviour
+	public class Prop : MonoBehaviour, IProp
 	{
 		public string Id => gameObject.name;
 		public bool isBlocking;
+		public int X => Mathf.FloorToInt(transform.position.x);
+		public int Y => Mathf.FloorToInt(transform.position.y);
 		[SerializeField]
 		private SpriteRenderer spriteRenderer;
 		public Sprite Sprite => (spriteRenderer != null) ? spriteRenderer.sprite : null;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GGJ
 {
-	public class DynamicProp : MonoBehaviour
+	public class DynamicProp : MonoBehaviour, IProp
 	{
 		[SerializeField]
 		private bool isPersistent;

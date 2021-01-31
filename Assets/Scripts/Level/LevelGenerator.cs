@@ -10,8 +10,6 @@ namespace GGJ
 	public class LevelGenerator : MonoBehaviour
 	{
 		[SerializeField]
-		private CharacterProp character;
-		[SerializeField]
 		private GameObject levelPrefab;
 		[SerializeField]
 		private SpriteRenderer backgroundPrefab;
@@ -54,6 +52,11 @@ namespace GGJ
 		private void Update()
 		{
 			levelCreator.OnUpdate();
+		}
+
+		private void OnDestroy()
+		{
+			levelCreator.CleanUp();
 		}
 
 		private LevelData LoadLevelData()
