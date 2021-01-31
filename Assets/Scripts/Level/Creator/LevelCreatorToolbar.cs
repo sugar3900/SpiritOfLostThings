@@ -101,24 +101,38 @@ namespace GGJ
 
 		private List<LevelCreatorOption> PopulateTileSets()
 		{
-			var tileOptions = new List<LevelCreatorOption>();
+			List<LevelCreatorOption> tileOptions = new List<LevelCreatorOption>();
 			for (int i = 0; i < tileSetRegistry.Count; i++)
 			{
 				TileSet tileSet = tileSetRegistry.TileSets[i];
-				Sprite sprite = tileSet.GetSprite(TileCase.Solid);
-				tileOptions.Add(CreateOption(tileSet.Id, sprite, i));
+				if (tileSet != null)
+				{
+					Sprite sprite = tileSet.GetSprite(TileCase.Solid);
+					tileOptions.Add(CreateOption(tileSet.Id, sprite, i));
+				}
+				else
+				{
+					Debug.LogWarning("The TileSet registry contains a missing reference.");
+				}
 			}
 			return tileOptions;
 		}
 
 		private List<LevelCreatorOption> PopulateProps()
 		{
-			var propOptions = new List<LevelCreatorOption>();
+			List<LevelCreatorOption> propOptions = new List<LevelCreatorOption>();
 			for (int i = 0; i < propRegistry.Count; i++)
 			{
 				Prop prop = propRegistry.Props[i];
-				Sprite sprite = prop.Sprite;
-				propOptions.Add(CreateOption(prop.Id, sprite, i));
+				if (prop != null)
+				{
+					Sprite sprite = prop.Sprite;
+					propOptions.Add(CreateOption(prop.Id, sprite, i));
+				}
+				else
+				{
+					Debug.LogWarning("The Prop registry contains a missing reference.");
+				}
 			}
 			return propOptions;
 		}
@@ -129,8 +143,15 @@ namespace GGJ
 			for (int i = 0; i < dynamicPropRegistry.Count; i++)
 			{
 				DynamicProp dynamicProp = dynamicPropRegistry.DynamicProps[i];
-				Sprite sprite = dynamicProp.Sprite;
-				dynamicPropOptions.Add(CreateOption(dynamicProp.Id, sprite, i));
+				if (dynamicProp != null)
+				{
+					Sprite sprite = dynamicProp.Sprite;
+					dynamicPropOptions.Add(CreateOption(dynamicProp.Id, sprite, i));
+				}
+				else
+				{
+					Debug.LogWarning("The DynamicProp registry contains a missing reference.");
+				}
 			}
 			return dynamicPropOptions;
 		}
@@ -151,9 +172,20 @@ namespace GGJ
 			scrollRect.horizontalNormalizedPosition = 0;
 		}
 
-		private void Select(int i)
+		private void Select(int index)
 		{
-			Selection = i;
+			Selection = index;
+			for (int i = 0; i < options.Count; i++)
+			{
+				if (i == index)
+				{
+					options[i].Highlight();
+				}
+				else
+				{
+					options[i].Unhighlight();
+				}
+			}
 		}
 	}
 }

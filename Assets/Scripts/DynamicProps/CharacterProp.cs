@@ -7,9 +7,7 @@ namespace GGJ
 		[SerializeField]
 		private float moveSpeed = 8f;
 		[SerializeField]
-		private float radiusForMovementCollision = 0.225f;
-		[SerializeField]
-		private float radiusForEdgeCollision = 0.225f;
+		private float moveColRadius = 0.225f;
 		[SerializeField]
 		private LayerMask movementCollisionLayers;
 		[SerializeField]
@@ -68,7 +66,7 @@ namespace GGJ
 		private bool CanMoveInDirection(Vector2 moveDirection)
 		{
 			Vector2 newPosition = (Vector2)transform.position + moveDirection;
-			Collider2D[] blockingObjects = Physics2D.OverlapCircleAll(newPosition, radiusForMovementCollision, movementCollisionLayers);
+			Collider2D[] blockingObjects = Physics2D.OverlapCircleAll(newPosition, moveColRadius, movementCollisionLayers);
 			foreach (Collider2D blockingObject in blockingObjects)
 			{
 				if (blockingObject != null && !blockingObject.isTrigger)

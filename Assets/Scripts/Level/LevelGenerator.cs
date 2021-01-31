@@ -90,10 +90,7 @@ namespace GGJ
 			GameObject instance = Instantiate(levelPrefab);
 			Level level = instance.GetComponent<Level>();
 			BuildContent(level, levelData);
-			if(onLevelGenerated != null)
-			{
-				onLevelGenerated(level);
-			}
+			onLevelGenerated?.Invoke(level);
 			return level;
 		}
 
@@ -105,26 +102,10 @@ namespace GGJ
 
 		private void BuildContent(Level level, LevelData levelData)
 		{
-			//level.CreateNavGrid(GetNavGrid(levelData));
 			level.TileGrid = GenerateTiles(levelData, level.transform);
 			level.Props = GenerateProps(levelData, level.transform);
 			level.DynamicProps = GenerateDynamicProps(levelData, level.transform);
 			level.Backgrounds = GenerateBackgrounds(levelData.Width, levelData.Height, level.transform);
-		}
-
-		private bool[,] GetNavGrid(LevelData levelData)
-		{
-			int width = levelData.Width;
-			int height = levelData.Height;
-			bool[,] navGrid = new bool[width, height];
-			for (int y = 0; y < height; y++)
-			{
-				for (int x = 0; x < width; x++)
-				{
-					navGrid[x, y] = levelData.GetIsBlockedAt(x, y);
-				}
-			}
-			return navGrid;
 		}
 
 		private Tile[,] GenerateTiles(LevelData levelData, Transform parent)
@@ -180,12 +161,12 @@ namespace GGJ
 				}
 				else
 				{
-					Debug.LogWarning($"No tile found with the tile set id {tileSetId} and case {tileCase}");
+					Debug.LogWarning($"No tile found with the TileSet id {tileSetId} and case {tileCase}");
 				}
 			}
 			else
 			{
-				Debug.LogWarning("No tile set found with the id " + tileSetId);
+				Debug.LogWarning("No TileSet found with the id " + tileSetId);
 			}
 			return null;
 		}
@@ -207,12 +188,12 @@ namespace GGJ
 			Prop propPrefab = propRegistry.GetProp(propData.Id);
 			if (propPrefab != null)
 			{
-				Vector3 offset = new Vector3(0.5f, 0.5f, propZ);
-				return Instantiate(propPrefab, propData.Position + offset, propData.Rotation, parent);
+				Vector3 position = new Vector3(propData.X + 0.5f, propData.Y + 0.5f, propZ);
+				return Instantiate(propPrefab, position, Quaternion.identity, parent);
 			}
 			else
 			{
-				Debug.LogWarning("No prefab found with the id " + propData.Id);
+				Debug.LogWarning("No Prop found with the id " + propData.Id);
 			}
 			return null;
 		}
@@ -233,17 +214,14 @@ namespace GGJ
 			DynamicProp dynamicPropPrefab = dynamicPropRegistry.GetDynamicProp(dynamicPropData.Id);
 			if (dynamicPropPrefab != null)
 			{
-				Vector3 offset = new Vector3(0.5f, 0.5f, dynamicPropZ);
-				var dynamicProp = Instantiate(dynamicPropPrefab, dynamicPropData.Position + offset, dynamicPropData.Rotation, parent);
-				if (onDynamicPropCreated != null)
-				{
-					onDynamicPropCreated(dynamicProp);
-				}
+				Vector3 position = new Vector3(dynamicPropData.X + 0.5f, dynamicPropData.Y + 0.5f, dynamicPropZ);
+				DynamicProp dynamicProp = Instantiate(dynamicPropPrefab, position, Quaternion.identity, parent);
+				onDynamicPropCreated?.Invoke(dynamicProp);
 				return dynamicProp;
 			}
 			else
 			{
-				Debug.LogWarning("No prefab found with the id " + dynamicPropData.Id);
+				Debug.LogWarning("No DynamicProp found with the id " + dynamicPropData.Id);
 			}
 			return null;
 		}
@@ -277,10 +255,13 @@ namespace GGJ
 			for (int i = 0; i < tileSetRegistry.Count; i++)
 			{
 				TileSet tileSet = tileSetRegistry[i];
-				validTileSetIds.Add(tileSet.Id);
-				if (tileSet.IsBlocking)
+				if (tileSet != null)
 				{
-					blockingTileSets.Add(i + 1);
+					validTileSetIds.Add(tileSet.Id);
+					if (tileSet.IsBlocking)
+					{
+						blockingTileSets.Add(i + 1);
+					}
 				}
 			}
 			levelData.TileSetIds = validTileSetIds;
@@ -297,10 +278,6 @@ namespace GGJ
 				if (prop == null)
 				{
 					toRemove.Add(data);
-				}
-				else
-				{
-					data.IsBlocking = prop.isBlocking;
 				}
 			}
 			if (toRemove.Count > 0)
@@ -322,10 +299,6 @@ namespace GGJ
 				if (dynamicProp == null)
 				{
 					toRemove.Add(data);
-				}
-				else
-				{
-					data.IsBlocking = dynamicProp.isBlocking;
 				}
 			}
 			if (toRemove.Count > 0)

@@ -9,7 +9,7 @@ namespace GGJ
 		[SerializeField]
 		private float zoomSpeed = 3f;
 		[SerializeField]
-		private float zoomDelta = 3f;
+		private float zoomInputMult = 3f;
 		[SerializeField]
 		private float minZoom = 10f;
 		[SerializeField]
@@ -18,44 +18,67 @@ namespace GGJ
 		private float maxLerpSqrDist = 32f;
 		[SerializeField]
 		private float speedDamp = 0.2f;
-		private float endZoom;
 		[SerializeField]
 		private Transform target;
+		[SerializeField]
+		private LevelGenerator levelGenerator;
 
+		private float targetZoom;
 		private float currentVelocityX;
 		private float currentVelocityY;
+
+		public Transform CameraTr => localCamera.transform;
 		public Transform Target
 		{
-			get { return target; }
-			set
-			{
-				if (target != value)
-				{
-					target = value;
-					SnapToTarget();
-				}
-			}
+			get => target;
+			set => target = value;
+		}
+		private float CameraZ => CameraTr.position.z;
+		private float Zoom
+		{
+			get => localCamera.orthographicSize;
+			set => localCamera.orthographicSize = value;
 		}
 
 		private void Start()
 		{
-			endZoom = maxZoom;
+			targetZoom = (minZoom + maxZoom) / 2;
+			levelGenerator.onDynamicPropCreated += DetectCharacterGeneration;
 		}
 
-		public void Update()
+		private void DetectCharacterGeneration(DynamicProp dynamicProp)
 		{
-			if (localCamera.orthographicSize != endZoom)
+			if (dynamicProp != null && dynamicProp is CharacterProp)
 			{
-				ProgressZoom();
+				target = dynamicProp.transform;
+			}
+		}	
+
+		private void Update()
+		{
+			ApplyInput();
+			if (localCamera.orthographicSize != targetZoom)
+			{
+				Zoom = Mathf.Lerp(Zoom, targetZoom, Time.deltaTime * zoomSpeed);
 			}
 			Move();
+		}
+
+		private void ApplyInput()
+		{
+			float scrollY = -Input.mouseScrollDelta.y;
+			if (Mathf.Abs(scrollY) > Mathf.Epsilon)
+			{
+				float zoomDelta = scrollY * zoomInputMult;
+				targetZoom = Mathf.Clamp(targetZoom + zoomDelta, minZoom, maxZoom);
+			}
 		}
 
 		private void Move()
 		{
 			if (Target != null)
 			{
-				if (Vector2.SqrMagnitude(localCamera.transform.position - Target.position) < maxLerpSqrDist)
+				if (Vector2.SqrMagnitude(CameraTr.position - Target.position) < maxLerpSqrDist)
 				{
 					LerpToTarget();
 				}
@@ -66,36 +89,18 @@ namespace GGJ
 			}
 		}
 
-		public float GetZoom()
-		{
-			return localCamera.orthographicSize;
-		}
-
-		public void SetZoom(float value)
-		{
-			localCamera.orthographicSize = value;
-		}
-
 		private void LerpToTarget()
 		{
-			localCamera.transform.position = new Vector3(
-				Mathf.SmoothDamp(localCamera.transform.position.x, Target.position.x, ref currentVelocityX, speedDamp),
-				Mathf.SmoothDamp(localCamera.transform.position.y, Target.position.y, ref currentVelocityY, speedDamp),
-				localCamera.transform.position.z);
+			CameraTr.position = new Vector3(
+				Mathf.SmoothDamp(CameraTr.position.x, Target.position.x, ref currentVelocityX, speedDamp),
+				Mathf.SmoothDamp(CameraTr.position.y, Target.position.y, ref currentVelocityY, speedDamp),
+				CameraZ);
 		}
 
 
 		private void SnapToTarget()
 		{
-			localCamera.transform.position = new Vector3(
-				Target.position.x,
-				Target.position.y,
-				localCamera.transform.position.z);
-		}
-
-		private void ProgressZoom()
-		{
-			SetZoom(Mathf.Lerp(GetZoom(), endZoom, Time.deltaTime * zoomDelta));
+			CameraTr.position = new Vector3(Target.position.x, Target.position.y, CameraZ);
 		}
 	}
 }

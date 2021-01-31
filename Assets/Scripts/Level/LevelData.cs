@@ -84,48 +84,13 @@ namespace GGJ
 			return GetTileSetIdAtPos(x, y) == src;
 		}
 
-		public bool GetIsBlockedAt(int x, int y)
-		{
-			string tileType = GetTileSetIdAtPos(x, y);
-			if (TileSetIds != null)
-			{
-				int index = TileSetIds.IndexOf(tileType);
-				if (BlockedTiles != null)
-				{
-					if (BlockedTiles.Contains(index))
-					{
-						return true;
-					}
-					else
-					{
-						foreach (LevelPropData levelProp in Props)
-						{
-							if (levelProp.IsBlocking && x == levelProp.X && y == levelProp.Y)
-							{
-								return true;
-							}
-						}
-					}
-				}
-				else
-				{
-					Debug.LogWarning("No BlockedTiles found");
-				}
-			}
-			else
-			{
-				Debug.LogWarning("No TileSetIds found");
-			}
-			return false;
-		}
-
 		private LevelDynamicPropData GetDynamicPropAtCoord(Vector2Int coord)
 		{
 			if (GetCoordIsInBounds(coord))
 			{
 				foreach (LevelDynamicPropData dynamicProp in DynamicProps)
 				{
-					if (dynamicProp.Coord == coord)
+					if (dynamicProp.X == coord.x && dynamicProp.Y == coord.y)
 					{
 						return dynamicProp;
 					}
@@ -140,7 +105,7 @@ namespace GGJ
 			{
 				foreach (LevelPropData prop in Props)
 				{
-					if (prop.Coord == coord)
+					if (prop.X == coord.x && prop.Y == coord.y)
 					{
 						return prop;
 					}
