@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4896132480545245386}
   - component: {fileID: 4280440865510405604}
   - component: {fileID: 72417531281518382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mushroom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179224091661598343}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.52, y: -6.95, z: -1}
+  m_LocalPosition: {x: 5.52, y: 1.55, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1852904110998474290}
@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPersistent: 0
+  isBlocking: 0
   spriteRenderer: {fileID: 72417531281518382}
 --- !u!212 &72417531281518382
 SpriteRenderer:
@@ -106,7 +108,7 @@ GameObject:
   - component: {fileID: 8843678338195736964}
   - component: {fileID: 3900728754674764920}
   - component: {fileID: 713785530447773177}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mushroom3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2492013388866644893}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.28, y: -7.66, z: -1}
+  m_LocalPosition: {x: -4.28, y: 0.84000015, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1852904110998474290}
@@ -139,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPersistent: 0
+  isBlocking: 0
   spriteRenderer: {fileID: 713785530447773177}
 --- !u!212 &713785530447773177
 SpriteRenderer:
@@ -201,7 +205,7 @@ GameObject:
   - component: {fileID: 9028849098066008082}
   - component: {fileID: 7995030257131781438}
   - component: {fileID: 6220387476902991780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mushroom4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3167782684112831909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.47, y: -6.95, z: -1}
+  m_LocalPosition: {x: -2.47, y: 1.5500002, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1852904110998474290}
@@ -234,6 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPersistent: 0
+  isBlocking: 0
   spriteRenderer: {fileID: 6220387476902991780}
 --- !u!212 &6220387476902991780
 SpriteRenderer:
@@ -295,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6458437159360689310}
   - component: {fileID: 2996964054518091579}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MemoryTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,6 +335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb94daefe3bf42bf802b24211874634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPersistent: 0
+  isBlocking: 0
   spriteRenderer: {fileID: 9064848643936754590}
   mushrooms:
   - {fileID: 5267898421380390695}
@@ -345,7 +353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1852904110998474290}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MemoryTreeHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +391,7 @@ GameObject:
   - component: {fileID: 2578724896580101818}
   - component: {fileID: 7582279155142578591}
   - component: {fileID: 7384545002330734542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mushroom1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5267898421380390695}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.48, y: -7.57, z: -1}
+  m_LocalPosition: {x: 7.48, y: 0.9299998, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1852904110998474290}
@@ -416,6 +424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPersistent: 0
+  isBlocking: 0
   spriteRenderer: {fileID: 7384545002330734542}
 --- !u!212 &7384545002330734542
 SpriteRenderer:
@@ -478,7 +488,8 @@ GameObject:
   - component: {fileID: 459776517089398385}
   - component: {fileID: 295718030741210778}
   - component: {fileID: 9064848643936754590}
-  m_Layer: 0
+  - component: {fileID: 5241828511869174237}
+  m_Layer: 8
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,6 +522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPersistent: 0
+  isBlocking: 0
   spriteRenderer: {fileID: 9064848643936754590}
 --- !u!212 &9064848643936754590
 SpriteRenderer:
@@ -562,6 +575,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &5241828511869174237
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6685070195405384577}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.7, y: 6.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 20.48, y: 20.48}
+    newSize: {x: 20.48, y: 15.36}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 16.05, y: 13.71}
+  m_EdgeRadius: 0
 --- !u!1 &8861124058562971441
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +612,7 @@ GameObject:
   - component: {fileID: 6627487976092831501}
   - component: {fileID: 8804305770453243080}
   - component: {fileID: 7110870774382944244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mushroom5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8861124058562971441}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.71, y: -6.95, z: -1}
+  m_LocalPosition: {x: -5.71, y: 1.5500002, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1852904110998474290}
@@ -606,6 +645,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6895db09bc4d3be40bc1a5266e97a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPersistent: 0
+  isBlocking: 0
   spriteRenderer: {fileID: 7110870774382944244}
 --- !u!212 &7110870774382944244
 SpriteRenderer:
