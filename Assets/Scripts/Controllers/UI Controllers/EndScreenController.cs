@@ -75,19 +75,14 @@ public class EndScreenController : MonoBehaviour {
 
     private int MapPoemLightnessToTreeSpriteIndex(int poemLightness, int maxPoemLightness){
         
-        int minPoemLightness = 0;
-        int minTreeSpriteVariant = 0;
         int maxTreeSpriteVariant = treeSpriteVariants.Length - 1;
-        
         int treeVariantIndex = poemLightness / maxPoemLightness * (maxTreeSpriteVariant);
-
         return treeVariantIndex;
     }
 
     private int CalculatePoemLightness(List<PoemLineData> poemLinesCollected){
 
         int poemLightness = 0;
-
         foreach (PoemLineData poemLineData in poemLinesCollected)
         {
             if (poemLineData.isLight)
@@ -95,7 +90,6 @@ public class EndScreenController : MonoBehaviour {
                 poemLightness ++;
             }
         }
-
         // Returns a number between 0 (darkest poem) and poemLinesCollected.length (lightest poem)
         return poemLightness;
     }
