@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace GGJ
@@ -92,7 +93,6 @@ namespace GGJ
 			GameObject instance = Instantiate(levelPrefab);
 			Level level = instance.GetComponent<Level>();
 			BuildContent(level, levelData);
-			OnLevelGenerated?.Invoke(level);
 			generationCount++;
 			return level;
 		}
@@ -108,14 +108,14 @@ namespace GGJ
 			level.TileGrid = GenerateTiles(levelData, level.transform);
 			level.Props = GenerateProps(levelData, level.transform);
 			level.Backgrounds = GenerateBackgrounds(levelData.Width, levelData.Height, level.transform);
-			if (generationCount == 0)
+			bool generatePersistent = generationCount == 0;
+			List<DynamicProp> dynamicProps = GenerateDynamicProps(levelData, level.transform, generatePersistent);
+			foreach (DynamicProp dynamicProp in dynamicProps)
 			{
-				level.DynamicProps = GenerateDynamicProps(levelData, level.transform);
-				foreach (var dynamicProp in level.DynamicProps)
-				{
-					dynamicProp.Initialize(level);
-				}
+				dynamicProp.Initialize(level);
 			}
+			level.DynamicProps.AddRange(dynamicProps);
+			OnLevelGenerated?.Invoke(level);
 		}
 
 		private Tile[,] GenerateTiles(LevelData levelData, Transform parent)
@@ -198,7 +198,7 @@ namespace GGJ
 			Prop propPrefab = propRegistry.GetProp(propData.Id);
 			if (propPrefab != null)
 			{
-				Vector3 position = new Vector3(propData.X + 0.5f, propData.Y + 0.5f, propZ);
+				Vector3 position = new Vector3(propData.X - 0.5f, propData.Y - 0.5f, propZ);
 				return Instantiate(propPrefab, position, Quaternion.identity, parent);
 			}
 			else
@@ -208,26 +208,34 @@ namespace GGJ
 			return null;
 		}
 
-		private DynamicProp[] GenerateDynamicProps(LevelData levelData, Transform parent)
+		private List<DynamicProp> GenerateDynamicProps(LevelData levelData, Transform parent, bool generatePersistent)
 		{
-			DynamicProp[] dynamicProps = new DynamicProp[levelData.DynamicProps.Count];
+			int count = levelData.DynamicProps.Count;
+			List<DynamicProp> dynamicProps = new List<DynamicProp>(count);
 			for (int i = 0; i < levelData.DynamicProps.Count; i++)
 			{
 				LevelDynamicPropData levelDynamicPropData = levelData.DynamicProps[i];
-				dynamicProps[i] = GenerateDynamicProp(levelDynamicPropData, parent);
+				DynamicProp newProp = GenerateDynamicProp(levelDynamicPropData, parent, generatePersistent);
+				if (newProp != null)
+				{
+					dynamicProps.Add(newProp);
+				}
 			}
 			return dynamicProps;
 		}
 
-		public DynamicProp GenerateDynamicProp(LevelDynamicPropData dynamicPropData, Transform parent)
+		public DynamicProp GenerateDynamicProp(LevelDynamicPropData dynamicPropData, Transform parent, bool generatePersistent)
 		{
 			DynamicProp dynamicPropPrefab = dynamicPropRegistry.GetDynamicProp(dynamicPropData.Id);
 			if (dynamicPropPrefab != null)
 			{
-				Vector3 position = new Vector3(dynamicPropData.X + 0.5f, dynamicPropData.Y + 0.5f, dynamicPropZ);
-				DynamicProp dynamicProp = Instantiate(dynamicPropPrefab, position, Quaternion.identity, parent);
-				OnDynamicPropCreated?.Invoke(dynamicProp);
-				return dynamicProp;
+				if (generatePersistent || !dynamicPropPrefab.IsPersistent)
+				{
+					Vector3 position = new Vector3(dynamicPropData.X - 0.5f, dynamicPropData.Y - 0.5f, dynamicPropZ);
+					DynamicProp dynamicProp = Instantiate(dynamicPropPrefab, position, Quaternion.identity, parent);
+					OnDynamicPropCreated?.Invoke(dynamicProp);
+					return dynamicProp;
+				}
 			}
 			else
 			{

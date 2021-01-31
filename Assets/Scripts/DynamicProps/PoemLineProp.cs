@@ -45,7 +45,7 @@ namespace GGJ {
         }
         
         public void UpdateTextFade(CharacterProp character){
-            
+
             // get distance from the character
             float distance = character.GetDistanceFrom(gameObject);
             

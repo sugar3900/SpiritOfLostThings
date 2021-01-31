@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GGJ
@@ -7,7 +9,7 @@ namespace GGJ
 		public Tile[,] TileGrid { get; set; }
 		public SpriteRenderer[,] Backgrounds { get; set; }
 		public Prop[] Props { get; set; }
-		public DynamicProp[] DynamicProps { get; set; }
+		public List<DynamicProp> DynamicProps { get; private set; } = new List<DynamicProp>();
 		public int Width => TileGrid.GetLength(0);
 		public int Height => TileGrid.GetLength(1);
 
@@ -15,12 +17,15 @@ namespace GGJ
 		{
 			foreach (DynamicProp dynamicProp in DynamicProps)
 			{
-				Vector2Int dynamicPropCoord = new Vector2Int(
-					(int)dynamicProp.transform.position.x,
-					(int)dynamicProp.transform.position.y);
-				if (coord == dynamicPropCoord)
+				if (dynamicProp != null)
 				{
-					return dynamicProp;
+					Vector2Int dynamicPropCoord = new Vector2Int(
+						(int)dynamicProp.transform.position.x,
+						(int)dynamicProp.transform.position.y);
+					if (coord == dynamicPropCoord)
+					{
+						return dynamicProp;
+					}
 				}
 			}
 			return null;
@@ -75,15 +80,15 @@ namespace GGJ
 
 		private void ClearDynamicProps()
 		{
-			for (int i = DynamicProps.Length - 1; i >= 0; i--)
+			for (int i = DynamicProps.Count - 1; i >= 0; i--)
 			{
 				DynamicProp dynamicProp = DynamicProps[i];
-				if (dynamicProp != null)
+				if (dynamicProp != null && !dynamicProp.IsPersistent)
 				{
 					Destroy(dynamicProp.gameObject);
 				}
 			}
-			DynamicProps = null;
+			DynamicProps = DynamicProps.Where(d => d != null).ToList();
 		}
 
 		private void ClearBackground()
@@ -107,6 +112,7 @@ namespace GGJ
 			ClearTiles();
 			ClearBackground();
 			ClearProps();
+			ClearDynamicProps();
 		}
 	}
 }

@@ -136,11 +136,9 @@ namespace GGJ
 
 		private void ChangeDynamicProp()
 		{
-			Debug.Log("ChangeDynamicProp");
 			Vector2Int coord = GetMouseCoord();
 			DynamicProp dynamicProp = level.GetDynamicPropAtCoord(coord);
 			DynamicProp newDynamicProp = dynamicPropRegistry[toolbar.Selection];
-			Debug.Log(newDynamicProp);
 			if (newDynamicProp != null && (dynamicProp == null || dynamicProp.Id != newDynamicProp.Id))
 			{
 				levelData.SetDynamicPropAtCoord(coord, newDynamicProp.Id);

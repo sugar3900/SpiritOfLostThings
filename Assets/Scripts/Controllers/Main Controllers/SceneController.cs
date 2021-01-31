@@ -11,23 +11,25 @@ namespace GGJ {
 
         public void OnEnable(){
             
+            levelGenerator.OnLevelGenerated += ParseLevelData;
             levelGenerator.OnLevelGenerated += SetUpGameFirstTime;
         }
         
         public void OnDisable(){
             
+            levelGenerator.OnLevelGenerated -= ParseLevelData;
             levelGenerator.OnLevelGenerated -= SetUpGameFirstTime;
+        }
+
+        private void ParseLevelData(Level level)
+		{
+            LevelPropInterfacer.ParseLevelData(level);
+            GameLoopController.InitOrReset();
         }
 
         private void SetUpGameFirstTime(Level level){
             
             levelGenerator.OnLevelGenerated -= SetUpGameFirstTime;
-
-            LevelPropInterfacer.ParseLevelData(level);
-            
-            // Reset core Controllers
-            GameLoopController.InitOrReset();
-            
             OverlayStartScreen();
         }
 
