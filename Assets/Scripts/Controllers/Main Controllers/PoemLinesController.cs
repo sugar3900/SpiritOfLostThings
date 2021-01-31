@@ -11,7 +11,7 @@ namespace GGJ {
 		[SerializeField] private List<PoemLineData> initPoemLineDatas;
 		
 		
-	    [NonSerialized]	public List<PoemLineData> poemLinesCollected;
+	    [NonSerialized]	public List<PoemLineData> poemLinesCollected = new List<PoemLineData>();
 
 	    private List<PoemLineProp> poemLineProps = new List<PoemLineProp>();
 
