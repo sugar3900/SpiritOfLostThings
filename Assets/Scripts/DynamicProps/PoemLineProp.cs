@@ -16,6 +16,7 @@ namespace GGJ {
         [SerializeField] private TextMesh poemText;
 
         private Action<PoemLineData> OnCollectedCallback;
+        private Vector3 treePosition;
 
 		private void Start()
 		{
@@ -23,9 +24,10 @@ namespace GGJ {
             renderer.sortingLayerName = "PoemLines";
         }
 
-		public void InitOrReset(Action<PoemLineData> onCollectedCallback){
+		public void InitOrReset(Action<PoemLineData> onCollectedCallback, Vector3 treePosition){
 
             OnCollectedCallback = onCollectedCallback;
+            this.treePosition = treePosition;
 
             UpdateText(poemLineData.poemLineContents);
             TurnOffParticleSystems();
@@ -54,9 +56,10 @@ namespace GGJ {
             OnCollectedCallback(poemLineData);
             
             gameObject.SetActive(false);
-
-            // TODO:
-            //Instantiate(FlyingMemoryPrefab);
+            
+            FlyingMemoryController memory = Instantiate(FlyingMemoryPrefab);
+            memory.transform.position = transform.position;
+            memory.Init(treePosition);
         }
 
         public void PointerEnter(){

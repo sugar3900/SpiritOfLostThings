@@ -16,8 +16,9 @@ namespace GGJ
 
 			poemLinesCollected.Clear();
 
-			LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.InitOrReset(CollectPoemLine));
-		}
+			var treePosition = LevelPropInterfacer.MemoryTree.transform.position;
+
+			LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.InitOrReset(CollectPoemLine, treePosition));		}
 
 		// TODO: call dowse from input somewhere
 		public void Dowse()
