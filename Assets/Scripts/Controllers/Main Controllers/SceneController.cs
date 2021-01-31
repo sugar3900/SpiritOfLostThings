@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace GGJ {
@@ -30,8 +27,6 @@ namespace GGJ {
             
             // Reset core Controllers
             GameLoopController.InitOrReset();
-            PlayerController.InitOrReset();
-            PlayerAnimationController.InitOrReset();
             
             OverlayStartScreen();
         }
@@ -49,8 +44,6 @@ namespace GGJ {
             
             // Reset core Controllers
             GameLoopController.InitOrReset();
-            PlayerController.InitOrReset();
-            PlayerAnimationController.InitOrReset();
         }
 
         public void OverlayEndScene(){

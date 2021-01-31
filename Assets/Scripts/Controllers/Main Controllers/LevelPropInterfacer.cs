@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
 
 namespace GGJ {
     
@@ -10,6 +7,7 @@ namespace GGJ {
 
         [NonSerialized] public List<PoemLineProp> PoemLines = new List<PoemLineProp>();
         [NonSerialized] public MemoryTreeProp MemoryTree;
+        [NonSerialized] public CharacterProp Character;
 
         public void ParseLevelData(Level level){
             
@@ -24,6 +22,11 @@ namespace GGJ {
                 else if (dynamicProp is MemoryTreeProp memoryTreeProp)
                 {
                     MemoryTree = memoryTreeProp;
+                }
+                
+                else if (dynamicProp is CharacterProp characterProp)
+                {
+                    Character = characterProp;
                 }
             }
         }

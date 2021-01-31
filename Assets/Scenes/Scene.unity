@@ -692,7 +692,7 @@ MonoBehaviour:
   zoomSpeed: 50
   zoomDelta: 1
   minZoom: 3
-  maxZoom: 4
+  maxZoom: 9
   maxLerpSqrDist: 32
   speedDamp: 0.2
   target: {fileID: 831898340}
@@ -723,7 +723,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -884,32 +884,32 @@ PrefabInstance:
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.25
+      value: 0.687113
       objectReference: {fileID: 0}
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.25
+      value: 0.687113
       objectReference: {fileID: 0}
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: -1.34
+      value: -3.6829257
       objectReference: {fileID: 0}
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.00000026056
       objectReference: {fileID: 0}
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.27212
       objectReference: {fileID: 0}
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9
+      value: -9.2343
       objectReference: {fileID: 0}
     - target: {fileID: 6914205723123181154, guid: 8f965aeb899a44e7a9023d988a565ab1,
         type: 3}
@@ -2508,7 +2508,6 @@ GameObject:
   - component: {fileID: 1972574539}
   - component: {fileID: 1972574538}
   - component: {fileID: 1972574537}
-  - component: {fileID: 1972574541}
   - component: {fileID: 1972574542}
   m_Layer: 0
   m_Name: Controllers
@@ -2542,6 +2541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7269ce7bb8843eebc871cedd06e4c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelGenerator: {fileID: 1936640499}
   startScreenController: {fileID: 345730163}
   endScreenController: {fileID: 1188049846}
 --- !u!114 &1972574539
@@ -2570,18 +2570,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1972574541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972574536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dca2f7fb2cda94349ade5b0cfa5cab81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1972574542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2591,11 +2579,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1972574536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c38ea6e1af5040e0964a98bd43a04f8, type: 3}
+  m_Script: {fileID: 11500000, guid: f1a3c546d9add49db940d82d05481910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelGenerator: {fileID: 1936640499}
-  initPoemLineDatas: []
 --- !u!1 &1974088287
 GameObject:
   m_ObjectHideFlags: 0

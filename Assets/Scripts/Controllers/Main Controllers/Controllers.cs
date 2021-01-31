@@ -3,16 +3,12 @@
 namespace GGJ {
     
     [RequireComponent(typeof(SceneController))]
-    [RequireComponent(typeof(PlayerController))]
-    [RequireComponent(typeof(PlayerAnimationController))]
     [RequireComponent(typeof(GameLoopController))]
     [RequireComponent(typeof(LevelPropInterfacer))]
 
     public abstract class Controllers : MonoBehaviour {
         
         private SceneController _sceneController;
-        private PlayerController _playerController;
-        private PlayerAnimationController _playerAnimationController;
         private GameLoopController _gameLoopController;
         private LevelPropInterfacer _levelPropInterfacer;
 
@@ -28,29 +24,6 @@ namespace GGJ {
             }
         }
         
-        protected PlayerController PlayerController {
-            get {
-
-                if (_playerController == null)
-                {
-                    _playerController = GetComponent<PlayerController>();
-                }
-
-                return _playerController;
-            }
-        }
-        
-        protected PlayerAnimationController PlayerAnimationController {
-            get {
-
-                if (_playerAnimationController == null)
-                {
-                    _playerAnimationController = GetComponent<PlayerAnimationController>();
-                }
-
-                return _playerAnimationController;
-            }
-        }
         
         protected GameLoopController GameLoopController {
             get {

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
 
 namespace GGJ {
     
@@ -17,14 +14,15 @@ namespace GGJ {
             LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.InitOrReset(CollectPoemLine));
         }
 
+        // TODO: call dowse from input somewhere
         public void Dowse(){
 
-            LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.DowseIfClose(PlayerController));
+            LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.DowseIfClose(LevelPropInterfacer.Character));
         }
 
         public void Update(){
             
-           LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.UpdateTextFade(PlayerController));
+           LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.UpdateTextFade(LevelPropInterfacer.Character));
         }
 
         private void CollectPoemLine(PoemLineData poemLineData){

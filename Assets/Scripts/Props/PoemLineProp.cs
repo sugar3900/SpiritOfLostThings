@@ -25,11 +25,11 @@ namespace GGJ {
             TurnOffParticleSystems();
         }
 
-        public void DowseIfClose(PlayerController player){
+        public void DowseIfClose(CharacterProp character){
             
             float maxDistanceForDowsing = poemLineData.maxDowseDistance;
 
-            if (player.GetDistanceFrom(gameObject) < maxDistanceForDowsing)
+            if (character.GetDistanceFrom(gameObject) < maxDistanceForDowsing)
             {
                 PlayDowseParticles();
                 PlayDowseSound();
@@ -44,10 +44,10 @@ namespace GGJ {
             //Instantiate(FlyingMemoryPrefab);
         }
         
-        public void UpdateTextFade(PlayerController player){
+        public void UpdateTextFade(CharacterProp character){
             
-            // get distance from the player
-            float distance = player.GetDistanceFrom(gameObject);
+            // get distance from the character
+            float distance = character.GetDistanceFrom(gameObject);
             
             // cap it at max distance to fade
             distance = Math.Min(poemLineData.maxDistanceBeforeTextFades, distance);
