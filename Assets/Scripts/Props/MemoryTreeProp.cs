@@ -2,7 +2,7 @@
 
 namespace GGJ {
     
-    public class MemoryTreeProp : MonoBehaviour {
+    public class MemoryTreeProp : DynamicProp {
     		
         [SerializeField] private GameObject[] mushrooms;
 

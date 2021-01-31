@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -7,26 +8,35 @@ namespace GGJ {
     
     public class GameLoopController : Controllers {
 
+        [NonSerialized]	public List<PoemLineData> poemLinesCollected = new List<PoemLineData>();
+
         public void InitOrReset(){
             
-            
+            poemLinesCollected.Clear();
+
+            LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.InitOrReset(CollectPoemLine));
         }
 
         public void Dowse(){
 
-            poemLinesController.DowseAllPoemLines();
+            LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.DowseIfClose(PlayerController));
         }
-        
-        public void CollectPoemLine(PoemLineData poemLineData){
 
-            poemLinesController.CollectPoem(poemLineData);
+        public void Update(){
             
-            if (poemLinesController.poemLinesCollected.Count >= 5)
+           LevelPropInterfacer.DoOnAllPoemLines(poemLine => poemLine.UpdateTextFade(PlayerController));
+        }
+
+        private void CollectPoemLine(PoemLineData poemLineData){
+
+            poemLinesCollected.Add(poemLineData);
+            
+            LevelPropInterfacer.MemoryTree.TurnOnMushrooms(poemLinesCollected.Count);
+            
+            if (poemLinesCollected.Count >= 5)
             {
-                sceneController.GoToEndGamePoemScene();
+                SceneController.OverlayEndScene();
             }
-            
-            // TODO: get MemoryTreeProp from PropRegistry and call MemoryTreeProp.TurnOnShrooms(poemLinesController.poemLinesCollected.Count);
         }
     }
 }

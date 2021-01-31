@@ -13,32 +13,32 @@ namespace GGJ {
         // TODO: call these input methods
         public void OnLeftPressed(){
             
-            playerAnimationController.Left();
+            PlayerAnimationController.Left();
         }
         
         public void OnRightPressed(){
             
-            playerAnimationController.Right();
+            PlayerAnimationController.Right();
         }
         
         public void OnUpPressed(){
             
-            playerAnimationController.Up();
+            PlayerAnimationController.Up();
         }
         
         public void OnDownPressed(){
             
-            playerAnimationController.Down();
+            PlayerAnimationController.Down();
         }
 
         public void OnDowsePressed(){
             
-            gameLoopController.Dowse();
+            GameLoopController.Dowse();
         }
         
         public float GetDistanceFrom(GameObject gameObject){
             
-            return Vector3.Distance(playerAnimationController.transform.position, gameObject.transform.position);
+            return Vector3.Distance(PlayerAnimationController.transform.position, gameObject.transform.position);
         }
     }
 }

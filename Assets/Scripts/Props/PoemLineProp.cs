@@ -13,52 +13,41 @@ namespace GGJ {
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private Text poemText;
 
-        public event Action<PoemLineData> collected;
+        private Action<PoemLineData> OnCollectedCallback;
         
         public PoemLineData poemLineData;
-        private PlayerController playerController;
-        private GameLoopController gameLoopController;
 
-        public void InitOrReset(PoemLineData poemLineData, PlayerController playerController, GameLoopController gameLoopController){
+        public void InitOrReset(Action<PoemLineData> onCollectedCallback){
 
-            this.poemLineData = poemLineData;
-            this.playerController = playerController;
-            this.gameLoopController = gameLoopController;
-            
+            OnCollectedCallback = onCollectedCallback;
+
             UpdateText(poemLineData.poemLineContents);
             TurnOffParticleSystems();
         }
-        
-        public void Update(){
-			
-            // Make sure this PoemLineProp was initialized before starting to 
-            if (playerController != null && poemLineData != null)
+
+        public void DowseIfClose(PlayerController player){
+            
+            float maxDistanceForDowsing = poemLineData.maxDowseDistance;
+
+            if (player.GetDistanceFrom(gameObject) < maxDistanceForDowsing)
             {
-                UpdateTextFade();
+                PlayDowseParticles();
+                PlayDowseSound();
             }
         }
+        
+        public void Collect(){
 
-        public void OnDowse(){
-            
-            PlayDowseParticles();
-            PlayDowseSound();
+            OnCollectedCallback(poemLineData);
+
+            // TODO:
+            //Instantiate(FlyingMemoryPrefab);
         }
-
-        private void UpdateText(string str){
-            
-            poemText.text = str;
-        }
-
-        private void TurnOffParticleSystems(){
-            
-            darkParticleSystem.gameObject.SetActive(false);
-            lightParticleSystem.gameObject.SetActive(false);
-        }
-
-        private void UpdateTextFade(){
+        
+        public void UpdateTextFade(PlayerController player){
             
             // get distance from the player
-            float distance = playerController.GetDistanceFrom(gameObject);
+            float distance = player.GetDistanceFrom(gameObject);
             
             // cap it at max distance to fade
             distance = Math.Min(poemLineData.maxDistanceBeforeTextFades, distance);
@@ -71,6 +60,17 @@ namespace GGJ {
             
                 
             poemText.color = new Color(poemText.color.r, poemText.color.g, poemText.color.b, alpha);
+        }
+
+        private void UpdateText(string str){
+            
+            poemText.text = str;
+        }
+
+        private void TurnOffParticleSystems(){
+            
+            darkParticleSystem.gameObject.SetActive(false);
+            lightParticleSystem.gameObject.SetActive(false);
         }
 
         private void PlayDowseParticles(){
@@ -88,13 +88,6 @@ namespace GGJ {
         private void PlayDowseSound(){
             
             audioSource.Play();
-        }
-
-        public void Collect(){
-
-            collected?.Invoke(poemLineData);
-
-            Instantiate(FlyingMemoryPrefab);
         }
     }
 }
