@@ -163,12 +163,10 @@ namespace GGJ
 						parent);
 					SpriteRenderer spriteRenderer = tile.GetComponent<SpriteRenderer>();
 					spriteRenderer.sprite = sprite;
+					spriteRenderer.sortingOrder = tileSet.SortOrder;
 					if (tileSet.IsBlocking)
 					{
-						BoxCollider2D col = tile.gameObject.AddComponent<BoxCollider2D>();
-						col.offset = new Vector2(-0.5f, -0.5f);
-						col.size = Vector2.one;
-						tile.gameObject.layer = obstacleLayer;
+						AddBoxCollider(tile.gameObject, new Vector2(-0.5f, -0.5f));
 					}
 					return tile;
 				}
@@ -191,7 +189,10 @@ namespace GGJ
 			{
 				LevelPropData levelPropData = levelData.Props[i];
 				Prop prop = GenerateProp(levelPropData, parent);
-				props[i] = prop;
+				if (prop != null)
+				{
+					props[i] = prop;
+				}
 			}
 			return props;
 		}
@@ -202,7 +203,15 @@ namespace GGJ
 			if (propPrefab != null)
 			{
 				Vector3 position = new Vector3(propData.X - 0.5f, propData.Y - 0.5f, propZ);
-				return Instantiate(propPrefab, position, Quaternion.identity, parent);
+				Prop prop = Instantiate(propPrefab, position, Quaternion.identity, parent);
+				if (prop != null)
+				{
+					if (prop.IsBlocking)
+					{
+						AddBoxCollider(prop.gameObject);
+					}
+					return prop;
+				}
 			}
 			else
 			{
@@ -237,6 +246,10 @@ namespace GGJ
 					Vector3 position = new Vector3(dynamicPropData.X - 0.5f, dynamicPropData.Y - 0.5f, dynamicPropZ);
 					DynamicProp dynamicProp = Instantiate(dynamicPropPrefab, position, Quaternion.identity, parent);
 					OnDynamicPropCreated?.Invoke(dynamicProp);
+					if (dynamicProp.IsBlocking)
+					{
+						AddBoxCollider(dynamicProp.gameObject);
+					}
 					return dynamicProp;
 				}
 			}
@@ -245,6 +258,14 @@ namespace GGJ
 				Debug.LogWarning("No DynamicProp found with the id " + dynamicPropData.Id);
 			}
 			return null;
+		}
+
+		private void AddBoxCollider(GameObject target, Vector2 offset = default)
+		{
+			BoxCollider2D col = target.AddComponent<BoxCollider2D>();
+			col.offset = offset;
+			col.size = Vector2.one;
+			target.layer = obstacleLayer;
 		}
 
 		public SpriteRenderer[,] GenerateBackgrounds(int width, int height, Transform parent)

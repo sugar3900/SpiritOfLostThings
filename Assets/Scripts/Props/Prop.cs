@@ -5,7 +5,9 @@ namespace GGJ
 	public class Prop : MonoBehaviour, IProp
 	{
 		public string Id => gameObject.name;
-		public bool isBlocking;
+		[SerializeField]
+		private bool isBlocking;
+		public bool IsBlocking => isBlocking;
 		public int X => Mathf.FloorToInt(transform.position.x);
 		public int Y => Mathf.FloorToInt(transform.position.y);
 		[SerializeField]

@@ -8,7 +8,9 @@ namespace GGJ
 		[SerializeField]
 		private bool isBlocking;
 		public bool IsBlocking => isBlocking;
-
+		[SerializeField]
+		private int sortOrder;
+		public int SortOrder => sortOrder;
 		[SerializeField]
 		private Sprite cornerPrefab;
 		[SerializeField]
