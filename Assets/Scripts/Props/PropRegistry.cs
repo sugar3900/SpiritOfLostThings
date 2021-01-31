@@ -14,7 +14,7 @@ namespace GGJ
 		{
 			foreach (Prop prop in props)
 			{
-				if (prop.Id == id)
+				if (prop != null && prop.Id == id)
 				{
 					return prop;
 				}
