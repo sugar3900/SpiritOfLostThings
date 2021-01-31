@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: LostSheepB
   m_EditorClassIdentifier: 
-  poemLineContents: A walking stick for the long journey home
+  poemLineContents: "A walking stick \nfor the long journey home"
   isLight: 1
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5

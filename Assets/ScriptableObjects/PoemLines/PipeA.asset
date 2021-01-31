@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: PipeA
   m_EditorClassIdentifier: 
-  poemLineContents: Ah...to sit and curl smoke wisps after a long day's work
+  poemLineContents: "Ah...to sit and curl smoke wisps \nafter a long day's work"
   isLight: 1
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: LostSheepA
   m_EditorClassIdentifier: 
-  poemLineContents: The shepard will find it by nightfall, you believe
+  poemLineContents: "The shepard will find it \nby nightfall, \nyou believe"
   isLight: 0
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: ChairA
   m_EditorClassIdentifier: 
-  poemLineContents: Won't you sit down and rest your feet?
+  poemLineContents: "Won't you sit down \nand rest your feet?"
   isLight: 1
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5
