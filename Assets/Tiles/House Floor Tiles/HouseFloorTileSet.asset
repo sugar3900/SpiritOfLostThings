@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da2e206dc3dddec4795a34366a50dc84, type: 3}
   m_Name: HouseFrontWallTileSet
   m_EditorClassIdentifier: 
-  isBlocking: 1
-  cornerPrefab: {fileID: 21300000, guid: de70c7f8b6c38460385797a7ca69964a, type: 3}
-  sidePrefab: {fileID: 21300000, guid: 89399f34de8e549129d81d3400858daa, type: 3}
-  diagonalPrefab: {fileID: 21300000, guid: 99a5c10aa189a405a89168d78faf5359, type: 3}
-  innerCornerPrefab: {fileID: 21300000, guid: 07a91024a30ec4faaaa35f41bb8d21d5, type: 3}
+  isBlocking: 0
+  cornerPrefab: {fileID: 21300000, guid: 815eed1a34843418886b78e86ecd3c80, type: 3}
+  sidePrefab: {fileID: 21300000, guid: 815eed1a34843418886b78e86ecd3c80, type: 3}
+  diagonalPrefab: {fileID: 21300000, guid: 815eed1a34843418886b78e86ecd3c80, type: 3}
+  innerCornerPrefab: {fileID: 21300000, guid: 815eed1a34843418886b78e86ecd3c80, type: 3}
   solidPrefab: {fileID: 21300000, guid: 815eed1a34843418886b78e86ecd3c80, type: 3}
