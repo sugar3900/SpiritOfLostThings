@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1372010354627392899}
   - component: {fileID: 8658385962046399964}
-  - component: {fileID: 5596755038346185238}
   - component: {fileID: 5724869547649730277}
   - component: {fileID: 2147061257928022793}
+  - component: {fileID: 6264310368397549128}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -33,7 +33,6 @@ RectTransform:
   m_Children:
   - {fileID: 420591651840357601}
   - {fileID: 901571807287319348}
-  - {fileID: 2710651525301361694}
   m_Father: {fileID: 3181841768635333265}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,39 +49,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428654479103960002}
   m_CullTransparentMesh: 0
---- !u!114 &5596755038346185238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428654479103960002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Test Thing Test Thing Test Thing
 --- !u!23 &5724869547649730277
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -130,103 +96,32 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428654479103960002}
-  m_Text: hello
+  m_Text: 'Test Thing Test Thing Test Thing
+
+    Thing on new line
+
+    a little
+    more...'
   m_OffsetZ: 0
   m_CharacterSize: 13.28
   m_LineSpacing: 1
-  m_Anchor: 0
-  m_Alignment: 0
+  m_Anchor: 4
+  m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 0
-  m_FontStyle: 0
+  m_FontSize: 51
+  m_FontStyle: 2
   m_RichText: 1
-  m_Font: {fileID: 0}
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!1 &2468149570852382810
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3181841768635333265}
-  m_Layer: 0
-  m_Name: PoemLineHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3181841768635333265
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2468149570852382810}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.075868, y: 0.075868, z: 0.075868}
-  m_Children:
-  - {fileID: 1372010354627392899}
-  m_Father: {fileID: 6914205723123181154}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4835846998445200670
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2710651525301361694}
-  - component: {fileID: 8917386609530621539}
-  - component: {fileID: 6158315010168883651}
-  m_Layer: 5
-  m_Name: HitArea
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2710651525301361694
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4835846998445200670}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1372010354627392899}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8917386609530621539
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4835846998445200670}
-  m_CullTransparentMesh: 0
---- !u!114 &6158315010168883651
+--- !u!114 &6264310368397549128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4835846998445200670}
+  m_GameObject: {fileID: 1428654479103960002}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -274,6 +169,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &2468149570852382810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3181841768635333265}
+  m_Layer: 0
+  m_Name: PoemLineHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3181841768635333265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2468149570852382810}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.075868, y: 0.075868, z: 0.075868}
+  m_Children:
+  - {fileID: 1372010354627392899}
+  m_Father: {fileID: 6914205723123181154}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7793451596356329953
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +212,7 @@ GameObject:
   - component: {fileID: 6262956157603524961}
   - component: {fileID: 9166117595078731513}
   m_Layer: 0
-  m_Name: PoemLine
+  m_Name: ChairA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,7 +227,7 @@ Transform:
   m_GameObject: {fileID: 7793451596356329953}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.07632971, y: 0.07632971, z: 0.07632971}
   m_Children:
   - {fileID: 3181841768635333265}
   m_Father: {fileID: 0}
@@ -321,12 +247,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isBlocking: 0
   spriteRenderer: {fileID: 0}
+  poemLineData: {fileID: 11400000, guid: d1f8c37dd40c14ed89647b612dbfab12, type: 2}
   darkParticleSystem: {fileID: 7849090822252910949}
   lightParticleSystem: {fileID: 7329794954266916528}
   FlyingMemoryPrefab: {fileID: 8207290183241568745, guid: 1983dfba4545842b98cad939e0da0fc4,
     type: 3}
   audioSource: {fileID: 9166117595078731513}
-  poemText: {fileID: 5596755038346185238}
+  poemText: {fileID: 2147061257928022793}
 --- !u!82 &9166117595078731513
 AudioSource:
   m_ObjectHideFlags: 0
@@ -490,6 +417,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightDowsingParticleEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 7793451596356329953, guid: 406e0ee702869479a9c241507868bdf0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 406e0ee702869479a9c241507868bdf0, type: 3}
 --- !u!4 &901571807287319348 stripped
@@ -570,6 +502,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DarkDowsingParticleEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793451596356329953, guid: 27526c424f01d4aa79ffbce38b904039,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27526c424f01d4aa79ffbce38b904039, type: 3}
