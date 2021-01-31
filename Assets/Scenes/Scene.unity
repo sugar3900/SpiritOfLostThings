@@ -200,6 +200,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1358980102}
     m_Modifications:
+    - target: {fileID: 1376429198650454383, guid: 2f4137ea02f024761b794a861bc61db0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -977
+      objectReference: {fileID: 0}
     - target: {fileID: 9186231229858312651, guid: 2f4137ea02f024761b794a861bc61db0,
         type: 3}
       propertyPath: m_Pivot.x
@@ -314,6 +319,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186231231017404477, guid: 2f4137ea02f024761b794a861bc61db0,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186231231017404477, guid: 2f4137ea02f024761b794a861bc61db0,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186231231017404477, guid: 2f4137ea02f024761b794a861bc61db0,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f4137ea02f024761b794a861bc61db0, type: 3}
@@ -777,7 +797,7 @@ MonoBehaviour:
       scrollRect: {fileID: 1705474339}
       contentArea: {fileID: 30461494}
       dropdown: {fileID: 467862257}
-    canEdit: 1
+    canEdit: 0
     indicatorZ: -3
     indicatorPrefab: {fileID: 5225554940775215949, guid: cd533c39fe703df439a90393a06d5532,
       type: 3}
