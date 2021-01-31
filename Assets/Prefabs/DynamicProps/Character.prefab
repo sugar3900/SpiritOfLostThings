@@ -84,8 +84,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPersistent: 1
+  isBlocking: 0
   spriteRenderer: {fileID: 0}
-  moveSpeed: 8
+  moveSpeed: 2.5
   moveColRadius: 0.225
   movementCollisionLayers:
     serializedVersion: 2
