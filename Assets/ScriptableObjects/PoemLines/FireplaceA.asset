@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: FireplaceA
   m_EditorClassIdentifier: 
-  poemLineContents: DON'T forget to gather, carry, fuel, stoke, tend, watch the fire
-    - before it dies
+  poemLineContents: "DON'T forget to gather, carry, \nfuel, stoke, tend, watch the
+    fire\n- before it dies"
   isLight: 0
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5

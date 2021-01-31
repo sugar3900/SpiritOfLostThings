@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: PipeB
   m_EditorClassIdentifier: 
-  poemLineContents: Those with time to kill blacken their lungs with soot
+  poemLineContents: "Those with time to kill \nblacken their lungs \nwith soot"
   isLight: 0
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5

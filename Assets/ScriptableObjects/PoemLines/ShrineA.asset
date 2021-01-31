@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: ShrineA
   m_EditorClassIdentifier: 
-  poemLineContents: Only God stares and ignores at the same time
+  poemLineContents: "Only God \nstares and ignores \nat the same time"
   isLight: 0
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5

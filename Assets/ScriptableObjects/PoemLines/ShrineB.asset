@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: ShrineB
   m_EditorClassIdentifier: 
-  poemLineContents: The birds sing loudest, here, near the shrine
+  poemLineContents: "The birds sing loudest, here, \nnear the shrine"
   isLight: 1
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5

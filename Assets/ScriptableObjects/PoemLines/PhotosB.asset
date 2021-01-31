@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: PhotosB
   m_EditorClassIdentifier: 
-  poemLineContents: Photographs of loved ones make the best listeners
+  poemLineContents: "Photographs of loved ones \nmake the best listeners"
   isLight: 1
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5

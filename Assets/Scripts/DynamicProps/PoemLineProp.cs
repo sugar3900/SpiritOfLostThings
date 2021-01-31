@@ -23,6 +23,8 @@ namespace GGJ {
 
             UpdateText(poemLineData.poemLineContents);
             TurnOffParticleSystems();
+            
+            gameObject.SetActive(true);
         }
 
         public void DowseIfClose(CharacterProp character){
@@ -35,13 +37,28 @@ namespace GGJ {
                 PlayDowseSound();
             }
         }
-        
+
+        public void OnMouseDown(){
+
+            Collect();
+        }
+
         public void Collect(){
 
             OnCollectedCallback(poemLineData);
+            
+            gameObject.SetActive(false);
 
             // TODO:
             //Instantiate(FlyingMemoryPrefab);
+        }
+
+        public void PointerEnter(){
+            
+        }
+
+        public void PointerExit(){
+            
         }
         
         public void UpdateTextFade(CharacterProp character){

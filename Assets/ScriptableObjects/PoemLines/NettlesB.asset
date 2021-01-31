@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: NettlesB
   m_EditorClassIdentifier: 
-  poemLineContents: '"Nettle", not "friend"....but a name you know well in this forest'
+  poemLineContents: "\"Nettle\", not \"friend\"....\nbut a name you know \nwell in
+    this forest"
   isLight: 1
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: ChairB
   m_EditorClassIdentifier: 
-  poemLineContents: A dusty chair longs for someone who hasn't sat there in a very
-    long time
+  poemLineContents: "A dusty chair longs\n for someone \nwho hasn't \nsat there in
+    a very \nlong time"
   isLight: 0
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5

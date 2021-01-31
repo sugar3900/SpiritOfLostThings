@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108e9c1a07804086afe5affb2c3d1ad, type: 3}
   m_Name: CheeseB
   m_EditorClassIdentifier: 
-  poemLineContents: Diamonds and braids of gold and cheese and Highlanders' pride
+  poemLineContents: "Diamonds and braids \nof gold and cheese  \nand Highlanders'
+    pride"
   isLight: 1
   maxDowseDistance: 5
   maxDistanceBeforeTextFades: 5
