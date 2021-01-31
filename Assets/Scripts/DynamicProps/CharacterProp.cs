@@ -5,15 +5,7 @@ namespace GGJ
 	public class CharacterProp : DynamicProp
 	{
 		[SerializeField]
-		private float minPositionLerp = 0.01f;
-		[SerializeField]
-		private float maxPositionLerp = 30f;
-		[SerializeField]
-		private float zDepth = -0.5f;
-		[SerializeField]
 		private float moveSpeed = 8f;
-		[SerializeField]
-		private float rotateSpeed = 1f;
 		[SerializeField]
 		private float radiusForMovementCollision = 0.225f;
 		[SerializeField]
