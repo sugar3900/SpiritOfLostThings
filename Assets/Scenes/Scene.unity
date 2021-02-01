@@ -521,6 +521,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9186231230808896108, guid: 551cc8aaf15ca46b388bb6e9ee131f28,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 551cc8aaf15ca46b388bb6e9ee131f28, type: 3}
 --- !u!114 &1188049846 stripped
@@ -781,7 +786,7 @@ MonoBehaviour:
     type: 3}
   tilePrefab: {fileID: -2919867300745283861, guid: 4a03a7fe6677d774e98a15ae7febba22,
     type: 3}
-  _levelFileName: Level
+  levelFileName: Level
   tileSetRegistry: {fileID: 11400000, guid: 579c245098f08aa44b04a13a7382e5e5, type: 2}
   propRegistry: {fileID: 11400000, guid: f49f87d6f44f1344187fa67378e085a6, type: 2}
   dynamicPropRegistry: {fileID: 11400000, guid: 303b1f822ae57d946bc0b7601607b627,
@@ -1057,21 +1062,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7249863933551351820, guid: d62356fdb775145c58f3b1d7903a4eeb,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.52488106
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249863933551351820, guid: d62356fdb775145c58f3b1d7903a4eeb,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.6037736
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249863933551351820, guid: d62356fdb775145c58f3b1d7903a4eeb,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.4756141
-      objectReference: {fileID: 0}
     - target: {fileID: 7249863933551351821, guid: d62356fdb775145c58f3b1d7903a4eeb,
         type: 3}
       propertyPath: levelGenerator

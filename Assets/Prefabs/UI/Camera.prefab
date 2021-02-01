@@ -49,8 +49,8 @@ MonoBehaviour:
   localCamera: {fileID: 7249863933551351820}
   zoomSpeed: 10
   zoomInputMult: 2
-  minZoom: 4
-  maxZoom: 4
+  minZoom: 4.25
+  maxZoom: 4.25
   maxLerpSqrDist: 32
   speedDamp: 0.15
   target: {fileID: 0}
@@ -65,7 +65,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.4756141, g: 0.6037736, b: 0.52488106, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -118,7 +118,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 858e2c0ff27474d12b956be049bc2f10, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0

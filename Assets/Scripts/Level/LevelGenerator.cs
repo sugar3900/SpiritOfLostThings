@@ -16,7 +16,7 @@ namespace GGJ
 		[SerializeField]
 		private Tile tilePrefab;
 		[SerializeField]
-		private string _levelFileName = "Level";
+		private string levelFileName = "Level";
 		[SerializeField]
 		private TileSetRegistry tileSetRegistry;
 		[SerializeField]
@@ -37,8 +37,6 @@ namespace GGJ
 		public event Action<Level> OnLevelGenerated;
 		public event Action<DynamicProp> OnDynamicPropCreated;
 		private int generationCount;
-
-		private string LevelFilePath => $"{Application.streamingAssetsPath}/{_levelFileName}.json";
 
 		private void Start()
 		{
@@ -61,9 +59,10 @@ namespace GGJ
 
 		private LevelData LoadLevelData()
 		{
-			if (File.Exists(LevelFilePath))
+			TextAsset rawLevelData = Resources.Load<TextAsset>(levelFileName);
+			if (rawLevelData != null)
 			{
-				string rawData = File.ReadAllText(LevelFilePath);
+				string rawData = rawLevelData.text;
 				JsonTextReader reader = new JsonTextReader(new StringReader(rawData));
 				JsonSerializer serializer = new JsonSerializer();
 				return serializer.Deserialize<LevelData>(reader);
@@ -79,7 +78,7 @@ namespace GGJ
 				UpdateLevelTileSets(levelData);
 				UpdateLevelPropData(levelData);
 				UpdateLevelDynamicPropData(levelData);
-				using (StreamWriter file = File.CreateText(LevelFilePath))
+				using (StreamWriter file = File.CreateText($"{Application.dataPath}/Resources/{levelFileName}.json"))
 				{
 					JsonSerializer serializer = new JsonSerializer();
 					serializer.Serialize(file, levelData);
